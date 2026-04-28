@@ -30,13 +30,13 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           {/* Base dotted texture image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.16]"
+            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.1]"
           />
 
           {/* Metallic dot pattern layer (intentionally visible) */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 opacity-[0.34] mix-blend-screen"
+            className="pointer-events-none absolute inset-0 z-0 opacity-[0.2] mix-blend-screen"
             style={{
               backgroundImage:
                 "radial-gradient(circle at 1.5px 1.5px, rgba(236, 226, 188, 0.78) 1.4px, transparent 1.5px), radial-gradient(circle at 1.5px 1.5px, rgba(186, 196, 214, 0.5) 1px, transparent 1.1px)",
