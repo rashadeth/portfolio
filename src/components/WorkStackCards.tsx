@@ -16,6 +16,44 @@ type Project = {
   liveUrl?: string;
 };
 
+const PATTERNS = [
+  // 0 — Topography dots
+  {
+    backgroundImage: 'radial-gradient(#e8e4dc 1px, transparent 1px)',
+    backgroundSize: '24px 24px',
+    opacity: 0.04,
+  },
+  // 1 — Plus grid
+  {
+    backgroundImage:
+      "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9zm-9 9h20v2H0z' fill='%23e8e4dc' fill-opacity='0.04'/%3E%3C/svg%3E\")",
+    backgroundSize: '20px 20px',
+  },
+  // 2 — Diagonal lines
+  {
+    backgroundImage:
+      'repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(232,228,220,0.03) 10px,rgba(232,228,220,0.03) 11px)',
+  },
+  // 3 — Hexagon dots
+  {
+    backgroundImage:
+      'radial-gradient(circle,rgba(232,228,220,0.06) 1px,transparent 1px),radial-gradient(circle,rgba(232,228,220,0.06) 1px,transparent 1px)',
+    backgroundSize: '20px 34px',
+    backgroundPosition: '0 0,10px 17px',
+  },
+  // 4 — Circuit grid
+  {
+    backgroundImage:
+      "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23e8e4dc' stroke-opacity='0.04' stroke-width='1' fill='none'/%3E%3C/svg%3E\")",
+    backgroundSize: '40px 40px',
+  },
+  // 5 — Dots grid (accent tint)
+  {
+    backgroundImage: 'radial-gradient(rgba(212,201,168,0.08) 1.5px,transparent 1.5px)',
+    backgroundSize: '20px 20px',
+  },
+] as const;
+
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +65,20 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           data-project-hover="true"
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
-          <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
+          {/* Subtle background pattern — unique per card, fades toward edges */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              zIndex: 0,
+              WebkitMaskImage: 'radial-gradient(ellipse at center, transparent 0%, black 100%)',
+              maskImage: 'radial-gradient(ellipse at center, transparent 0%, black 100%)',
+              ...PATTERNS[index % PATTERNS.length],
+            }}
+          />
+          <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             <div className="w-full lg:w-3/5">
               <div
                 data-orientation={project.orientation}
