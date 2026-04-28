@@ -17,6 +17,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://yohanan.design"),
   title: "Ian Okpoko — Product Designer & Developer",
   description:
     "Product designer and frontend developer based in Abuja, Nigeria. Building digital products from Figma to React and Flutter.",
@@ -24,10 +25,11 @@ export const metadata: Metadata = {
     title: "Ian Okpoko — Product Designer & Developer",
     description:
       "Product designer and frontend developer based in Abuja, Nigeria. Building digital products from Figma to React and Flutter.",
-    url: "https://ianokpoko.com",
+    url: "https://yohanan.design",
     siteName: "Ian Okpoko",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -35,6 +37,7 @@ export const metadata: Metadata = {
     description:
       "Product designer and frontend developer based in Abuja, Nigeria. Building digital products from Figma to React and Flutter.",
     creator: "@yohanansoltd",
+    images: ["/og-image.png"],
   },
 };
 
