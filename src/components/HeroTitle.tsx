@@ -75,7 +75,7 @@ export default function HeroTitle() {
     >
       <WordSwap en="Designing" zh="设计" />{" "}
       <WordSwap en="and" zh="和" />{" "}
-      <WordSwap en="building" zh="构建" italic />{" "}
+      <WordSwap en="building" zh="构建" />{" "}
       <WordSwap en="digital" zh="数字" />{" "}
       <WordSwap en="products." zh="产品。" />
     </h1>
