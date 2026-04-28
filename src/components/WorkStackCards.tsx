@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { ExternalLink } from "lucide-react";
 
 type Project = {
   name: string;
@@ -95,7 +96,13 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-white transition-opacity hover:opacity-80"
                   >
-                    Live App <span aria-hidden="true">↗</span>
+                    <span className="sm:hidden" aria-hidden="true">
+                      <ExternalLink size={14} strokeWidth={1.75} />
+                    </span>
+                    <span className="hidden sm:inline">Live App</span>
+                    <span className="hidden sm:inline" aria-hidden="true">
+                      <ExternalLink size={12} strokeWidth={1.75} />
+                    </span>
                   </a>
                 ) : null}
                 <span>View Case Study</span>
