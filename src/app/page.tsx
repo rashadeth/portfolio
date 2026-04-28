@@ -263,7 +263,7 @@ export default function Home() {
 
       <footer className="relative z-20 mx-auto w-full max-w-[1440px] bg-black px-4 pb-0 sm:px-6 md:px-10">
         <div className="grid gap-3 border-t border-white/[0.05] pb-6 pt-6 text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] md:grid-cols-3">
-          <span>© {new Date().getFullYear()} Ian Okpoko</span>
+          <span>© {new Date().getFullYear()} Ian Rashad</span>
           <span className="md:text-center">Designed & built by Ian</span>
           <span className="md:text-right">Abuja, Nigeria</span>
         </div>
