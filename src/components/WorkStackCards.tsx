@@ -16,42 +16,20 @@ type Project = {
   liveUrl?: string;
 };
 
-const PATTERNS = [
-  // 0 — Subtle dots
-  {
-    backgroundImage: 'radial-gradient(rgba(232,228,220,0.03) 1px, transparent 1px)',
-    backgroundSize: '28px 28px',
-  },
-  // 1 — Plus grid
-  {
-    backgroundImage:
-      "url(\"data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13 0h2v28h-2zM0 13h28v2H0z' fill='%23e8e4dc' fill-opacity='0.03'/%3E%3C/svg%3E\")",
-    backgroundSize: '28px 28px',
-  },
-  // 2 — Diagonal lines
-  {
-    backgroundImage:
-      'repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(232,228,220,0.025) 12px,rgba(232,228,220,0.025) 13px)',
-  },
-  // 3 — Hex dots
-  {
-    backgroundImage:
-      'radial-gradient(circle,rgba(232,228,220,0.03) 1px,transparent 1px),radial-gradient(circle,rgba(232,228,220,0.03) 1px,transparent 1px)',
-    backgroundSize: '28px 48px',
-    backgroundPosition: '0 0,14px 24px',
-  },
-  // 4 — Circuit grid
-  {
-    backgroundImage:
-      "url(\"data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 14h28M14 0v28' stroke='%23e8e4dc' stroke-opacity='0.03' stroke-width='1' fill='none'/%3E%3C/svg%3E\")",
-    backgroundSize: '28px 28px',
-  },
-  // 5 — Accent dots
-  {
-    backgroundImage: 'radial-gradient(rgba(212,201,168,0.03) 1px, transparent 1px)',
-    backgroundSize: '28px 28px',
-  },
-] as const;
+// Metallic dot colours — silver, gold, steel, platinum, bronze, rose-gold
+const METAL_COLORS = [
+  'rgba(210,210,220,0.5)',   // silver
+  'rgba(212,185,95,0.5)',    // gold
+  'rgba(175,190,205,0.5)',   // steel blue
+  'rgba(225,220,230,0.5)',   // platinum
+  'rgba(205,175,130,0.5)',   // bronze
+  'rgba(215,185,175,0.5)',   // rose gold
+];
+
+const PATTERNS = METAL_COLORS.map((color) => ({
+  backgroundImage: `radial-gradient(circle, ${color} 1.5px, transparent 1.5px)`,
+  backgroundSize: '28px 28px',
+})) as { backgroundImage: string; backgroundSize: string }[];
 
 const MASK =
   'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)';
