@@ -66,14 +66,13 @@ export default function Home() {
   ];
 
   const contactLinks = [
-    { label: "Email", handle: "ian@okpoko.dev", href: "mailto:ian@okpoko.dev" },
+    { label: "Email", href: "mailto:ian@okpoko.dev" },
     {
       label: "LinkedIn",
-      handle: "ian-okpoko-9b35922b6",
       href: "https://www.linkedin.com/in/ian-okpoko-9b35922b6?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     },
-    { label: "Twitter", handle: "@ianokpoko", href: "https://twitter.com" },
-    { label: "TikTok", handle: "@ianokpoko", href: "https://www.tiktok.com" },
+    { label: "Twitter", href: "https://twitter.com" },
+    { label: "TikTok", href: "https://www.tiktok.com" },
   ];
 
   return (
@@ -246,19 +245,21 @@ export default function Home() {
           </h2>
           <div className="mt-10 sm:mt-12">
             {contactLinks.map((item) => (
-              <a
+              <div
                 key={item.label}
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group grid w-full grid-cols-[1fr_auto_auto] items-center border-b border-white/[0.05] py-5 sm:py-6"
+                className="group grid w-full grid-cols-[1fr_auto] items-center border-b border-white/[0.05] py-5 sm:py-6"
               >
                 <span className="text-xs font-light uppercase tracking-[0.18em] sm:text-sm">{item.label}</span>
-                <span className="mr-3 text-xs font-light text-white sm:mr-5 sm:text-sm">{item.handle}</span>
-                <span className="text-lg font-light text-white transition-transform duration-300 group-hover:translate-x-1">
+                <a
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  aria-label={`Open ${item.label}`}
+                  className="justify-self-end text-lg font-light text-white transition-transform duration-300 group-hover:translate-x-1"
+                >
                   →
-                </span>
-              </a>
+                </a>
+              </div>
             ))}
           </div>
         </div>

@@ -52,7 +52,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                     preload="metadata"
                     src={project.videoSrc}
                     data-orientation={project.orientation}
-                    className={`h-full w-full object-cover object-center${
+                    className={`pointer-events-none h-full w-full object-cover object-center md:pointer-events-auto${
                       project.fitMode === "contain" ? " md:object-contain" : ""
                     }`}
                   />
