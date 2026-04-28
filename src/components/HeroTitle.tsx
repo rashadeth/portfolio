@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface WordSwapProps {
   en: string;
@@ -10,17 +10,32 @@ interface WordSwapProps {
 
 function WordSwap({ en, zh, italic }: WordSwapProps) {
   const [hovered, setHovered] = useState(false);
+  const wrapperRef = useRef<HTMLSpanElement>(null);
+
+  const handleEnter = () => {
+    setHovered(true);
+    if (wrapperRef.current) {
+      window.dispatchEvent(
+        new CustomEvent("word-hover", {
+          detail: { en, zh, rect: wrapperRef.current.getBoundingClientRect() },
+        })
+      );
+    }
+  };
+
+  const handleLeave = () => {
+    setHovered(false);
+    window.dispatchEvent(new CustomEvent("word-leave"));
+  };
 
   return (
     <span
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      ref={wrapperRef}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
       style={{ display: "inline-block", position: "relative" }}
     >
-      {/*
-       * Invisible spacer — always renders English text in normal flow.
-       * This fixes both width and height so nothing ever shifts.
-       */}
+      {/* Invisible spacer — locks layout width + height to English word */}
       <span
         aria-hidden="true"
         style={{ visibility: "hidden", fontStyle: italic ? "italic" : "normal" }}
@@ -70,6 +85,7 @@ function WordSwap({ en, zh, italic }: WordSwapProps) {
 export default function HeroTitle() {
   return (
     <h1
+      id="hero-title"
       className="mt-6 max-w-[13ch] font-sans font-light leading-[1.15] tracking-tight"
       style={{ fontSize: "clamp(44px, 10vw, 128px)" }}
     >
