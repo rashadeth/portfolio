@@ -27,12 +27,9 @@ const METAL_COLORS = [
 ];
 
 const PATTERNS = METAL_COLORS.map((color) => ({
-  backgroundImage: `radial-gradient(circle, ${color} 1.5px, transparent 1.5px)`,
-  backgroundSize: '28px 28px',
+  backgroundImage: `radial-gradient(circle, ${color} 3px, transparent 3px)`,
+  backgroundSize: '20px 20px',
 })) as { backgroundImage: string; backgroundSize: string }[];
-
-const MASK =
-  'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)';
 
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -95,8 +92,6 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                   inset: 0,
                   pointerEvents: 'none',
                   zIndex: 0,
-                  WebkitMaskImage: MASK,
-                  maskImage: MASK,
                   ...PATTERNS[index % PATTERNS.length],
                 }}
               />
