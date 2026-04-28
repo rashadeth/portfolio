@@ -19,36 +19,36 @@ type Project = {
 const PATTERNS = [
   // 0 — Subtle dots
   {
-    backgroundImage: 'radial-gradient(rgba(232,228,220,0.06) 1px, transparent 1px)',
+    backgroundImage: 'radial-gradient(rgba(232,228,220,0.03) 1px, transparent 1px)',
     backgroundSize: '28px 28px',
   },
   // 1 — Plus grid
   {
     backgroundImage:
-      "url(\"data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13 0h2v28h-2zM0 13h28v2H0z' fill='%23e8e4dc' fill-opacity='0.06'/%3E%3C/svg%3E\")",
+      "url(\"data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13 0h2v28h-2zM0 13h28v2H0z' fill='%23e8e4dc' fill-opacity='0.03'/%3E%3C/svg%3E\")",
     backgroundSize: '28px 28px',
   },
   // 2 — Diagonal lines
   {
     backgroundImage:
-      'repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(232,228,220,0.05) 12px,rgba(232,228,220,0.05) 13px)',
+      'repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(232,228,220,0.025) 12px,rgba(232,228,220,0.025) 13px)',
   },
   // 3 — Hex dots
   {
     backgroundImage:
-      'radial-gradient(circle,rgba(232,228,220,0.06) 1px,transparent 1px),radial-gradient(circle,rgba(232,228,220,0.06) 1px,transparent 1px)',
+      'radial-gradient(circle,rgba(232,228,220,0.03) 1px,transparent 1px),radial-gradient(circle,rgba(232,228,220,0.03) 1px,transparent 1px)',
     backgroundSize: '28px 48px',
     backgroundPosition: '0 0,14px 24px',
   },
   // 4 — Circuit grid
   {
     backgroundImage:
-      "url(\"data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 14h28M14 0v28' stroke='%23e8e4dc' stroke-opacity='0.06' stroke-width='1' fill='none'/%3E%3C/svg%3E\")",
+      "url(\"data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 14h28M14 0v28' stroke='%23e8e4dc' stroke-opacity='0.03' stroke-width='1' fill='none'/%3E%3C/svg%3E\")",
     backgroundSize: '28px 28px',
   },
   // 5 — Accent dots
   {
-    backgroundImage: 'radial-gradient(rgba(212,201,168,0.06) 1px, transparent 1px)',
+    backgroundImage: 'radial-gradient(rgba(212,201,168,0.03) 1px, transparent 1px)',
     backgroundSize: '28px 28px',
   },
 ] as const;
@@ -72,7 +72,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
             <div className="w-full lg:w-3/5">
               <div
                 data-orientation={project.orientation}
-                className={`relative w-full rounded-[6px] border border-white/[0.06] ${
+                className={`relative w-full rounded-[6px] border border-white/[0.03] ${
                   project.orientation === "portrait"
                     ? "h-[300px] overflow-hidden sm:flex sm:h-[520px] sm:items-center sm:justify-center sm:bg-[#f5f5f5] sm:p-5 lg:h-[600px] lg:p-6"
                     : "h-[300px] overflow-hidden sm:aspect-video sm:h-auto sm:max-h-[340px] md:max-h-[420px] lg:max-h-[500px]"
