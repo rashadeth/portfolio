@@ -40,13 +40,32 @@ export default function ContactLinksAnimated({ links }: ContactLinksAnimatedProp
       whileInView="visible"
       viewport={{ once: true, amount: 0.25 }}
     >
-      {links.map((itemLink) => (
+      {links.map((itemLink, index) => (
         <motion.div
           key={itemLink.label}
           variants={item}
           whileHover={{ x: 2 }}
-          className="group grid w-full grid-cols-[1fr_auto] items-center border-b border-white/[0.05] py-5 sm:py-6"
+          className="group relative grid w-full grid-cols-[1fr_auto] items-center overflow-hidden border-b border-white/[0.05] py-5 sm:py-6"
         >
+          <motion.span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 blur-md"
+            initial={{ x: "-120%" }}
+            whileInView={{
+              x: "360%",
+              opacity: [0, 0.35, 0],
+            }}
+            viewport={{ once: true, amount: 0.8 }}
+            whileHover={{
+              x: "360%",
+              opacity: [0, 0.45, 0],
+            }}
+            transition={{
+              duration: 0.9,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.1 + index * 0.06,
+            }}
+          />
           <span className="text-xs font-light uppercase tracking-[0.18em] sm:text-sm">{itemLink.label}</span>
           <motion.a
             href={itemLink.href}
