@@ -135,7 +135,7 @@ export default function Home() {
             Product Designer & Frontend Developer — Abuja, Nigeria
           </p>
           <h1
-            className="mt-6 max-w-[13ch] font-sans font-light leading-[0.92] tracking-tight"
+            className="mt-6 max-w-[13ch] font-sans font-light leading-[1.3] tracking-tight"
             style={{ fontSize: "clamp(44px, 10vw, 128px)" }}
           >
             Designing and <span className="italic">building</span> digital products.
