@@ -30,18 +30,18 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           {/* Base dotted texture image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.1]"
+            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.06]"
           />
 
           {/* Metallic dot pattern layer (intentionally visible) */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 opacity-[0.2] mix-blend-screen"
+            className="pointer-events-none absolute inset-0 z-0 opacity-[0.1]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 1.5px 1.5px, rgba(236, 226, 188, 0.78) 1.4px, transparent 1.5px), radial-gradient(circle at 1.5px 1.5px, rgba(186, 196, 214, 0.5) 1px, transparent 1.1px)",
-              backgroundSize: "18px 18px, 18px 18px",
-              backgroundPosition: "0 0, 9px 9px",
+                "radial-gradient(circle at 1.5px 1.5px, rgba(158, 158, 158, 0.34) 1.3px, transparent 1.4px), radial-gradient(circle at 1.5px 1.5px, rgba(118, 118, 118, 0.2) 1px, transparent 1.1px)",
+              backgroundSize: "20px 20px, 20px 20px",
+              backgroundPosition: "0 0, 10px 10px",
             }}
           />
           <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
