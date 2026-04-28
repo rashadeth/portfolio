@@ -187,3 +187,8 @@ button,
   50%       { transform: translateY(-10px); }
 }
 
+@keyframes whatsappFloat {
+  from { transform: translateY(-4px); }
+  to   { transform: translateY(4px); }
+}
+

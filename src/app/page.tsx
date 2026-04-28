@@ -2,6 +2,7 @@ import FramerGradientBackground from "@/components/FramerGradientBackground";
 import HeroTitle from "@/components/HeroTitle";
 import LensCursor from "@/components/LensCursor";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import WorkStackCards from "@/components/WorkStackCards";
 import { Aperture } from "lucide-react";
 
@@ -81,6 +82,7 @@ export default function Home() {
     <main className="relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]" style={{ overflow: "clip" }}>
       <FramerGradientBackground />
       <ProjectHoverCursor />
+      <WhatsAppIcon />
 
       <div
         aria-hidden="true"
