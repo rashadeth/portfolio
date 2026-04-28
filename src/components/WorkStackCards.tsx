@@ -27,10 +27,22 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           data-project-hover="true"
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
-          {/* Dotted texture image — full card background */}
+          {/* Base dotted texture image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.28] mix-blend-screen"
+            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.16]"
+          />
+
+          {/* Metallic dot pattern layer (intentionally visible) */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-0 opacity-[0.34] mix-blend-screen"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1.5px 1.5px, rgba(236, 226, 188, 0.78) 1.4px, transparent 1.5px), radial-gradient(circle at 1.5px 1.5px, rgba(186, 196, 214, 0.5) 1px, transparent 1.1px)",
+              backgroundSize: "18px 18px, 18px 18px",
+              backgroundPosition: "0 0, 9px 9px",
+            }}
           />
           <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             {/* Video / media side */}

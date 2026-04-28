@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 const WORDS = [
   { en: 'Designing', zh: '设计' },
@@ -13,7 +13,6 @@ const LERP = 0.1
 const RADIUS = 60
 
 export default function LensCursor() {
-  const [mounted, setMounted] = useState(false)
   const lensRef = useRef<HTMLDivElement>(null)
   const clipCircleRef = useRef<SVGCircleElement>(null)
   const magLayerRef = useRef<HTMLDivElement>(null)
@@ -25,7 +24,6 @@ export default function LensCursor() {
 
   useEffect(() => {
     if (window.innerWidth < 768) return
-    setMounted(true)
 
     const measureTitle = () => {
       const el = document.getElementById('hero-title')
@@ -109,8 +107,6 @@ export default function LensCursor() {
       cancelAnimationFrame(raf.current)
     }
   }, [])
-
-  if (!mounted) return null
 
   return (
     <>
