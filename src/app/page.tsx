@@ -100,7 +100,7 @@ export default function Home() {
           >
             <Aperture size={22} strokeWidth={1.75} />
           </a>
-          <nav className="font-sans text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] sm:tracking-[0.2em]">
+          <nav className="font-sans text-[10px] font-light tracking-[0.08em] text-white sm:text-[11px] sm:tracking-[0.1em]">
             <ul className="flex items-center gap-4 sm:gap-6 md:gap-10">
               <li>
                 <a href="#work" className="transition-colors hover:text-[var(--fg)]">
@@ -134,9 +134,7 @@ export default function Home() {
           }}
         />
         <div className="relative z-10 flex h-full flex-col justify-end">
-          <p className="text-[11px] font-light uppercase tracking-[0.2em] text-white">
-            Product Designer & Frontend Developer — Abuja, Nigeria
-          </p>
+          <p className="text-[11px] font-light uppercase tracking-[0.2em] text-white">Design Engineer</p>
           <HeroTitle />
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <p className="max-w-xl text-sm font-light leading-relaxed text-white">
