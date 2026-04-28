@@ -1,7 +1,5 @@
 import FramerGradientBackground from "@/components/FramerGradientBackground";
-import ParallaxOrchestrator from "@/components/ParallaxOrchestrator";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
-import SectionReveal from "@/components/SectionReveal";
 import WorkStackCards from "@/components/WorkStackCards";
 import { Aperture } from "lucide-react";
 
@@ -74,7 +72,6 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]" style={{ overflow: "clip" }}>
       <FramerGradientBackground />
-      <ParallaxOrchestrator />
       <ProjectHoverCursor />
 
       <div
@@ -117,14 +114,10 @@ export default function Home() {
         </div>
       </header>
 
-      <SectionReveal
-        delayMs={20}
-        className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10"
-      >
+      <section className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 will-change-transform"
-          data-parallax-speed="-0.06"
+          className="pointer-events-none absolute inset-0 z-0"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' seed='3'/%3E%3CfeDisplacementMap scale='8'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23w)' opacity='0.18'/%3E%3C/svg%3E\")",
@@ -155,17 +148,15 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </SectionReveal>
+      </section>
 
-      <SectionReveal
+      <section
         id="work"
-        delayMs={40}
         className="relative z-10 mx-auto w-full max-w-[1440px] overflow-hidden px-4 py-8 sm:px-6 sm:py-16 md:px-10 md:py-24 md:pb-40"
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 will-change-transform"
-          data-parallax-speed="-0.045"
+          className="pointer-events-none absolute inset-0 z-0"
           style={{
             backgroundImage: "radial-gradient(rgba(232,228,220,0.06) 1.5px, transparent 1.5px)",
             backgroundSize: "28px 28px",
@@ -176,17 +167,15 @@ export default function Home() {
         <div className="relative z-10 border-t border-white/[0.05] pt-0">
           <WorkStackCards projects={projects} />
         </div>
-      </SectionReveal>
+      </section>
 
-      <SectionReveal
+      <section
         id="about"
-        delayMs={60}
         className="relative z-20 mx-auto w-full max-w-[1440px] overflow-hidden px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-32 md:px-10 md:pb-28 md:pt-36"
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-52 -left-44 z-0 h-[700px] w-[700px] rounded-full will-change-transform"
-          data-parallax-speed="-0.075"
+          className="pointer-events-none absolute -bottom-52 -left-44 z-0 h-[700px] w-[700px] rounded-full"
           style={{
             background:
               "radial-gradient(circle at center, rgba(0,200,150,0.08) 0%, rgba(0,200,150,0.025) 48%, rgba(0,200,150,0) 76%)",
@@ -194,8 +183,7 @@ export default function Home() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 opacity-40 will-change-transform"
-          data-parallax-speed="-0.03"
+          className="pointer-events-none absolute inset-0 z-0 opacity-40"
           style={{
             backgroundImage:
               "repeating-linear-gradient(45deg, rgba(232,228,220,0.04) 0 1px, transparent 1px 18px)",
@@ -239,11 +227,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </SectionReveal>
+      </section>
 
-      <SectionReveal
+      <section
         id="contact"
-        delayMs={70}
         className="relative mx-auto w-full max-w-[1440px] overflow-hidden bg-black px-4 py-20 sm:px-6 sm:py-24 md:px-10 md:py-28"
       >
         <div className="relative z-10 border-t border-white/[0.05] pt-10">
@@ -268,18 +255,15 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </SectionReveal>
+      </section>
 
-      <SectionReveal
-        delayMs={80}
-        className="relative z-20 mx-auto w-full max-w-[1440px] bg-black px-4 pb-0 sm:px-6 md:px-10"
-      >
+      <footer className="relative z-20 mx-auto w-full max-w-[1440px] bg-black px-4 pb-0 sm:px-6 md:px-10">
         <div className="grid gap-3 border-t border-white/[0.05] pb-6 pt-6 text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] md:grid-cols-3">
           <span>© {new Date().getFullYear()} Ian Okpoko</span>
           <span className="md:text-center">Designed & built by Ian</span>
           <span className="md:text-right">Abuja, Nigeria</span>
         </div>
-      </SectionReveal>
+      </footer>
     </main>
   );
 }
