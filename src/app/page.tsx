@@ -61,6 +61,7 @@ export default function Home() {
       orientation: "landscape",
       fitMode: "contain",
       mediaBg: "#f5f5f5",
+      liveUrl: "https://afroszn.org/",
     },
   ];
 
