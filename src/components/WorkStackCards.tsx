@@ -27,21 +27,21 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           data-project-hover="true"
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
-          {/* Base dotted texture image */}
+          {/* Soft neutral dot texture */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.06]"
+            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.035]"
           />
 
-          {/* Metallic dot pattern layer (intentionally visible) */}
+          {/* Secondary gray dots to keep texture subtle */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 opacity-[0.1]"
+            className="pointer-events-none absolute inset-0 z-0 opacity-[0.055]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 1.5px 1.5px, rgba(158, 158, 158, 0.34) 1.3px, transparent 1.4px), radial-gradient(circle at 1.5px 1.5px, rgba(118, 118, 118, 0.2) 1px, transparent 1.1px)",
-              backgroundSize: "20px 20px, 20px 20px",
-              backgroundPosition: "0 0, 10px 10px",
+                "radial-gradient(circle at 1.2px 1.2px, rgba(145, 145, 145, 0.24) 1.1px, transparent 1.2px), radial-gradient(circle at 1.2px 1.2px, rgba(98, 98, 98, 0.16) 0.9px, transparent 1px)",
+              backgroundSize: "22px 22px, 22px 22px",
+              backgroundPosition: "0 0, 11px 11px",
             }}
           />
           <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
