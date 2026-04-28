@@ -1,5 +1,6 @@
 import FramerGradientBackground from "@/components/FramerGradientBackground";
 import HeroTitle from "@/components/HeroTitle";
+import LensCursor from "@/components/LensCursor";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
 import WorkStackCards from "@/components/WorkStackCards";
 import { Aperture } from "lucide-react";
@@ -122,6 +123,7 @@ export default function Home() {
       </header>
 
       <section className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10">
+        <LensCursor />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0"
