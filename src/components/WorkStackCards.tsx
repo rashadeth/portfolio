@@ -19,38 +19,38 @@ type Project = {
 const PATTERNS = [
   // 0 — Topography dots
   {
-    backgroundImage: 'radial-gradient(#e8e4dc 1px, transparent 1px)',
-    backgroundSize: '24px 24px',
-    opacity: 0.04,
+    backgroundImage: 'radial-gradient(#e8e4dc 2px, transparent 2px)',
+    backgroundSize: '28px 28px',
+    opacity: 0.15,
   },
   // 1 — Plus grid
   {
     backgroundImage:
-      "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9zm-9 9h20v2H0z' fill='%23e8e4dc' fill-opacity='0.04'/%3E%3C/svg%3E\")",
-    backgroundSize: '20px 20px',
+      "url(\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 0h2v24h-2zM0 11h24v2H0z' fill='%23e8e4dc' fill-opacity='0.18'/%3E%3C/svg%3E\")",
+    backgroundSize: '24px 24px',
   },
   // 2 — Diagonal lines
   {
     backgroundImage:
-      'repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(232,228,220,0.03) 10px,rgba(232,228,220,0.03) 11px)',
+      'repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(232,228,220,0.15) 10px,rgba(232,228,220,0.15) 12px)',
   },
   // 3 — Hexagon dots
   {
     backgroundImage:
-      'radial-gradient(circle,rgba(232,228,220,0.06) 1px,transparent 1px),radial-gradient(circle,rgba(232,228,220,0.06) 1px,transparent 1px)',
-    backgroundSize: '20px 34px',
-    backgroundPosition: '0 0,10px 17px',
+      'radial-gradient(circle,rgba(232,228,220,0.18) 2px,transparent 2px),radial-gradient(circle,rgba(232,228,220,0.18) 2px,transparent 2px)',
+    backgroundSize: '22px 38px',
+    backgroundPosition: '0 0,11px 19px',
   },
   // 4 — Circuit grid
   {
     backgroundImage:
-      "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23e8e4dc' stroke-opacity='0.04' stroke-width='1' fill='none'/%3E%3C/svg%3E\")",
+      "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23e8e4dc' stroke-opacity='0.18' stroke-width='1.5' fill='none'/%3E%3C/svg%3E\")",
     backgroundSize: '40px 40px',
   },
   // 5 — Dots grid (accent tint)
   {
-    backgroundImage: 'radial-gradient(rgba(212,201,168,0.08) 1.5px,transparent 1.5px)',
-    backgroundSize: '20px 20px',
+    backgroundImage: 'radial-gradient(rgba(212,201,168,0.18) 2.5px,transparent 2.5px)',
+    backgroundSize: '24px 24px',
   },
 ] as const;
 
@@ -73,8 +73,8 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
               inset: 0,
               pointerEvents: 'none',
               zIndex: 0,
-              WebkitMaskImage: 'radial-gradient(ellipse at center, transparent 0%, black 100%)',
-              maskImage: 'radial-gradient(ellipse at center, transparent 0%, black 100%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 100%)',
+              maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 100%)',
               ...PATTERNS[index % PATTERNS.length],
             }}
           />
