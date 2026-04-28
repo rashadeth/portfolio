@@ -30,11 +30,11 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           {/* Soft neutral dot texture */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.035] lg:opacity-[0.012]"
+            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.035] lg:hidden"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 opacity-100 lg:opacity-25"
+            className="pointer-events-none absolute inset-0 z-0 opacity-100 lg:hidden"
             style={{
               background:
                 "radial-gradient(120% 80% at 80% 16%, rgba(173, 188, 255, 0.08), transparent 52%), radial-gradient(90% 70% at 18% 82%, rgba(132, 255, 206, 0.06), transparent 56%)",
