@@ -32,6 +32,15 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.035]"
           />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-0"
+            style={{
+              background:
+                "radial-gradient(120% 80% at 80% 16%, rgba(173, 188, 255, 0.08), transparent 52%), radial-gradient(90% 70% at 18% 82%, rgba(132, 255, 206, 0.06), transparent 56%)",
+              animation: "cardGlowPulse 7.5s ease-in-out infinite alternate",
+            }}
+          />
 
           <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             {/* Video / media side */}
@@ -74,7 +83,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
             </div>
 
             {/* Info panel */}
-            <div className="flex h-full w-full flex-col px-6 pb-6 pt-5 lg:px-0 lg:pb-0 lg:pt-0 lg:w-2/5 lg:pl-6">
+            <div className="flex h-full w-full flex-col px-0 pb-0 pt-5 sm:pt-6 lg:w-2/5 lg:pt-0">
               <div className="flex flex-col h-full">
                 <div className="space-y-5 transition-opacity duration-300 group-hover:opacity-75">
                   <p className="text-xs font-light uppercase tracking-[0.18em] text-white">

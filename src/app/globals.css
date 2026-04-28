@@ -192,3 +192,14 @@ button,
   to   { transform: translateY(4px); }
 }
 
+@keyframes cardGlowPulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(1.02);
+  }
+}
+
