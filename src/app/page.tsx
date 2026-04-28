@@ -27,6 +27,7 @@ export default function Home() {
       orientation: "landscape",
       fitMode: "contain",
       mediaBg: "#f5f5f5",
+      liveUrl: "https://apps.apple.com/ng/app/foodcourt-food-delivery/id1579693328",
     },
     {
       name: "Spacebook",
