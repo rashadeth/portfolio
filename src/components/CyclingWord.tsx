@@ -16,17 +16,17 @@ export default function CyclingWord() {
 
     const advance = () => {
       gsap.to(el, {
+        rotateX: -90,
         opacity: 0,
-        y: "-0.2em",
-        duration: 0.3,
+        duration: 0.22,
         ease: "power2.in",
         onComplete() {
           idx.current = (idx.current + 1) % WORDS.length;
           el.textContent = WORDS[idx.current];
           gsap.fromTo(
             el,
-            { opacity: 0, y: "0.25em" },
-            { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }
+            { rotateX: 90, opacity: 0 },
+            { rotateX: 0, opacity: 1, duration: 0.32, ease: "power2.out" }
           );
         },
       });
@@ -36,5 +36,14 @@ export default function CyclingWord() {
     return () => clearInterval(id);
   }, []);
 
-  return <span ref={elRef}>{WORDS[0]}</span>;
+  return (
+    <span style={{ display: "inline-block", perspective: "600px" }}>
+      <span
+        ref={elRef}
+        style={{ display: "inline-block", transformOrigin: "50% 50%" }}
+      >
+        {WORDS[0]}
+      </span>
+    </span>
+  );
 }
