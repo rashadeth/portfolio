@@ -33,17 +33,6 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
             className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.035]"
           />
 
-          {/* Secondary gray dots to keep texture subtle */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 opacity-[0.055]"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 1.2px 1.2px, rgba(145, 145, 145, 0.24) 1.1px, transparent 1.2px), radial-gradient(circle at 1.2px 1.2px, rgba(98, 98, 98, 0.16) 0.9px, transparent 1px)",
-              backgroundSize: "22px 22px, 22px 22px",
-              backgroundPosition: "0 0, 11px 11px",
-            }}
-          />
           <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             {/* Video / media side */}
             <div className="w-full lg:w-3/5">
