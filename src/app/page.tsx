@@ -1,4 +1,5 @@
 import FramerGradientBackground from "@/components/FramerGradientBackground";
+import PaperPlane from "@/components/PaperPlane";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
 import WorkStackCards from "@/components/WorkStackCards";
 import { Aperture } from "lucide-react";
@@ -118,6 +119,7 @@ export default function Home() {
       </header>
 
       <section className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10">
+        <PaperPlane />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0"
@@ -133,19 +135,9 @@ export default function Home() {
           </p>
           <h1
             className="mt-6 max-w-[13ch] font-sans font-light leading-[0.92] tracking-tight"
-            style={{
-              fontSize: "clamp(44px, 10vw, 128px)",
-              animation: "headerFadeUp 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both",
-            }}
+            style={{ fontSize: "clamp(44px, 10vw, 128px)" }}
           >
-            Designing and{" "}
-            <span className="flipping-word italic">
-              <span className="flipping-word-inner">
-                <span className="flipping-word-face">building</span>
-                <span className="flipping-word-face back">building</span>
-              </span>
-            </span>{" "}
-            digital products.
+            Designing and <span className="italic">building</span> digital products.
           </h1>
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <p className="max-w-xl text-sm font-light leading-relaxed text-white">
