@@ -146,45 +146,67 @@ export default function Home() {
               xmlns="http://www.w3.org/2000/svg"
               style={{ overflow: 'visible' }}
             >
-              <g style={{
-                animation: 'fly 4s ease-in-out infinite',
-                transformOrigin: '60px 80px'
-              }}>
+              <g transform="translate(260, 80)" style={{ animation: 'flyAcross 6s linear infinite' }}>
                 {/* Paper plane body */}
                 <path
-                  d="M10 80 L140 20 L110 80 L140 140 Z"
+                  d="M0 0 L-30 -15 L-22 0 L-30 15 Z"
                   stroke="#e8e4dc"
-                  strokeWidth="1.5"
-                  fill="rgba(232,228,220,0.08)"
+                  strokeWidth="1.2"
+                  fill="rgba(232,228,220,0.1)"
                   strokeLinejoin="round"
                 />
-                {/* Wing fold line */}
+                {/* Wing fold */}
+                <path d="M0 0 L-22 0" stroke="#e8e4dc" strokeWidth="0.8" opacity="0.4"/>
+
+                {/* Ribbon string from tail */}
                 <path
-                  d="M10 80 L110 80"
-                  stroke="#e8e4dc"
-                  strokeWidth="1"
-                  opacity="0.5"
+                  d="M-30 0 Q-45 8 -55 4 Q-70 0 -80 6 Q-90 12 -100 8"
+                  stroke="#d4c9a8"
+                  strokeWidth="0.8"
+                  fill="none"
+                  opacity="0.7"
                 />
-                {/* Tail */}
+
+                {/* Ribbon banner */}
+                <rect
+                  x="-145" y="-10" width="60" height="20" rx="2"
+                  fill="rgba(212,201,168,0.12)"
+                  stroke="#d4c9a8"
+                  strokeWidth="0.8"
+                />
+                {/* Ribbon tails */}
                 <path
-                  d="M110 80 L90 95"
-                  stroke="#e8e4dc"
-                  strokeWidth="1"
-                  opacity="0.5"
+                  d="M-145 -10 L-152 0 L-145 10"
+                  fill="rgba(212,201,168,0.12)"
+                  stroke="#d4c9a8"
+                  strokeWidth="0.8"
                 />
-                {/* Flight trail dots */}
-                <circle cx="-10" cy="80" r="1.5" fill="#d4c9a8" opacity="0.6"/>
-                <circle cx="-25" cy="82" r="1" fill="#d4c9a8" opacity="0.4"/>
-                <circle cx="-38" cy="85" r="0.8" fill="#d4c9a8" opacity="0.2"/>
+
+                {/* Text on ribbon */}
+                <text
+                  x="-115" y="5"
+                  textAnchor="middle"
+                  fontFamily="monospace"
+                  fontSize="7"
+                  fill="#d4c9a8"
+                  letterSpacing="1"
+                  opacity="0.9"
+                >
+                  let&apos;s work
+                </text>
               </g>
 
               <style>{`
-                @keyframes fly {
-                  0%   { transform: translateY(0px)   rotate(-2deg); }
-                  25%  { transform: translateY(-12px)  rotate(2deg);  }
-                  50%  { transform: translateY(-6px)   rotate(-1deg); }
-                  75%  { transform: translateY(-16px)  rotate(3deg);  }
-                  100% { transform: translateY(0px)   rotate(-2deg); }
+                @keyframes flyAcross {
+                  0%   { transform: translate(260px, 80px) translateY(0px)   rotate(-2deg); }
+                  25%  { transform: translate(260px, 80px) translateY(-12px)  rotate(2deg);  }
+                  50%  { transform: translate(260px, 80px) translateY(-6px)   rotate(-1deg); }
+                  75%  { transform: translate(260px, 80px) translateY(-16px)  rotate(3deg);  }
+                  100% { transform: translate(260px, 80px) translateY(0px)   rotate(-2deg); }
+                }
+                @keyframes drawString {
+                  0%, 100% { opacity: 0.7; }
+                  50%      { opacity: 0.4; }
                 }
               `}</style>
             </svg>
