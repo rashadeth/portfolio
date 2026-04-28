@@ -138,7 +138,7 @@ export default function Home() {
             className="mt-6 max-w-[13ch] font-sans font-light leading-[1.15] tracking-tight"
             style={{ fontSize: "clamp(44px, 10vw, 128px)" }}
           >
-            Designing and <span className="italic">building</span> digital products.
+            Designing and <span>building</span> digital products.
           </h1>
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <p className="max-w-xl text-sm font-light leading-relaxed text-white">
