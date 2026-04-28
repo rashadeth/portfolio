@@ -1,7 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
+
+const LottiePlayer = dynamic(
+  () => import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
+  { ssr: false }
+);
 
 export default function HeroLottie() {
   const [loaded, setLoaded] = useState(false);
@@ -27,7 +32,7 @@ export default function HeroLottie() {
   }
 
   return (
-    <Player
+    <LottiePlayer
       autoplay
       loop
       src="https://lottie.host/5c332104-f41c-4e30-a05e-1b5d8a8dfc7b/eDyPHG4Yva.lottie"
