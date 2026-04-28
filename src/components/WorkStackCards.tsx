@@ -30,7 +30,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           {/* Dotted texture image — full card background */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-[length:96px_96px] bg-repeat opacity-[0.08]"
+            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-cover bg-center opacity-[0.28] mix-blend-screen"
           />
           <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             {/* Video / media side */}
