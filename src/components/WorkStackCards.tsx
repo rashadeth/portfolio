@@ -1,6 +1,11 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Project = {
   name: string;
@@ -16,6 +21,7 @@ type Project = {
 
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -26,11 +32,37 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
+  useGSAP(
+    () => {
+      if (window.matchMedia("(min-width: 769px)").matches) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
+      if (!cards.length) return;
+
+      cards.forEach((card) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 48,
+          duration: 0.75,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 88%",
+            once: true,
+          },
+        });
+      });
+    },
+    { scope: containerRef, dependencies: [] }
+  );
+
   return (
     <div ref={containerRef} className="relative z-10 flex flex-col gap-6">
       {projects.map((project, index) => (
         <article
           key={project.slug}
+          ref={(el) => { cardRefs.current[index] = el; }}
           data-project-hover={isDesktop ? "true" : undefined}
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
