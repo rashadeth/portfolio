@@ -82,7 +82,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
             cardRefs.current[index] = el;
           }}
           data-project-hover="true"
-          className="group relative w-full overflow-hidden rounded-xl border border-transparent bg-transparent md:border-white/[0.05] md:bg-[var(--bg)] md:p-8"
+          className="group relative w-full overflow-hidden rounded-2xl border border-white/[0.15] bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-2xl md:rounded-xl md:border-white/[0.05] md:bg-[var(--bg)] md:shadow-none md:backdrop-blur-none md:p-8"
           style={{
             position: isStickyEnabled ? "sticky" : "relative",
             top: isStickyEnabled ? `${TOP_BASE + index * TOP_STEP}px` : "auto",
