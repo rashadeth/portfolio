@@ -70,7 +70,11 @@ export default function Home() {
 
   const contactLinks = [
     { label: "Email", handle: "ian@okpoko.dev", href: "mailto:ian@okpoko.dev" },
-    { label: "Behance", handle: "@ianokpoko", href: "https://www.behance.net" },
+    {
+      label: "LinkedIn",
+      handle: "ian-okpoko-9b35922b6",
+      href: "https://www.linkedin.com/in/ian-okpoko-9b35922b6?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+    },
     { label: "Twitter", handle: "@ianokpoko", href: "https://twitter.com" },
     { label: "TikTok", handle: "@ianokpoko", href: "https://www.tiktok.com" },
   ];
