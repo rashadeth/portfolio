@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
 
 type Project = {
   name: string;
@@ -19,76 +14,16 @@ type Project = {
   mediaBg: string;
 };
 
-const TOP_BASE = 80;
-const TOP_STEP = 40;
-
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
-  const [isStickyEnabled, setIsStickyEnabled] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(min-width: 769px)");
-    const sync = () => setIsStickyEnabled(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
-
-  useGSAP(
-    () => {
-      if (!isStickyEnabled) return;
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReducedMotion) return;
-
-      const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
-      if (cards.length < 2) return;
-
-      cards.forEach((card, i) => {
-        if (i === cards.length - 1) return;
-        gsap.to(card, {
-          scale: 0.97,
-          yPercent: -3,
-          ease: "none",
-          scrollTrigger: {
-            trigger: cards[i + 1],
-            start: "top bottom",
-            end: "top 20%",
-            scrub: 1,
-          },
-        });
-      });
-    },
-    { scope: containerRef, dependencies: [isStickyEnabled] }
-  );
-
-  // Refresh ScrollTrigger after SectionReveal's entrance animation settles
-  // so trigger positions are measured from final layout, not the initial translateY state.
-  useEffect(() => {
-    const id = setTimeout(() => ScrollTrigger.refresh(), 1000);
-    return () => clearTimeout(id);
-  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative flex flex-col gap-12 md:gap-0"
-      style={{ minHeight: isStickyEnabled ? `${projects.length * 70}vh` : "auto" }}
-    >
+    <div ref={containerRef} className="relative z-10 flex flex-col gap-6">
       {projects.map((project, index) => (
         <article
           key={project.slug}
-          ref={(el) => {
-            cardRefs.current[index] = el;
-          }}
           data-project-hover="true"
-          className="group relative w-full overflow-hidden rounded-2xl border border-white/[0.15] bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-2xl md:rounded-xl md:border-white/[0.05] md:bg-[var(--bg)] md:shadow-none md:backdrop-blur-none md:p-8"
-          style={{
-            position: isStickyEnabled ? "sticky" : "relative",
-            top: isStickyEnabled ? `${TOP_BASE + index * TOP_STEP}px` : "auto",
-            zIndex: isStickyEnabled ? (projects.length - index) * 10 : "auto",
-            transformOrigin: "top center",
-          }}
+          className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
           <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             <div className="w-full lg:w-3/5">
@@ -151,15 +86,15 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                   ))}
                 </div>
               </div>
-              <a
-                href={`/work/${project.slug}`}
-                className="mt-8 inline-flex w-fit text-xs font-light uppercase tracking-[0.16em] text-[var(--fg)] sm:mt-10"
-              >
-                <span className="relative pb-1">
-                  View Case Study →
-                  <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-[var(--fg)] transition-transform duration-300 group-hover:scale-x-100" />
+              <div className="mt-8 inline-flex w-fit items-center gap-3 text-xs font-light uppercase tracking-[0.16em] text-white sm:mt-10">
+                <span>View Case Study</span>
+                <span className="inline-flex items-center gap-1" aria-hidden="true">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:0ms]" />
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:180ms]" />
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:360ms]" />
                 </span>
-              </a>
+                <span className="text-white/80">Coming Soon</span>
+              </div>
             </div>
           </div>
         </article>

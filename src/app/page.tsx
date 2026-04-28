@@ -160,7 +160,7 @@ export default function Home() {
       <SectionReveal
         id="work"
         delayMs={40}
-        className="relative mx-auto w-full max-w-[1440px] px-4 py-8 sm:px-6 sm:py-16 md:px-10 md:py-24 md:pb-40"
+        className="relative z-10 mx-auto w-full max-w-[1440px] overflow-hidden px-4 py-8 sm:px-6 sm:py-16 md:px-10 md:py-24 md:pb-40"
       >
         <div
           aria-hidden="true"
@@ -181,7 +181,7 @@ export default function Home() {
       <SectionReveal
         id="about"
         delayMs={60}
-        className="relative mx-auto w-full max-w-[1440px] overflow-hidden px-4 py-20 sm:px-6 sm:py-24 md:px-10 md:py-28"
+        className="relative z-20 mx-auto w-full max-w-[1440px] overflow-hidden px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-32 md:px-10 md:pb-28 md:pt-36"
       >
         <div
           aria-hidden="true"
