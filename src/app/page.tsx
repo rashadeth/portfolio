@@ -121,7 +121,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section data-hero-section className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10 [cursor:none]">
+      <section className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0"
@@ -139,11 +139,7 @@ export default function Home() {
             className="mt-6 max-w-[13ch] font-sans font-light leading-[1.15] tracking-tight"
             style={{ fontSize: "clamp(44px, 10vw, 128px)" }}
           >
-            <span data-en="Designing" data-zh="设计">Designing</span>{" "}
-            <span data-en="and" data-zh="和">and</span>{" "}
-            <span data-en="building" data-zh="构建">building</span>{" "}
-            <span data-en="digital" data-zh="数字">digital</span>{" "}
-            <span data-en="products" data-zh="产品">products</span>.
+            <LensEffect />
           </h1>
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <p className="max-w-xl text-sm font-light leading-relaxed text-white">
@@ -277,7 +273,6 @@ export default function Home() {
           <span className="md:text-right">Abuja, Nigeria</span>
         </div>
       </footer>
-      <LensEffect />
     </main>
   );
 }
