@@ -2,7 +2,6 @@ import FramerGradientBackground from "@/components/FramerGradientBackground";
 import ContactLinksAnimated from "@/components/ContactLinksAnimated";
 import HeroTitle from "@/components/HeroTitle";
 import LensCursor from "@/components/LensCursor";
-import LottiePlaneLoader from "@/components/LottiePlaneLoader";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import WorkStackCards from "@/components/WorkStackCards";
@@ -138,7 +137,58 @@ export default function Home() {
           }}
         />
         <div className="relative z-10 flex h-full flex-col justify-end">
-          <LottiePlaneLoader />
+          <div style={{ marginBottom: '24px' }}>
+            <svg
+              width="280"
+              height="160"
+              viewBox="0 0 280 160"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ overflow: 'visible' }}
+            >
+              <g style={{
+                animation: 'fly 4s ease-in-out infinite',
+                transformOrigin: '60px 80px'
+              }}>
+                {/* Paper plane body */}
+                <path
+                  d="M10 80 L140 20 L110 80 L140 140 Z"
+                  stroke="#e8e4dc"
+                  strokeWidth="1.5"
+                  fill="rgba(232,228,220,0.08)"
+                  strokeLinejoin="round"
+                />
+                {/* Wing fold line */}
+                <path
+                  d="M10 80 L110 80"
+                  stroke="#e8e4dc"
+                  strokeWidth="1"
+                  opacity="0.5"
+                />
+                {/* Tail */}
+                <path
+                  d="M110 80 L90 95"
+                  stroke="#e8e4dc"
+                  strokeWidth="1"
+                  opacity="0.5"
+                />
+                {/* Flight trail dots */}
+                <circle cx="-10" cy="80" r="1.5" fill="#d4c9a8" opacity="0.6"/>
+                <circle cx="-25" cy="82" r="1" fill="#d4c9a8" opacity="0.4"/>
+                <circle cx="-38" cy="85" r="0.8" fill="#d4c9a8" opacity="0.2"/>
+              </g>
+
+              <style>{`
+                @keyframes fly {
+                  0%   { transform: translateY(0px)   rotate(-2deg); }
+                  25%  { transform: translateY(-12px)  rotate(2deg);  }
+                  50%  { transform: translateY(-6px)   rotate(-1deg); }
+                  75%  { transform: translateY(-16px)  rotate(3deg);  }
+                  100% { transform: translateY(0px)   rotate(-2deg); }
+                }
+              `}</style>
+            </svg>
+          </div>
           <p className="text-[11px] font-light uppercase tracking-[0.2em] text-white">Design Engineer</p>
           <HeroTitle />
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
