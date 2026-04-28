@@ -98,7 +98,7 @@ export default function Home() {
           >
             <Aperture size={22} strokeWidth={1.75} />
           </a>
-          <nav className="font-mono text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] sm:tracking-[0.2em]">
+          <nav className="font-sans text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] sm:tracking-[0.2em]">
             <ul className="flex items-center gap-4 sm:gap-6 md:gap-10">
               <li>
                 <a href="#work" className="transition-colors hover:text-[var(--fg)]">
