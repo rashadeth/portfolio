@@ -3,6 +3,9 @@
 :root {
   --background: #0c0c0c;
   --foreground: #ffffff;
+  --bg: #0c0c0c;
+  --fg: #e8e4dc;
+  --line: rgba(255, 255, 255, 0.08);
 }
 
 @theme inline {
@@ -118,8 +121,8 @@ button,
 
 .section-reveal.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: none;
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

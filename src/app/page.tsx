@@ -2,6 +2,7 @@ import FramerGradientBackground from "@/components/FramerGradientBackground";
 import ParallaxOrchestrator from "@/components/ParallaxOrchestrator";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
 import SectionReveal from "@/components/SectionReveal";
+import WorkStackCards from "@/components/WorkStackCards";
 import { Aperture } from "lucide-react";
 
 export default function Home() {
@@ -71,7 +72,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0c0c0c] text-[#e8e4dc]">
+    <main className="relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]" style={{ overflow: "clip" }}>
       <FramerGradientBackground />
       <ParallaxOrchestrator />
       <ProjectHoverCursor />
@@ -118,7 +119,7 @@ export default function Home() {
 
       <SectionReveal
         delayMs={20}
-        className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 md:px-10"
+        className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10"
       >
         <div
           aria-hidden="true"
@@ -157,8 +158,9 @@ export default function Home() {
       </SectionReveal>
 
       <SectionReveal
+        id="work"
         delayMs={40}
-        className="relative mx-auto w-full max-w-[1440px] overflow-hidden px-4 py-20 sm:px-6 sm:py-24 md:px-10 md:py-28 md:pb-40"
+        className="relative mx-auto w-full max-w-[1440px] px-4 py-8 sm:px-6 sm:py-16 md:px-10 md:py-24 md:pb-40"
       >
         <div
           aria-hidden="true"
@@ -171,92 +173,8 @@ export default function Home() {
             WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
           }}
         />
-        <div className="relative z-10 flex flex-col border-t border-white/[0.05]">
-          {projects.map((project, index) => (
-            <article
-              key={project.slug}
-              data-project-hover="true"
-              className="group relative overflow-hidden border border-white/[0.05] bg-black/20 px-0 py-8 backdrop-blur-[2px] md:sticky md:py-10"
-              style={{
-                top: `calc(92px + ${index * 18}px)`,
-                zIndex: projects.length - index,
-              }}
-            >
-              <div className="flex flex-col gap-8 overflow-hidden lg:max-h-[600px] lg:flex-row lg:items-stretch">
-                <div className="w-full lg:w-3/5">
-                  <div
-                    data-orientation={project.orientation}
-                    className={`relative w-full rounded-[6px] border border-white/[0.06] ${
-                      project.orientation === "portrait"
-                        ? "flex h-[420px] items-center justify-center overflow-hidden bg-[#f5f5f5] p-3 sm:h-[520px] sm:p-5 lg:h-[600px] lg:p-6"
-                        : "aspect-video h-full max-h-[260px] overflow-hidden sm:max-h-[340px] md:max-h-[420px] lg:max-h-[500px]"
-                    }`}
-                    style={{
-                      backgroundColor:
-                        project.hasVideo && project.fitMode === "contain"
-                          ? project.mediaBg
-                          : undefined,
-                    }}
-                  >
-                  {project.hasVideo ? (
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      src={project.videoSrc}
-                      data-orientation={project.orientation}
-                      className={`${
-                        project.fitMode === "contain"
-                          ? "h-full w-full object-contain object-center"
-                          : "h-full w-full object-cover object-center"
-                      }`}
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-[#111] px-6 text-center">
-                      <span className="font-sans text-5xl font-light italic tracking-tight text-[var(--fg)]/80">
-                        {project.name}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                </div>
-                <div className="flex h-full w-full flex-col lg:w-2/5 lg:pl-6">
-                  <div className="space-y-5 transition-opacity duration-300 group-hover:opacity-75">
-                    <p className="text-xs font-light uppercase tracking-[0.18em] text-white">
-                      {`0${index + 1}`}
-                    </p>
-                    <h3 className="font-sans text-[clamp(34px,7vw,52px)] font-light leading-[0.95] tracking-tight">
-                      {project.name}
-                    </h3>
-                    <p className="text-sm font-light leading-relaxed text-white">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-white/[0.08] px-3 py-1 text-[10px] font-light uppercase tracking-[0.16em] text-white"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <a
-                    href={`/work/${project.slug}`}
-                    className="mt-8 inline-flex w-fit text-xs font-light uppercase tracking-[0.16em] text-[var(--fg)] sm:mt-10"
-                  >
-                    <span className="relative pb-1">
-                      View Case Study →
-                      <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-[var(--fg)] transition-transform duration-300 group-hover:scale-x-100" />
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
+        <div className="relative z-10 border-t border-white/[0.05] pt-0">
+          <WorkStackCards projects={projects} />
         </div>
       </SectionReveal>
 
