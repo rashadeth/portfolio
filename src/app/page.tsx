@@ -2,6 +2,7 @@ import FramerGradientBackground from "@/components/FramerGradientBackground";
 import ContactLinksAnimated from "@/components/ContactLinksAnimated";
 import HeroTitle from "@/components/HeroTitle";
 import LensCursor from "@/components/LensCursor";
+import LottiePlaneLoader from "@/components/LottiePlaneLoader";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import WorkStackCards from "@/components/WorkStackCards";
@@ -137,6 +138,7 @@ export default function Home() {
           }}
         />
         <div className="relative z-10 flex h-full flex-col justify-end">
+          <LottiePlaneLoader />
           <p className="text-[11px] font-light uppercase tracking-[0.2em] text-white">Design Engineer</p>
           <HeroTitle />
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
