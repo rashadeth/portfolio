@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 type Project = {
   name: string;
@@ -16,13 +16,22 @@ type Project = {
 
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 769px)");
+    const sync = () => setIsDesktop(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   return (
     <div ref={containerRef} className="relative z-10 flex flex-col gap-6">
       {projects.map((project, index) => (
         <article
           key={project.slug}
-          data-project-hover="true"
+          data-project-hover={isDesktop ? "true" : undefined}
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
           <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
