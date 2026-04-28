@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
 
 type Project = {
   name: string;
@@ -17,53 +12,18 @@ type Project = {
   orientation: string;
   fitMode: string;
   mediaBg: string;
+  liveUrl?: string;
 };
 
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 769px)");
-    const sync = () => setIsDesktop(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-
-  useGSAP(
-    () => {
-      if (window.matchMedia("(min-width: 769px)").matches) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
-      if (!cards.length) return;
-
-      cards.forEach((card) => {
-        gsap.from(card, {
-          opacity: 0,
-          y: 48,
-          duration: 0.75,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 88%",
-            once: true,
-          },
-        });
-      });
-    },
-    { scope: containerRef, dependencies: [] }
-  );
 
   return (
     <div ref={containerRef} className="relative z-10 flex flex-col gap-6">
       {projects.map((project, index) => (
         <article
           key={project.slug}
-          ref={(el) => { cardRefs.current[index] = el; }}
-          data-project-hover={isDesktop ? "true" : undefined}
+          data-project-hover="true"
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
           <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
@@ -128,6 +88,16 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                 </div>
               </div>
               <div className="mt-8 inline-flex w-fit items-center gap-3 text-xs font-light uppercase tracking-[0.16em] text-white sm:mt-10">
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-white transition-opacity hover:opacity-80"
+                  >
+                    Live App <span aria-hidden="true">↗</span>
+                  </a>
+                ) : null}
                 <span>View Case Study</span>
                 <span className="inline-flex items-center gap-1" aria-hidden="true">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:0ms]" />

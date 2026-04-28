@@ -15,6 +15,7 @@ export default function Home() {
       orientation: "portrait",
       fitMode: "contain",
       mediaBg: "#f5f5f5",
+      liveUrl: "https://apps.apple.com/ng/app/barbr-creators/id6760665839",
     },
     {
       name: "Foodcourt",
