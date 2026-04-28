@@ -1,4 +1,5 @@
 import FramerGradientBackground from "@/components/FramerGradientBackground";
+import ContactLinksAnimated from "@/components/ContactLinksAnimated";
 import HeroTitle from "@/components/HeroTitle";
 import LensCursor from "@/components/LensCursor";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
@@ -241,25 +242,7 @@ export default function Home() {
           <h2 className="max-w-[12ch] font-sans text-[clamp(40px,9vw,84px)] font-light leading-[0.96] tracking-tight">
             Let&apos;s make something great.
           </h2>
-          <div className="mt-10 sm:mt-12">
-            {contactLinks.map((item) => (
-              <div
-                key={item.label}
-                className="group grid w-full grid-cols-[1fr_auto] items-center border-b border-white/[0.05] py-5 sm:py-6"
-              >
-                <span className="text-xs font-light uppercase tracking-[0.18em] sm:text-sm">{item.label}</span>
-                <a
-                  href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  aria-label={`Open ${item.label}`}
-                  className="justify-self-end text-lg font-light text-white transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  →
-                </a>
-              </div>
-            ))}
-          </div>
+          <ContactLinksAnimated links={contactLinks} />
         </div>
       </section>
 
