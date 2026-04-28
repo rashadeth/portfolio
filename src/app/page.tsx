@@ -146,7 +146,7 @@ export default function Home() {
               xmlns="http://www.w3.org/2000/svg"
               style={{ overflow: 'visible' }}
             >
-              <g transform="translate(260, 80)" style={{ animation: 'flyAcross 6s linear infinite' }}>
+              <g style={{ animation: 'flyAcross 14s linear infinite', transform: 'scale(2)', transformOrigin: '0px 0px' }}>
                 {/* Paper plane body */}
                 <path
                   d="M0 0 L-30 -15 L-22 0 L-30 15 Z"
@@ -198,11 +198,10 @@ export default function Home() {
 
               <style>{`
                 @keyframes flyAcross {
-                  0%   { transform: translate(260px, 80px) translateY(0px)   rotate(-2deg); }
-                  25%  { transform: translate(260px, 80px) translateY(-12px)  rotate(2deg);  }
-                  50%  { transform: translate(260px, 80px) translateY(-6px)   rotate(-1deg); }
-                  75%  { transform: translate(260px, 80px) translateY(-16px)  rotate(3deg);  }
-                  100% { transform: translate(260px, 80px) translateY(0px)   rotate(-2deg); }
+                  0%   { transform: scale(2) translate(-200px, 100px) rotate(-3deg); }
+                  30%  { transform: scale(2) translate(400px,  70px)  rotate(-5deg); }
+                  60%  { transform: scale(2) translate(850px,  90px)  rotate(-2deg); }
+                  100% { transform: scale(2) translate(1600px, 75px)  rotate(-4deg); }
                 }
                 @keyframes drawString {
                   0%, 100% { opacity: 0.7; }
