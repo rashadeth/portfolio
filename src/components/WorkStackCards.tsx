@@ -16,19 +16,19 @@ type Project = {
   liveUrl?: string;
 };
 
-// Metallic dot colours — silver, gold, steel, platinum, bronze, rose-gold
+// Metallic dot colours — semi-visible at 0.35 opacity
 const METAL_COLORS = [
-  'rgba(210,210,220,0.5)',   // silver
-  'rgba(212,185,95,0.5)',    // gold
-  'rgba(175,190,205,0.5)',   // steel blue
-  'rgba(225,220,230,0.5)',   // platinum
-  'rgba(205,175,130,0.5)',   // bronze
-  'rgba(215,185,175,0.5)',   // rose gold
+  'rgba(210,210,225,0.35)',  // silver
+  'rgba(212,185,85,0.35)',   // gold
+  'rgba(170,190,210,0.35)',  // steel blue
+  'rgba(228,222,235,0.35)',  // platinum
+  'rgba(200,168,120,0.35)',  // bronze
+  'rgba(218,182,172,0.35)',  // rose gold
 ];
 
 const PATTERNS = METAL_COLORS.map((color) => ({
-  backgroundImage: `radial-gradient(circle, ${color} 3px, transparent 3px)`,
-  backgroundSize: '20px 20px',
+  backgroundImage: `radial-gradient(circle, ${color} 2.5px, transparent 2.5px)`,
+  backgroundSize: '22px 22px',
 })) as { backgroundImage: string; backgroundSize: string }[];
 
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
@@ -42,7 +42,18 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           data-project-hover="true"
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
-          <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
+          {/* Metallic dot pattern — full card background */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              zIndex: 0,
+              ...PATTERNS[index % PATTERNS.length],
+            }}
+          />
+          <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             {/* Video / media side */}
             <div className="w-full lg:w-3/5">
               <div
@@ -82,22 +93,9 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
               </div>
             </div>
 
-            {/* Info panel — pattern lives here only */}
-            <div className="relative overflow-hidden flex h-full w-full flex-col px-6 pb-6 pt-5 lg:px-0 lg:pb-0 lg:pt-0 lg:w-2/5 lg:pl-6">
-              {/* Subtle paper-texture pattern */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  pointerEvents: 'none',
-                  zIndex: 0,
-                  ...PATTERNS[index % PATTERNS.length],
-                }}
-              />
-
-              {/* Content above pattern */}
-              <div className="relative z-[1] flex flex-col h-full">
+            {/* Info panel */}
+            <div className="flex h-full w-full flex-col px-6 pb-6 pt-5 lg:px-0 lg:pb-0 lg:pt-0 lg:w-2/5 lg:pl-6">
+              <div className="flex flex-col h-full">
                 <div className="space-y-5 transition-opacity duration-300 group-hover:opacity-75">
                   <p className="text-xs font-light uppercase tracking-[0.18em] text-white">
                     {`0${index + 1}`}
