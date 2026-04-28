@@ -10,7 +10,7 @@ export default function PaperPlane() {
       style={{ animation: "paperPlaneFloat 3s ease-in-out infinite" }}
     >
       <DotLottieReact
-        src="https://lottie.host/embed/5c332104-f41c-4e30-a05e-1b5d8a8dfc7b/eDyPHG4Yva.lottie"
+        src="https://lottie.host/5c332104-f41c-4e30-a05e-1b5d8a8dfc7b/eDyPHG4Yva.lottie"
         autoplay
         loop
         style={{ width: 200, height: 200 }}
