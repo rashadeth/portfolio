@@ -16,21 +16,6 @@ type Project = {
   liveUrl?: string;
 };
 
-// Metallic dot colours — semi-visible at 0.35 opacity
-const METAL_COLORS = [
-  'rgba(210,210,225,0.35)',  // silver
-  'rgba(212,185,85,0.35)',   // gold
-  'rgba(170,190,210,0.35)',  // steel blue
-  'rgba(228,222,235,0.35)',  // platinum
-  'rgba(200,168,120,0.35)',  // bronze
-  'rgba(218,182,172,0.35)',  // rose gold
-];
-
-const PATTERNS = METAL_COLORS.map((color) => ({
-  backgroundImage: `radial-gradient(circle, ${color} 2.5px, transparent 2.5px)`,
-  backgroundSize: '22px 22px',
-})) as { backgroundImage: string; backgroundSize: string }[];
-
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -42,16 +27,10 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
           data-project-hover="true"
           className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
         >
-          {/* Metallic dot pattern — full card background */}
+          {/* Dotted texture image — full card background */}
           <div
             aria-hidden="true"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              pointerEvents: 'none',
-              zIndex: 0,
-              ...PATTERNS[index % PATTERNS.length],
-            }}
+            className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/dots-4px.png')] bg-[length:96px_96px] bg-repeat opacity-[0.08]"
           />
           <div className="relative z-[1] flex flex-col lg:flex-row lg:items-stretch lg:gap-8 lg:max-h-[600px] lg:overflow-hidden">
             {/* Video / media side */}
