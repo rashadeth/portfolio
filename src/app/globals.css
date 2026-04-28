@@ -134,3 +134,46 @@ button,
   }
 }
 
+@keyframes headerWordFlip {
+  0%,
+  42% {
+    transform: rotateX(0deg);
+  }
+  50%,
+  92% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}
+
+.flipping-word {
+  display: inline-block;
+  position: relative;
+  height: 1em;
+  min-width: 5.6ch;
+  perspective: 900px;
+  vertical-align: baseline;
+}
+
+.flipping-word-inner {
+  position: relative;
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: headerWordFlip 2.8s ease-in-out infinite;
+}
+
+.flipping-word-face {
+  display: inline-block;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flipping-word-face.back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateX(180deg);
+}
+

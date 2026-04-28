@@ -1,4 +1,3 @@
-import CyclingWord from "@/components/CyclingWord";
 import FramerGradientBackground from "@/components/FramerGradientBackground";
 import ProjectHoverCursor from "@/components/ProjectHoverCursor";
 import WorkStackCards from "@/components/WorkStackCards";
@@ -139,19 +138,14 @@ export default function Home() {
               animation: "headerFadeUp 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both",
             }}
           >
-            <span
-              style={{
-                backgroundImage:
-                  "linear-gradient(105deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.7) 42%, rgba(255,255,255,0.98) 50%, rgba(255,255,255,0.7) 58%, rgba(255,255,255,0.92) 100%)",
-                backgroundSize: "240% 100%",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                animation: "headerGlowSweep 4.5s ease-in-out 1.1s infinite",
-              }}
-            >
-              Designing and <span className="italic">building</span> digital <CyclingWord />.
-            </span>
+            Designing and{" "}
+            <span className="flipping-word italic">
+              <span className="flipping-word-inner">
+                <span className="flipping-word-face">building</span>
+                <span className="flipping-word-face back">building</span>
+              </span>
+            </span>{" "}
+            digital products.
           </h1>
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <p className="max-w-xl text-sm font-light leading-relaxed text-white">
