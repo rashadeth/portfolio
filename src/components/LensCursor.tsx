@@ -19,77 +19,24 @@ export default function LensCursor() {
   const pos = useRef({ x: -300, y: -300 })
   const target = useRef({ x: -300, y: -300 })
   const active = useRef(false)
-  const running = useRef(false)
   const titleRect = useRef<DOMRect | null>(null)
   const raf = useRef<number>(0)
 
   useEffect(() => {
-    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
-    if (!hasFinePointer || window.innerWidth < 1024) return
+    if (window.innerWidth < 768) return
 
     const measureTitle = () => {
       const el = document.getElementById('hero-title')
-      if (!el) return
-      titleRect.current = el.getBoundingClientRect()
-      if (magLayerRef.current && titleRect.current) {
-        magLayerRef.current.style.top = `${titleRect.current.top}px`
-        magLayerRef.current.style.left = `${titleRect.current.left}px`
-      }
+      if (el) titleRect.current = el.getBoundingClientRect()
     }
     requestAnimationFrame(measureTitle)
     window.addEventListener('resize', measureTitle)
-    window.addEventListener('scroll', measureTitle, { passive: true })
 
     const heroSection = document.getElementById('hero-title')?.closest('section') as HTMLElement | null
 
     const onMove = (e: MouseEvent) => { target.current = { x: e.clientX, y: e.clientY } }
-
-    const tick = () => {
-      if (!active.current) {
-        running.current = false
-        return
-      }
-      pos.current.x += (target.current.x - pos.current.x) * LERP
-      pos.current.y += (target.current.y - pos.current.y) * LERP
-
-      const { x, y } = pos.current
-      const tr = titleRect.current
-
-      if (lensRef.current) {
-        lensRef.current.style.transform = `translate(${x - RADIUS}px, ${y - RADIUS}px)`
-      }
-
-      if (clipCircleRef.current) {
-        clipCircleRef.current.setAttribute('cx', String(Math.round(x)))
-        clipCircleRef.current.setAttribute('cy', String(Math.round(y)))
-      }
-
-      if (magLayerRef.current && tr) {
-        magLayerRef.current.style.transformOrigin = `${x - tr.left}px ${y - tr.top}px`
-      }
-
-      raf.current = requestAnimationFrame(tick)
-    }
-
-    const onEnter = (e: MouseEvent) => {
-      active.current = true
-      target.current = { x: e.clientX, y: e.clientY }
-      pos.current = { x: e.clientX, y: e.clientY }
-
-      if (lensRef.current) lensRef.current.style.opacity = '1'
-      if (magLayerRef.current) magLayerRef.current.style.opacity = '1'
-
-      if (!running.current) {
-        running.current = true
-        raf.current = requestAnimationFrame(tick)
-      }
-    }
-
-    const onLeave = () => {
-      active.current = false
-      if (lensRef.current) lensRef.current.style.opacity = '0'
-      if (magLayerRef.current) magLayerRef.current.style.opacity = '0'
-    }
+    const onEnter = () => { active.current = true }
+    const onLeave = () => { active.current = false }
 
     heroSection?.addEventListener('mousemove', onMove)
     heroSection?.addEventListener('mouseenter', onEnter)
@@ -119,6 +66,37 @@ export default function LensCursor() {
     window.addEventListener('word-hover', onWordHover)
     window.addEventListener('word-leave', onWordLeave)
 
+    const tick = () => {
+      pos.current.x += (target.current.x - pos.current.x) * LERP
+      pos.current.y += (target.current.y - pos.current.y) * LERP
+
+      const { x, y } = pos.current
+      const tr = titleRect.current
+
+      // Lens circle
+      if (lensRef.current) {
+        lensRef.current.style.transform = `translate(${x - RADIUS}px, ${y - RADIUS}px)`
+        lensRef.current.style.opacity = active.current ? '1' : '0'
+      }
+
+      // SVG clip circle
+      if (clipCircleRef.current) {
+        clipCircleRef.current.setAttribute('cx', String(Math.round(x)))
+        clipCircleRef.current.setAttribute('cy', String(Math.round(y)))
+      }
+
+      // Magnified text layer
+      if (magLayerRef.current && tr) {
+        magLayerRef.current.style.top = `${tr.top}px`
+        magLayerRef.current.style.left = `${tr.left}px`
+        magLayerRef.current.style.transformOrigin = `${x - tr.left}px ${y - tr.top}px`
+        magLayerRef.current.style.opacity = active.current ? '1' : '0'
+      }
+
+      raf.current = requestAnimationFrame(tick)
+    }
+    raf.current = requestAnimationFrame(tick)
+
     return () => {
       heroSection?.removeEventListener('mousemove', onMove)
       heroSection?.removeEventListener('mouseenter', onEnter)
@@ -126,7 +104,6 @@ export default function LensCursor() {
       window.removeEventListener('word-hover', onWordHover)
       window.removeEventListener('word-leave', onWordLeave)
       window.removeEventListener('resize', measureTitle)
-      window.removeEventListener('scroll', measureTitle)
       cancelAnimationFrame(raf.current)
     }
   }, [])

@@ -274,6 +274,12 @@ button,
     mix-blend-mode: normal !important;
   }
 
+  /* Kill ALL inline-style CSS animations (grainDrift, flyAcross, cardGlowPulse,
+     whatsappFloat, liquidMorph). The !important flag overrides inline styles. */
+  [style*="animation"] {
+    animation: none !important;
+  }
+
   /* Remove GPU layer caused by filter:drop-shadow on the WhatsApp button */
   .whatsapp-fab {
     filter: none !important;
