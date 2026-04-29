@@ -36,7 +36,7 @@ export default function Home() {
     {
       name: "Spacebook",
       slug: "spacebook",
-      description: "A social product workspace for teams building fast-moving digital ideas.",
+      description: "A two-sided marketplace for creators to discover and book creative spaces.",
       tags: ["Product", "Web"],
       videoSrc: "/videos/spacebook.mp4",
       hasVideo: true,

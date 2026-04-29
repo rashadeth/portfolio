@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, ArrowRight } from "lucide-react";
 
 type Project = {
   name: string;
@@ -123,13 +124,13 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                       </span>
                     </a>
                   ) : null}
-                  <span>View Case Study</span>
-                  <span className="inline-flex items-center gap-1" aria-hidden="true">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:0ms]" />
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:180ms]" />
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:360ms]" />
-                  </span>
-                  <span className="text-white/80">Coming Soon</span>
+                  <Link
+                    href={`/case-study/${project.slug}`}
+                    className="inline-flex items-center gap-2 text-white transition-opacity hover:opacity-70"
+                  >
+                    View Case Study
+                    <ArrowRight size={12} strokeWidth={1.75} />
+                  </Link>
                 </div>
               </div>
             </div>

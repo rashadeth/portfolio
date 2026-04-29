@@ -1,0 +1,280 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { getProject, getAllSlugs } from "@/lib/projects";
+import projects from "@/lib/projects";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return getAllSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProject(slug);
+  if (!project) return {};
+  return {
+    title: `${project.name} — Case Study`,
+    description: project.tagline,
+  };
+}
+
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = getProject(slug);
+  if (!project) notFound();
+
+  const currentIndex = projects.findIndex((p) => p.slug === slug);
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+
+  return (
+    <main className="relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]">
+      {/* grain overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-50 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
+          animation: "grainDrift 14s steps(6, end) infinite",
+        }}
+      />
+
+      {/* nav */}
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-[rgba(12,12,12,0.72)] backdrop-blur-xl">
+        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 md:px-10">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[10px] font-light uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
+          >
+            <ArrowLeft size={13} strokeWidth={1.75} />
+            Back
+          </Link>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[10px] font-light uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
+            >
+              Live Project
+              <ExternalLink size={11} strokeWidth={1.75} />
+            </a>
+          )}
+        </div>
+      </header>
+
+      <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-10">
+        {/* ── HERO ── */}
+        <section className="relative pb-4 pt-24 sm:pb-6 sm:pt-28 md:pb-8 md:pt-32">
+          <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
+            {/* dot grid */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 z-0 opacity-100"
+              style={{
+                backgroundImage: "radial-gradient(rgba(232,228,220,0.05) 1.5px, transparent 1.5px)",
+                backgroundSize: "28px 28px",
+                maskImage: "linear-gradient(to bottom, black 0%, transparent 80%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 80%)",
+              }}
+            />
+
+            <div className="relative z-10 px-5 pb-14 pt-14 sm:px-8 sm:pb-16 sm:pt-16 md:px-12 md:pb-20 md:pt-20">
+              {/* tags */}
+              <div className="mb-8 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-white/[0.08] px-3 py-1 text-[10px] font-light uppercase tracking-[0.16em] text-white/60"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* title */}
+              <h1 className="max-w-[16ch] font-sans text-[clamp(42px,9vw,96px)] font-light leading-[0.94] tracking-tight">
+                {project.name}
+              </h1>
+              <p className="mt-5 max-w-[52ch] text-base font-light leading-relaxed text-white/60 sm:text-lg">
+                {project.tagline}
+              </p>
+
+              {/* meta grid */}
+              <dl className="mt-12 grid gap-px border border-white/[0.06] sm:grid-cols-3">
+                {[
+                  { term: "Year", detail: project.year },
+                  { term: "Role", detail: project.role },
+                  { term: "Platform", detail: project.platform },
+                ].map(({ term, detail }) => (
+                  <div key={term} className="bg-white/[0.02] px-5 py-5 sm:px-6">
+                    <dt className="mb-1.5 text-[10px] font-light uppercase tracking-[0.18em] text-white/40">
+                      {term}
+                    </dt>
+                    <dd className="text-sm font-light leading-snug text-[#e8e4dc]">{detail}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        {/* ── PROBLEM ── */}
+        <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
+          <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
+            <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
+              <p className="mb-6 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                The Problem
+              </p>
+              <p className="max-w-[62ch] font-sans text-[clamp(20px,3.2vw,30px)] font-light leading-[1.35] tracking-tight text-[#e8e4dc]">
+                {project.problem}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── PROCESS ── */}
+        <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
+          <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
+            <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
+              <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                Process
+              </p>
+              <div className="grid gap-px border border-white/[0.05] sm:grid-cols-2">
+                {project.processSteps.map((step) => (
+                  <div
+                    key={step.step}
+                    className="group bg-[#0c0c0c] px-6 py-8 transition-colors hover:bg-white/[0.025] sm:px-8 sm:py-10"
+                  >
+                    <span className="mb-4 block text-[10px] font-light uppercase tracking-[0.2em] text-white/30">
+                      {step.step}
+                    </span>
+                    <h3 className="mb-3 font-sans text-xl font-light leading-snug tracking-tight text-[#e8e4dc]">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm font-light leading-relaxed text-white/55">{step.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── AI WORKFLOW ── */}
+        <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
+          <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] sm:rounded-3xl"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(79,142,247,0.04) 0%, rgba(12,12,12,0.98) 60%), #0c0c0c",
+            }}
+          >
+            {/* subtle grid */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-30"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(45deg, rgba(232,228,220,0.04) 0 1px, transparent 1px 22px)",
+              }}
+            />
+            <div className="relative z-10 px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
+              <p className="mb-3 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                AI Workflow
+              </p>
+              <h2 className="mb-10 max-w-[40ch] font-sans text-[clamp(18px,2.8vw,26px)] font-light leading-[1.3] tracking-tight">
+                {project.aiWorkflow.headline}
+              </h2>
+
+              <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                {project.aiWorkflow.tools.map((tool) => (
+                  <div
+                    key={tool.name}
+                    className="flex flex-col gap-1 rounded-xl border border-white/[0.07] bg-white/[0.02] px-5 py-4 sm:w-[calc(33.333%-8px)]"
+                  >
+                    <span className="text-xs font-light uppercase tracking-[0.14em] text-white">
+                      {tool.name}
+                    </span>
+                    <span className="text-sm font-light leading-relaxed text-white/50">{tool.role}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p className="max-w-[58ch] text-sm font-light leading-relaxed text-white/55">
+                {project.aiWorkflow.summary}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── IMPACT ── */}
+        <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
+          <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
+            <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
+              <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                Business Impact
+              </p>
+              <div className="grid grid-cols-2 gap-px border border-white/[0.05] sm:grid-cols-4">
+                {project.impactStats.map((stat) => (
+                  <div key={stat.label} className="bg-[#0c0c0c] px-5 py-8 sm:px-6">
+                    <p className="mb-2 font-sans text-[clamp(28px,5vw,44px)] font-light leading-none tracking-tight text-[#e8e4dc]">
+                      {stat.value}
+                    </p>
+                    <p className="text-[11px] font-light uppercase tracking-[0.14em] text-white/40">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── NEXT PROJECT ── */}
+        <section className="relative pb-8 pt-2 sm:pb-12 sm:pt-3 md:pb-16 md:pt-4">
+          <Link
+            href={`/case-study/${nextProject.slug}`}
+            className="group block overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] transition-colors hover:bg-white/[0.04] sm:rounded-3xl"
+          >
+            <div className="flex items-center justify-between px-5 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14">
+              <div>
+                <p className="mb-2 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                  Next Project
+                </p>
+                <h2 className="font-sans text-[clamp(28px,6vw,56px)] font-light leading-[0.95] tracking-tight text-[#e8e4dc]">
+                  {nextProject.name}
+                </h2>
+                <p className="mt-3 max-w-[40ch] text-sm font-light text-white/50">
+                  {nextProject.tagline}
+                </p>
+              </div>
+              <ArrowRight
+                size={32}
+                strokeWidth={1.25}
+                className="shrink-0 text-white/30 transition-transform duration-300 group-hover:translate-x-2 group-hover:text-white/70"
+              />
+            </div>
+          </Link>
+        </section>
+      </div>
+
+      <footer className="mx-auto w-full max-w-[1440px] bg-black px-4 sm:px-6 md:px-10">
+        <div className="grid gap-3 border-t border-white/[0.05] pb-6 pt-6 text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] md:grid-cols-3">
+          <span>© {new Date().getFullYear()} Ian Rashad</span>
+          <span className="md:text-center">Designed & built by Ian</span>
+          <span className="md:text-right">Abuja, Nigeria</span>
+        </div>
+      </footer>
+    </main>
+  );
+}
