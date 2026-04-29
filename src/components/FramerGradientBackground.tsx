@@ -80,9 +80,26 @@ export default function FramerGradientBackground() {
         className="absolute inset-0 block lg:hidden"
         style={{
           background:
-            "radial-gradient(ellipse 90% 55% at 50% 15%, rgba(255,155,55,0.22) 0%, rgba(215,58,32,0.13) 44%, transparent 74%)",
+            "radial-gradient(ellipse 95% 62% at 50% 14%, rgba(255,188,96,0.36) 0%, rgba(255,109,64,0.24) 34%, rgba(87,25,52,0.18) 60%, transparent 80%)",
           backgroundSize: "125% 125%",
           animation: "driftWide 14s ease-in-out infinite alternate, ambientPulse 7s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 block lg:hidden"
+        style={{
+          background:
+            "radial-gradient(72% 56% at 16% 80%, rgba(255,132,88,0.2) 0%, rgba(255,132,88,0) 74%), radial-gradient(70% 52% at 84% 22%, rgba(255,208,124,0.18) 0%, rgba(255,208,124,0) 76%)",
+          animation: "driftArc 18s ease-in-out infinite alternate",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 block lg:hidden"
+        style={{
+          background:
+            "linear-gradient(145deg, rgba(255,130,76,0.14) 0%, rgba(255,94,56,0.08) 36%, rgba(46,10,28,0.08) 72%, rgba(12,12,12,0.12) 100%)",
+          mixBlendMode: "screen",
+          animation: "ambientPulse 8.5s ease-in-out infinite",
         }}
       />
 
