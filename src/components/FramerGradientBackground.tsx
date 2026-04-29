@@ -81,6 +81,8 @@ export default function FramerGradientBackground() {
         style={{
           background:
             "radial-gradient(ellipse 90% 55% at 50% 15%, rgba(255,155,55,0.22) 0%, rgba(215,58,32,0.13) 44%, transparent 74%)",
+          backgroundSize: "125% 125%",
+          animation: "driftWide 14s ease-in-out infinite alternate, ambientPulse 7s ease-in-out infinite",
         }}
       />
 
