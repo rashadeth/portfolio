@@ -134,20 +134,24 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="relative mx-auto min-h-[100svh] w-full max-w-[1440px] overflow-hidden px-4 pb-8 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-10">
-        <LensCursor />
-        <div
-          aria-hidden="true"
-          data-parallax-layer
-          data-parallax-amount="28"
-          className="pointer-events-none absolute inset-0 z-0 will-change-transform"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' seed='3'/%3E%3CfeDisplacementMap scale='8'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23w)' opacity='0.18'/%3E%3C/svg%3E\")",
-            opacity: 0.2,
-          }}
-        />
-        <div className="relative z-10 flex h-full flex-col justify-end">
+      <section
+        id="hero"
+        className="relative mx-auto w-full max-w-[1440px] px-4 pb-4 pt-24 sm:px-6 sm:pb-6 sm:pt-28 md:px-10 md:pb-8 md:pt-32"
+      >
+        <div className="relative min-h-[calc(100svh-5.5rem)] overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:min-h-[calc(100svh-6rem)] sm:rounded-3xl">
+          <LensCursor />
+          <div
+            aria-hidden="true"
+            data-parallax-layer
+            data-parallax-amount="28"
+            className="pointer-events-none absolute inset-0 z-0 will-change-transform"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' seed='3'/%3E%3CfeDisplacementMap scale='8'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23w)' opacity='0.18'/%3E%3C/svg%3E\")",
+              opacity: 0.2,
+            }}
+          />
+          <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-end px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-20 md:px-8 md:pb-16">
           <div style={{ marginBottom: '24px' }}>
             <svg
               width="280"
@@ -235,54 +239,58 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       <section
         id="work"
-        className="relative z-10 mx-auto w-full max-w-[1440px] overflow-hidden px-4 py-8 sm:px-6 sm:py-16 md:px-10 md:py-24 md:pb-40"
+        className="relative z-10 mx-auto w-full max-w-[1440px] px-4 pb-4 pt-2 sm:px-6 sm:pb-6 sm:pt-3 md:px-10 md:pb-8 md:pt-4"
       >
-        <div
-          aria-hidden="true"
-          data-parallax-layer
-          data-parallax-amount="20"
-          className="pointer-events-none absolute inset-0 z-0 will-change-transform"
-          style={{
-            backgroundImage: "radial-gradient(rgba(232,228,220,0.06) 1.5px, transparent 1.5px)",
-            backgroundSize: "28px 28px",
-            maskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
-          }}
-        />
-        <div className="relative z-10 border-t border-white/[0.05] pt-0">
-          <WorkStackCards projects={projects} />
+        <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl md:pb-10">
+          <div
+            aria-hidden="true"
+            data-parallax-layer
+            data-parallax-amount="20"
+            className="pointer-events-none absolute inset-0 z-0 will-change-transform"
+            style={{
+              backgroundImage: "radial-gradient(rgba(232,228,220,0.06) 1.5px, transparent 1.5px)",
+              backgroundSize: "28px 28px",
+              maskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
+            }}
+          />
+          <div className="relative z-10 px-3 pt-10 pb-6 sm:px-5 sm:pb-10 sm:pt-12 md:px-6 md:pb-16 lg:pb-24">
+            <WorkStackCards projects={projects} />
+          </div>
         </div>
       </section>
 
       <section
         id="about"
-        className="relative z-20 mx-auto w-full max-w-[1440px] overflow-hidden px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-32 md:px-10 md:pb-28 md:pt-36"
+        className="relative z-20 mx-auto w-full max-w-[1440px] px-4 pb-4 pt-8 sm:px-6 sm:pb-6 sm:pt-12 md:px-10 md:pb-8 md:pt-14"
       >
-        <div
-          aria-hidden="true"
-          data-parallax-layer
-          data-parallax-amount="26"
-          className="pointer-events-none absolute -bottom-52 -left-44 z-0 h-[700px] w-[700px] rounded-full will-change-transform"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(0,200,150,0.08) 0%, rgba(0,200,150,0.025) 48%, rgba(0,200,150,0) 76%)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          data-parallax-layer
-          data-parallax-amount="14"
-          className="pointer-events-none absolute inset-0 z-0 opacity-40 will-change-transform"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg, rgba(232,228,220,0.04) 0 1px, transparent 1px 18px)",
-          }}
-        />
-        <div className="relative z-10 grid gap-12 border-t border-white/[0.05] pt-10 md:grid-cols-2 md:gap-20">
+        <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
+          <div
+            aria-hidden="true"
+            data-parallax-layer
+            data-parallax-amount="26"
+            className="pointer-events-none absolute -bottom-52 -left-44 z-0 h-[700px] w-[700px] rounded-full will-change-transform"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(0,200,150,0.08) 0%, rgba(0,200,150,0.025) 48%, rgba(0,200,150,0) 76%)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            data-parallax-layer
+            data-parallax-amount="14"
+            className="pointer-events-none absolute inset-0 z-0 opacity-40 will-change-transform"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(45deg, rgba(232,228,220,0.04) 0 1px, transparent 1px 18px)",
+            }}
+          />
+          <div className="relative z-10 grid gap-12 px-4 py-14 sm:px-7 sm:py-16 md:grid-cols-2 md:gap-20 md:px-10 md:py-20">
           <p className="max-w-[20ch] font-sans text-[clamp(36px,8vw,60px)] font-light leading-[1.02] tracking-tight">
             I am a designer and developer focused on making digital products feel clear, useful, and
             deeply human.
@@ -320,17 +328,30 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       <section
         id="contact"
-        className="relative mx-auto w-full max-w-[1440px] overflow-hidden bg-black px-4 py-20 sm:px-6 sm:py-24 md:px-10 md:py-28"
+        className="relative mx-auto w-full max-w-[1440px] bg-transparent px-4 pb-4 pt-10 sm:px-6 sm:pb-6 sm:pt-14 md:px-10 md:pb-8 md:pt-16"
       >
-        <div className="relative z-10 border-t border-white/[0.05] pt-10">
+        <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-black/25 backdrop-blur-[2px] sm:rounded-3xl">
+          <div
+            aria-hidden="true"
+            data-parallax-layer
+            data-parallax-amount="16"
+            className="pointer-events-none absolute inset-0 z-0 will-change-transform"
+            style={{
+              background:
+                "radial-gradient(ellipse 110% 80% at 50% 100%, rgba(79,142,247,0.06) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 80% 0%, rgba(123,97,255,0.045) 0%, transparent 50%)",
+            }}
+          />
+          <div className="relative z-10 px-5 py-16 sm:px-8 sm:py-20 md:px-12 md:py-24">
           <h2 className="max-w-[12ch] font-sans text-[clamp(40px,9vw,84px)] font-light leading-[0.96] tracking-tight">
             Let&apos;s make something great.
           </h2>
           <ContactLinksAnimated links={contactLinks} />
+          </div>
         </div>
       </section>
 
