@@ -172,38 +172,63 @@ export default async function CaseStudyPage({
         </section>
 
         {/* ── MOCKUPS ── */}
-        {project.mockups && project.mockups.length > 0 && (
-          <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
-            <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
-              <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
-                <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
-                  Screens
-                </p>
-                <div className="scrollbar-hide flex gap-5 overflow-x-auto pb-2 sm:gap-6">
-                  {project.mockups.map((mockup) => (
-                    <div key={mockup.src} className="flex flex-none flex-col items-center gap-4">
-                      <div className="relative h-[520px] w-[240px] overflow-hidden rounded-[44px] border border-white/[0.08] bg-[#111] shadow-[0_24px_64px_rgba(0,0,0,0.6)]">
-                        {/* phone notch */}
-                        <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-3">
-                          <div className="h-[18px] w-[72px] rounded-full bg-black" />
+        {project.mockups && project.mockups.length > 0 && (() => {
+          const isDesktop = project.mockups[0].orientation === "desktop";
+          return (
+            <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
+              <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
+                <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
+                  <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                    Screens
+                  </p>
+
+                  {isDesktop ? (
+                    /* ── desktop: vertical strip ── */
+                    <div className="flex flex-col items-center gap-8">
+                      {project.mockups.map((mockup) => (
+                        <div key={mockup.src} className="flex w-full flex-col items-center gap-3">
+                          <div className="w-full max-w-[900px] overflow-hidden rounded-[8px] border border-white/[0.07] shadow-[0_4px_24px_rgba(0,0,0,0.55),0_1px_4px_rgba(0,0,0,0.3)]">
+                            <img
+                              src={mockup.src}
+                              alt={mockup.label}
+                              className="w-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="text-[10px] font-light uppercase tracking-[0.16em] text-white/35">
+                            {mockup.label}
+                          </span>
                         </div>
-                        <img
-                          src={mockup.src}
-                          alt={mockup.label}
-                          className="h-full w-full object-cover object-top"
-                          loading="lazy"
-                        />
-                      </div>
-                      <span className="text-[10px] font-light uppercase tracking-[0.16em] text-white/35">
-                        {mockup.label}
-                      </span>
+                      ))}
                     </div>
-                  ))}
+                  ) : (
+                    /* ── portrait: horizontal scroll row ── */
+                    <div className="scrollbar-hide flex gap-5 overflow-x-auto pb-2 sm:gap-6">
+                      {project.mockups.map((mockup) => (
+                        <div key={mockup.src} className="flex flex-none flex-col items-center gap-4">
+                          <div className="relative h-[520px] w-[240px] overflow-hidden rounded-[44px] border border-white/[0.08] bg-[#111] shadow-[0_24px_64px_rgba(0,0,0,0.6)]">
+                            <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-3">
+                              <div className="h-[18px] w-[72px] rounded-full bg-black" />
+                            </div>
+                            <img
+                              src={mockup.src}
+                              alt={mockup.label}
+                              className="h-full w-full object-cover object-top"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="text-[10px] font-light uppercase tracking-[0.16em] text-white/35">
+                            {mockup.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          </section>
-        )}
+            </section>
+          );
+        })()}
 
         {/* ── AI WORKFLOW ── */}
         <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">

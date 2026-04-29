@@ -23,6 +23,7 @@ export type ImpactStat = {
 export type Mockup = {
   src: string;
   label: string;
+  orientation?: "portrait" | "desktop";
 };
 
 export type Project = {
@@ -153,6 +154,13 @@ const projects: Project[] = [
       { value: "+27%", label: "Repeat Order Rate" },
       { value: "4.6★", label: "Post-launch App Rating" },
       { value: "−41%", label: "Cart Abandonment" },
+    ],
+    mockups: [
+      { src: "/images/foodcourt/overview.png", label: "Overview", orientation: "desktop" },
+      { src: "/images/foodcourt/live-trips.png", label: "Live Trips", orientation: "desktop" },
+      { src: "/images/foodcourt/orders.png", label: "Orders", orientation: "desktop" },
+      { src: "/images/foodcourt/scheduled-orders.png", label: "Scheduled Orders", orientation: "desktop" },
+      { src: "/images/foodcourt/partners.png", label: "Partners", orientation: "desktop" },
     ],
     liveUrl: "https://apps.apple.com/ng/app/foodcourt-food-delivery/id1579693328",
   },
