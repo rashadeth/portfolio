@@ -16,6 +16,13 @@ export default function SectionReveal({ children, className, id, delayMs = 0 }: 
     if (!ref.current) return;
 
     const node = ref.current;
+
+    // On mobile, skip the scroll reveal — elements appear in final state immediately.
+    if (window.innerWidth <= 768) {
+      node.classList.add("is-visible");
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

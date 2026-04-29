@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 type ContactLink = {
   label: string;
@@ -32,6 +33,34 @@ const item = {
 };
 
 export default function ContactLinksAnimated({ links }: ContactLinksAnimatedProps) {
+  const [isMobile] = useState(
+    () => typeof window !== "undefined" && window.innerWidth <= 768
+  );
+
+  if (isMobile) {
+    return (
+      <div className="mt-10 sm:mt-12">
+        {links.map((itemLink) => (
+          <div
+            key={itemLink.label}
+            className="group relative grid w-full grid-cols-[1fr_auto] items-center border-b border-white/[0.05] py-5 sm:py-6"
+          >
+            <span className="text-xs font-light uppercase tracking-[0.18em] sm:text-sm">{itemLink.label}</span>
+            <a
+              href={itemLink.href}
+              target={itemLink.href.startsWith("http") ? "_blank" : undefined}
+              rel={itemLink.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              aria-label={`Open ${itemLink.label}`}
+              className="justify-self-end text-lg font-light text-white"
+            >
+              →
+            </a>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <motion.div
       className="mt-10 sm:mt-12"

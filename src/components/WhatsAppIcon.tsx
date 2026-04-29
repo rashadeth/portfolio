@@ -7,6 +7,7 @@ export default function WhatsAppIcon() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
+      className="whatsapp-fab"
       style={{
         position: 'fixed',
         bottom: 32,

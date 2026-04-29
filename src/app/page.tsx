@@ -80,7 +80,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]" style={{ overflow: "clip" }}>
+    <main className="relative min-h-screen overflow-x-clip bg-[#0c0c0c] text-[#e8e4dc]">
       <FramerGradientBackground />
       <ProjectHoverCursor />
       <WhatsAppIcon />

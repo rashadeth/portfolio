@@ -219,3 +219,78 @@ button,
   }
 }
 
+/* ─── Mobile scroll fix (max-width: 768px) ──────────────────────────
+   Goal: 100% native browser scrolling — zero JS intervention.
+   Desktop layout and animations are completely untouched.
+──────────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px), (hover: none) and (pointer: coarse) {
+  html,
+  body {
+    overflow-x: hidden;
+    /* overflow-y must remain auto/unset so native scroll flows freely */
+    /* will-change: scroll-position hints the compositor without creating a new
+       stacking context — safe to use here (will-change: transform would break
+       position:fixed descendants). */
+    will-change: scroll-position;
+  }
+
+  /* Enable GPU-composited native scroll on the document layer */
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Let native scroll flow — do NOT add transform/translateZ here because
+     position:fixed children (gradient bg, cursors, WhatsApp btn) are inside
+     <main> and any transform on a parent makes it the new containing block,
+     breaking their fixed positioning. */
+  main {
+    overflow: visible !important;   /* override overflow:clip inline style */
+    overflow-x: hidden !important;
+    touch-action: pan-y;
+  }
+
+  /* Header: remove backdrop-filter (triggers a GPU compositing layer on every scroll frame) */
+  header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(12, 12, 12, 0.94) !important;
+  }
+
+  /* WebGL shader canvas wrapper — hidden on mobile, replaced by simple CSS gradient */
+  .mobile-canvas-hidden {
+    display: none !important;
+  }
+
+  /* Hide the GPU-heavy mix-blend + blur overlay divs in the gradient background */
+  .mobile-hidden {
+    display: none !important;
+  }
+
+  /* Belt-and-suspenders: disable any remaining mix-blend-mode compositing */
+  .mix-blend-screen {
+    mix-blend-mode: normal !important;
+  }
+  .mix-blend-overlay {
+    mix-blend-mode: normal !important;
+  }
+
+  /* Kill ALL inline-style CSS animations (grainDrift, flyAcross, cardGlowPulse,
+     whatsappFloat, liquidMorph). The !important flag overrides inline styles. */
+  [style*="animation"] {
+    animation: none !important;
+  }
+
+  /* Remove GPU layer caused by filter:drop-shadow on the WhatsApp button */
+  .whatsapp-fab {
+    filter: none !important;
+    animation: none !important;
+  }
+
+  /* Section-reveal: show final state immediately — no fade/slide on mobile */
+  .section-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

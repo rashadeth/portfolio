@@ -10,6 +10,9 @@ export default function ProjectHoverCursor() {
   const frameRef = useRef(0);
 
   useEffect(() => {
+    const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!hasFinePointer) return;
+
     const move = (event: MouseEvent) => {
       targetRef.current.x = event.clientX;
       targetRef.current.y = event.clientY;

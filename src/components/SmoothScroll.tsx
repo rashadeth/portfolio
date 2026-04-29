@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis, useLenis } from "lenis/react";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,30 +61,6 @@ function FluidParallax() {
       });
     });
 
-    mm.add("(max-width: 768px)", () => {
-      layers.forEach((layer) => {
-        const base = Number(layer.dataset.parallaxAmount ?? "36") * 0.45;
-        const trigger = layer.closest("section");
-        if (!trigger) return;
-
-        gsap.fromTo(
-          layer,
-          { y: -base },
-          {
-            y: base,
-            ease: "none",
-            scrollTrigger: {
-              trigger,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.9,
-              invalidateOnRefresh: true,
-            },
-          },
-        );
-      });
-    });
-
     return () => {
       mm.revert();
     };
@@ -128,17 +104,39 @@ function SmoothAnchors() {
 }
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
+  // Enable Lenis only on desktop-class devices with fine pointers.
+  // Touch devices (including large tablets) stay on native scroll to avoid friction.
+  const [useLenis, setUseLenis] = useState(false);
+
+  useEffect(() => {
+    const sizeMq = window.matchMedia("(min-width: 1024px)");
+    const pointerMq = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    const sync = () => setUseLenis(sizeMq.matches && pointerMq.matches);
+    sync();
+
+    sizeMq.addEventListener("change", sync);
+    pointerMq.addEventListener("change", sync);
+    return () => {
+      sizeMq.removeEventListener("change", sync);
+      pointerMq.removeEventListener("change", sync);
+    };
+  }, []);
+
+  if (!useLenis) {
+    return <>{children}</>;
+  }
+
   return (
     <ReactLenis
       root
       options={{
-        duration: 1.2,
-        lerp: 0.07,
+        duration: 0.9,
+        lerp: 0.1,
         smoothWheel: true,
         wheelMultiplier: 1,
-        touchMultiplier: 1.65,
-        syncTouch: true,
-        syncTouchLerp: 0.075,
+        touchMultiplier: 1,
+        syncTouch: false,
         autoRaf: true,
       }}
     >
