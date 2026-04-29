@@ -103,6 +103,41 @@ function SmoothAnchors() {
   return null;
 }
 
+function NativeSmoothAnchors() {
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const anchor = (event.target as HTMLElement | null)?.closest("a");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+
+      event.preventDefault();
+
+      if (href === "#") {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        return;
+      }
+
+      const id = href.slice(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const absoluteTop = window.scrollY + el.getBoundingClientRect().top - NAV_OFFSET;
+      window.scrollTo({
+        top: Math.max(absoluteTop, 0),
+        left: 0,
+        behavior: "smooth",
+      });
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  return null;
+}
+
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   // Enable Lenis only on desktop-class devices with fine pointers.
   // Touch devices (including large tablets) stay on native scroll to avoid friction.
@@ -124,7 +159,12 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
   }, []);
 
   if (!useLenis) {
-    return <>{children}</>;
+    return (
+      <>
+        <NativeSmoothAnchors />
+        {children}
+      </>
+    );
   }
 
   return (
