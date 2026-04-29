@@ -332,6 +332,11 @@ const projects: Project[] = [
       { value: "3.2×", label: "Editorial to Commerce Conversion" },
       { value: "14k", label: "Day-1 Newsletter Launch Audience" },
     ],
+    mockups: [
+      { src: "/images/afroszn/create-event.png", label: "Create Event", orientation: "desktop" },
+      { src: "/images/afroszn/analytics-dashboard.png", label: "Analytics Dashboard", orientation: "desktop" },
+      { src: "/images/afroszn/ticket-management.png", label: "Ticket Management", orientation: "desktop" },
+    ],
     liveUrl: "https://afroszn.org/",
   },
 ];

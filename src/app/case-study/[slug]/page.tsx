@@ -184,7 +184,7 @@ export default async function CaseStudyPage({
 
                   {isDesktop ? (
                     /* ── desktop: vertical strip ── */
-                    <div className="flex flex-col items-center gap-8">
+                    <div className="flex flex-col items-center gap-12">
                       {project.mockups.map((mockup) => (
                         <div key={mockup.src} className="flex w-full flex-col items-center gap-3">
                           <div className="w-full max-w-[900px] overflow-hidden rounded-[8px] border border-white/[0.07] shadow-[0_4px_24px_rgba(0,0,0,0.55),0_1px_4px_rgba(0,0,0,0.3)]">
