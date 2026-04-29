@@ -214,6 +214,13 @@ const projects: Project[] = [
       { value: "74%", label: "Booking Completion Rate" },
       { value: "4.9★", label: "Early Reviewer Rating" },
     ],
+    mockups: [
+      { src: "/images/spacebook/my-spaces-empty.png", label: "My Spaces — Empty State", orientation: "desktop" },
+      { src: "/images/spacebook/my-spaces-listings.png", label: "My Spaces — With Listings", orientation: "desktop" },
+      { src: "/images/spacebook/my-spaces-set-status.png", label: "My Spaces — Set Status", orientation: "desktop" },
+      { src: "/images/spacebook/list-new-space.png", label: "List a New Space", orientation: "desktop" },
+      { src: "/images/spacebook/edit-space-details.png", label: "Edit Space Details", orientation: "desktop" },
+    ],
   },
   {
     slug: "steppa",
