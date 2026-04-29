@@ -113,6 +113,7 @@ export default function LensCursor() {
       {/* SVG clip path — circle tracks cursor in viewport space */}
       <svg
         aria-hidden="true"
+        className="hidden md:block"
         style={{
           position: 'fixed',
           top: 0,
@@ -135,6 +136,7 @@ export default function LensCursor() {
       <div
         ref={magLayerRef}
         aria-hidden="true"
+        className="hidden md:block"
         style={{
           position: 'fixed',
           top: 0,
@@ -167,6 +169,7 @@ export default function LensCursor() {
       <div
         ref={lensRef}
         aria-hidden="true"
+        className="hidden md:block"
         style={{
           position: 'fixed',
           top: 0,
