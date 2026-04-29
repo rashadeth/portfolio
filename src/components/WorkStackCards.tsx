@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ExternalLink, ArrowRight } from "lucide-react";
 
@@ -16,6 +16,53 @@ type Project = {
   mediaBg: string;
   liveUrl?: string;
 };
+
+function ProjectVideo({
+  src,
+  orientation,
+  fitMode,
+}: {
+  src: string;
+  orientation: string;
+  fitMode: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const node = videoRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!videoRef.current) return;
+        if (entry.isIntersecting) {
+          void videoRef.current.play().catch(() => {});
+        } else {
+          videoRef.current.pause();
+        }
+      },
+      { threshold: 0.25, rootMargin: "160px 0px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      src={src}
+      data-orientation={orientation}
+      className={`pointer-events-none h-full w-full object-center md:pointer-events-auto ${
+        fitMode === "contain" ? "object-contain" : "object-cover"
+      }`}
+    />
+  );
+}
 
 export default function WorkStackCards({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,17 +108,10 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                 }}
               >
                 {project.hasVideo ? (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
+                  <ProjectVideo
                     src={project.videoSrc}
-                    data-orientation={project.orientation}
-                    className={`pointer-events-none h-full w-full object-center md:pointer-events-auto ${
-                      project.fitMode === "contain" ? "object-contain" : "object-cover"
-                    }`}
+                    orientation={project.orientation}
+                    fitMode={project.fitMode}
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[#111] px-6 text-center">

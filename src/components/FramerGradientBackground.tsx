@@ -7,6 +7,8 @@ import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
 export default function FramerGradientBackground() {
   const targetRef = useRef({ x: 0, y: 0 });
   const smoothRef = useRef({ x: 0, y: 0 });
+  const lastMoveRef = useRef(0);
+  const runningRef = useRef(false);
   const [gradient, setGradient] = useState({
     cAzimuthAngle: 228,
     cPolarAngle: 126,
@@ -14,8 +16,18 @@ export default function FramerGradientBackground() {
     positionY: 0,
     uStrength: 2.05,
   });
+  const [pixelDensity, setPixelDensity] = useState(1.2);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef(0);
+
+  useEffect(() => {
+    const syncDensity = () => {
+      setPixelDensity(window.matchMedia("(max-width: 1024px)").matches ? 1.1 : 1.35);
+    };
+    syncDensity();
+    window.addEventListener("resize", syncDensity);
+    return () => window.removeEventListener("resize", syncDensity);
+  }, []);
 
   useEffect(() => {
     const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -26,6 +38,12 @@ export default function FramerGradientBackground() {
       const ny = event.clientY / window.innerHeight - 0.5;
       targetRef.current.x = nx;
       targetRef.current.y = ny;
+      lastMoveRef.current = performance.now();
+
+      if (!runningRef.current) {
+        runningRef.current = true;
+        frameRef.current = window.requestAnimationFrame(animate);
+      }
     };
 
     const animate = () => {
@@ -34,6 +52,8 @@ export default function FramerGradientBackground() {
 
       const sx = smoothRef.current.x;
       const sy = smoothRef.current.y;
+      const dx = Math.abs(targetRef.current.x - sx);
+      const dy = Math.abs(targetRef.current.y - sy);
 
       setGradient((prev) => {
         const next = {
@@ -61,14 +81,20 @@ export default function FramerGradientBackground() {
         wrapperRef.current.style.transform = `translate3d(${sx * 8}px, ${sy * 8}px, 0)`;
       }
 
+      const idleForMs = performance.now() - lastMoveRef.current;
+      if (dx < 0.0008 && dy < 0.0008 && idleForMs > 140) {
+        runningRef.current = false;
+        return;
+      }
+
       frameRef.current = window.requestAnimationFrame(animate);
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
-    frameRef.current = window.requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
+      runningRef.current = false;
       window.cancelAnimationFrame(frameRef.current);
     };
   }, []);
@@ -78,7 +104,7 @@ export default function FramerGradientBackground() {
       <div className="absolute inset-0">
         <ShaderGradientCanvas
           style={{ position: "absolute", inset: 0 }}
-          pixelDensity={1.5}
+          pixelDensity={pixelDensity}
           fov={42}
         >
           <ShaderGradient
