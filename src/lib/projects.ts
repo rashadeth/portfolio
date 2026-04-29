@@ -20,6 +20,11 @@ export type ImpactStat = {
   label: string;
 };
 
+export type Mockup = {
+  src: string;
+  label: string;
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -34,6 +39,7 @@ export type Project = {
   processSteps: ProcessStep[];
   aiWorkflow: AiWorkflow;
   impactStats: ImpactStat[];
+  mockups?: Mockup[];
   liveUrl?: string;
 };
 
@@ -87,6 +93,14 @@ const projects: Project[] = [
       { value: "2,400+", label: "Downloads in Month 1" },
       { value: "38%", label: "Reduction in Task Time" },
       { value: "3×", label: "Barber Booking Rate" },
+    ],
+    mockups: [
+      { src: "/images/barbr/select-goals.png", label: "Select Goals" },
+      { src: "/images/barbr/select-struggles.png", label: "Select Struggles" },
+      { src: "/images/barbr/signup.png", label: "Sign Up" },
+      { src: "/images/barbr/select-profile-type.png", label: "Profile Type" },
+      { src: "/images/barbr/barbershop-name.png", label: "Barbershop Name" },
+      { src: "/images/barbr/welcome.png", label: "Welcome" },
     ],
     liveUrl: "https://apps.apple.com/ng/app/barbr-creators/id6760665839",
   },

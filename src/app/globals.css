@@ -48,6 +48,14 @@ button,
   cursor: auto;
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes floatOrb {
   0% {
     transform: translate3d(0, 0, 0);
