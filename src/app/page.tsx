@@ -333,26 +333,12 @@ export default function Home() {
 
       <section
         id="contact"
-        className="relative mx-auto w-full max-w-[1440px] bg-transparent px-4 pb-4 pt-10 sm:px-6 sm:pb-6 sm:pt-14 md:px-10 md:pb-8 md:pt-16"
+        className="relative mx-auto w-full max-w-[1440px] bg-[#000000] px-4 py-16 text-white sm:px-6 sm:py-20 md:px-10 md:py-24"
       >
-        <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-black/25 backdrop-blur-[2px] sm:rounded-3xl">
-          <div
-            aria-hidden="true"
-            data-parallax-layer
-            data-parallax-amount="16"
-            className="pointer-events-none absolute inset-0 z-0 will-change-transform"
-            style={{
-              background:
-                "radial-gradient(ellipse 110% 80% at 50% 100%, rgba(79,142,247,0.06) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 80% 0%, rgba(123,97,255,0.045) 0%, transparent 50%)",
-            }}
-          />
-          <div className="relative z-10 px-5 py-16 sm:px-8 sm:py-20 md:px-12 md:py-24">
-          <h2 className="max-w-[12ch] font-sans text-[clamp(40px,9vw,84px)] font-light leading-[0.96] tracking-tight">
-            Let&apos;s make something great.
-          </h2>
-          <ContactLinksAnimated links={contactLinks} />
-          </div>
-        </div>
+        <h2 className="max-w-[12ch] font-sans text-[clamp(40px,9vw,84px)] font-light leading-[0.96] tracking-tight text-white">
+          Let&apos;s make something great.
+        </h2>
+        <ContactLinksAnimated links={contactLinks} />
       </section>
 
       <footer className="relative z-20 mx-auto w-full max-w-[1440px] bg-black px-4 pb-0 sm:px-6 md:px-10">
