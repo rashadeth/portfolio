@@ -256,11 +256,6 @@ button,
     background-color: rgba(12, 12, 12, 0.94) !important;
   }
 
-  /* WebGL shader canvas wrapper — hidden on mobile, replaced by simple CSS gradient */
-  .mobile-canvas-hidden {
-    display: none !important;
-  }
-
   /* Hide the GPU-heavy mix-blend + blur overlay divs in the gradient background */
   .mobile-hidden {
     display: none !important;
@@ -272,12 +267,6 @@ button,
   }
   .mix-blend-overlay {
     mix-blend-mode: normal !important;
-  }
-
-  /* Kill ALL inline-style CSS animations (grainDrift, flyAcross, cardGlowPulse,
-     whatsappFloat, liquidMorph). The !important flag overrides inline styles. */
-  [style*="animation"] {
-    animation: none !important;
   }
 
   /* Remove GPU layer caused by filter:drop-shadow on the WhatsApp button */

@@ -75,17 +75,7 @@ export default function FramerGradientBackground() {
 
   return (
     <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-0 will-change-transform">
-      {/* Mobile simple gradient — replaces WebGL canvas to eliminate GPU load */}
-      <div
-        className="absolute inset-0 block lg:hidden"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 55% at 50% 15%, rgba(255,155,55,0.22) 0%, rgba(215,58,32,0.13) 44%, transparent 74%)",
-        }}
-      />
-
-      {/* Desktop-only WebGL shader canvas — hidden on mobile */}
-      <div className="mobile-canvas-hidden absolute inset-0 hidden lg:block">
+      <div className="absolute inset-0">
         <ShaderGradientCanvas
           style={{ position: "absolute", inset: 0 }}
           pixelDensity={1.5}
