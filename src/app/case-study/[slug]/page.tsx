@@ -204,24 +204,33 @@ export default async function CaseStudyPage({
                   ) : (
                     /* ── portrait: horizontal scroll row ── */
                     <div className="scrollbar-hide flex gap-5 overflow-x-auto pb-2 sm:gap-6">
-                      {project.mockups.map((mockup) => (
-                        <div key={mockup.src} className="flex flex-none flex-col items-center gap-4">
-                          <div className="relative h-[520px] w-[240px] overflow-hidden rounded-[44px] border border-white/[0.08] bg-[#111] shadow-[0_24px_64px_rgba(0,0,0,0.6)]">
-                            <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-3">
-                              <div className="h-[18px] w-[72px] rounded-full bg-black" />
+                      {project.mockups.map((mockup) => {
+                        const radius = mockup.cornerRadius ?? "44px";
+                        const hasNotch = !mockup.cornerRadius;
+                        return (
+                          <div key={mockup.src} className="flex flex-none flex-col items-center gap-4">
+                            <div
+                              className="relative h-[520px] w-[240px] overflow-hidden border border-white/[0.08] bg-[#111] shadow-[0_24px_64px_rgba(0,0,0,0.6)]"
+                              style={{ borderRadius: radius }}
+                            >
+                              {hasNotch && (
+                                <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-3">
+                                  <div className="h-[18px] w-[72px] rounded-full bg-black" />
+                                </div>
+                              )}
+                              <img
+                                src={mockup.src}
+                                alt={mockup.label}
+                                className="h-full w-full object-cover object-top"
+                                loading="lazy"
+                              />
                             </div>
-                            <img
-                              src={mockup.src}
-                              alt={mockup.label}
-                              className="h-full w-full object-cover object-top"
-                              loading="lazy"
-                            />
+                            <span className="text-[10px] font-light uppercase tracking-[0.16em] text-white/35">
+                              {mockup.label}
+                            </span>
                           </div>
-                          <span className="text-[10px] font-light uppercase tracking-[0.16em] text-white/35">
-                            {mockup.label}
-                          </span>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
                 </div>

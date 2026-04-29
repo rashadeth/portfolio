@@ -24,6 +24,8 @@ export type Mockup = {
   src: string;
   label: string;
   orientation?: "portrait" | "desktop";
+  cornerRadius?: string;
+  showNotch?: boolean;
 };
 
 export type Project = {
@@ -271,6 +273,13 @@ const projects: Project[] = [
       { value: "−34%", label: "Drop-off at Destination Input" },
       { value: "4 sec", label: "Avg. Connectivity Recovery Time" },
       { value: "18%", label: "Comprehension Lift with Localised Voice" },
+    ],
+    mockups: [
+      { src: "/images/steppa/welcome.png", label: "Welcome", cornerRadius: "24px" },
+      { src: "/images/steppa/motivation.png", label: "Goal Selection", cornerRadius: "24px" },
+      { src: "/images/steppa/permissions.png", label: "Apple Health", cornerRadius: "24px" },
+      { src: "/images/steppa/premium-paywall.png", label: "Premium Paywall", cornerRadius: "24px" },
+      { src: "/images/steppa/goal-locked-in.png", label: "Goal Locked In", cornerRadius: "24px" },
     ],
   },
   {
