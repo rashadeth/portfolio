@@ -21,16 +21,19 @@ function ProjectVideo({
   src,
   orientation,
   fitMode,
+  eager,
 }: {
   src: string;
   orientation: string;
   fitMode: string;
+  eager: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const node = videoRef.current;
     if (!node) return;
+    if (eager) node.load();
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -41,12 +44,12 @@ function ProjectVideo({
           videoRef.current.pause();
         }
       },
-      { threshold: 0.25, rootMargin: "160px 0px" },
+      { threshold: 0.01, rootMargin: "320px 0px" },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   return (
     <video
@@ -54,7 +57,7 @@ function ProjectVideo({
       muted
       loop
       playsInline
-      preload="metadata"
+      preload={eager ? "auto" : "metadata"}
       src={src}
       data-orientation={orientation}
       className={`pointer-events-none h-full w-full object-center md:pointer-events-auto ${
@@ -112,6 +115,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                     src={project.videoSrc}
                     orientation={project.orientation}
                     fitMode={project.fitMode}
+                    eager={index < 2}
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[#111] px-6 text-center">
