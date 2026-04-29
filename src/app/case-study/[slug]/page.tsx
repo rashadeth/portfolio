@@ -38,7 +38,7 @@ export default async function CaseStudyPage({
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <main className="relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]">
+    <main className="cursor-restore relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]">
       {/* grain overlay */}
       <div
         aria-hidden="true"

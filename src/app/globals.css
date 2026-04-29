@@ -41,6 +41,13 @@ button,
   cursor: none;
 }
 
+.cursor-restore,
+.cursor-restore a,
+.cursor-restore button,
+.cursor-restore [role="button"] {
+  cursor: auto;
+}
+
 @keyframes floatOrb {
   0% {
     transform: translate3d(0, 0, 0);
