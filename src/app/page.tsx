@@ -138,7 +138,9 @@ export default function Home() {
         <LensCursor />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0"
+          data-parallax-layer
+          data-parallax-amount="28"
+          className="pointer-events-none absolute inset-0 z-0 will-change-transform"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' seed='3'/%3E%3CfeDisplacementMap scale='8'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23w)' opacity='0.18'/%3E%3C/svg%3E\")",
@@ -241,7 +243,9 @@ export default function Home() {
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0"
+          data-parallax-layer
+          data-parallax-amount="20"
+          className="pointer-events-none absolute inset-0 z-0 will-change-transform"
           style={{
             backgroundImage: "radial-gradient(rgba(232,228,220,0.06) 1.5px, transparent 1.5px)",
             backgroundSize: "28px 28px",
@@ -260,7 +264,9 @@ export default function Home() {
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-52 -left-44 z-0 h-[700px] w-[700px] rounded-full"
+          data-parallax-layer
+          data-parallax-amount="26"
+          className="pointer-events-none absolute -bottom-52 -left-44 z-0 h-[700px] w-[700px] rounded-full will-change-transform"
           style={{
             background:
               "radial-gradient(circle at center, rgba(0,200,150,0.08) 0%, rgba(0,200,150,0.025) 48%, rgba(0,200,150,0) 76%)",
@@ -268,7 +274,9 @@ export default function Home() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 opacity-40"
+          data-parallax-layer
+          data-parallax-amount="14"
+          className="pointer-events-none absolute inset-0 z-0 opacity-40 will-change-transform"
           style={{
             backgroundImage:
               "repeating-linear-gradient(45deg, rgba(232,228,220,0.04) 0 1px, transparent 1px 18px)",

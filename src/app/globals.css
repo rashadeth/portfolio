@@ -16,7 +16,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis handles smooth/inertial scroll — native smooth-behavior fights it */
+  scroll-behavior: auto;
   scroll-padding-top: 80px;
 }
 

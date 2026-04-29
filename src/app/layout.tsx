@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
 import Script from "next/script";
 import ScrollToTopOnLoad from "@/components/ScrollToTopOnLoad";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -85,8 +86,10 @@ export default function RootLayout({
       className={`${manrope.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <ScrollToTopOnLoad />
-        {children}
+        <SmoothScroll>
+          <ScrollToTopOnLoad />
+          {children}
+        </SmoothScroll>
       </body>
       <Script
         id="person-jsonld"

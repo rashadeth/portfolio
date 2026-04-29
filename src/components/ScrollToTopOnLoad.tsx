@@ -1,8 +1,11 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { useEffect } from "react";
 
 export default function ScrollToTopOnLoad() {
+  const lenis = useLenis();
+
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
@@ -18,13 +21,15 @@ export default function ScrollToTopOnLoad() {
       );
     }
 
+    lenis?.scrollTo(0, { immediate: true });
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
     // Run once more after paint to override any late browser restoration.
     requestAnimationFrame(() => {
+      lenis?.scrollTo(0, { immediate: true });
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     });
-  }, []);
+  }, [lenis]);
 
   return null;
 }
