@@ -318,14 +318,6 @@ export default function Home() {
                 Figma, Next.js, React, TypeScript, Tailwind, GSAP.
               </p>
             </div>
-            <div className="grid gap-2 py-5 sm:grid-cols-[120px_1fr] sm:gap-6">
-              <span className="text-xs font-light uppercase tracking-[0.16em] text-white">
-                Education
-              </span>
-              <p className="text-sm font-light leading-relaxed">
-                B.Sc. Computer Science — University of Abuja.
-              </p>
-            </div>
           </div>
         </div>
         </div>
