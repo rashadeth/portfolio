@@ -19,57 +19,29 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  title: "Ian O — Design Engineer",
+  description: "Designing and building digital products from Abuja, Nigeria.",
   metadataBase: new URL("https://yohanan.design"),
-  title: {
-    default: "Ian Okpoko — Design Engineer in Abuja",
-    template: "%s | Ian Okpoko",
-  },
-  description:
-    "Ian Okpoko is a design engineer in Abuja, Nigeria, building digital products from concept to launch across web and mobile.",
-  keywords: [
-    "Ian Okpoko",
-    "Ian Rashad",
-    "Design Engineer",
-    "Product Designer Nigeria",
-    "Frontend Developer Abuja",
-    "UI UX Designer Nigeria",
-    "Portfolio",
-    "Yohanan Design",
-  ],
-  applicationName: "Ian Okpoko Portfolio",
-  authors: [{ name: "Ian Okpoko", url: "https://yohanan.design" }],
-  creator: "Ian Okpoko",
-  publisher: "Ian Okpoko",
-  category: "portfolio",
-  alternates: {
-    canonical: "https://yohanan.design",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
   openGraph: {
-    title: "Ian Okpoko — Design Engineer",
+    title: "Ian O — Design Engineer",
     description: "Designing and building digital products from Abuja, Nigeria.",
     url: "https://yohanan.design",
-    siteName: "Ian Okpoko Portfolio",
-    locale: "en_US",
+    siteName: "Ian O",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ian O — Design Engineer",
+      },
+    ],
     type: "website",
-    images: [{ url: "https://yohanan.design/images/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ian Okpoko — Design Engineer",
+    title: "Ian O — Design Engineer",
     description: "Designing and building digital products from Abuja, Nigeria.",
-    creator: "@yohanansoltd",
-    images: ["https://yohanan.design/images/og-image.png"],
+    images: ["/images/og-image.png"],
   },
 };
 
