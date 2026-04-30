@@ -56,22 +56,20 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Ian Okpoko — Design Engineer in Abuja",
-    description:
-      "Design engineer portfolio for Ian Okpoko: product design and frontend development work across web and mobile.",
+    title: "Ian Okpoko — Design Engineer",
+    description: "Designing and building digital products from Abuja, Nigeria.",
     url: "https://yohanan.design",
     siteName: "Ian Okpoko Portfolio",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "https://yohanan.design/images/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ian Okpoko — Design Engineer in Abuja",
-    description:
-      "Design engineer portfolio for Ian Okpoko: selected projects, product design, and frontend development.",
+    title: "Ian Okpoko — Design Engineer",
+    description: "Designing and building digital products from Abuja, Nigeria.",
     creator: "@yohanansoltd",
-    images: ["/og-image.png"],
+    images: ["https://yohanan.design/images/og-image.png"],
   },
 };
 
