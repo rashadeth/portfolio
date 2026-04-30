@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export default function ParallaxOrchestrator() {
   useEffect(() => {
-    if (window.innerWidth <= 768) return;
+    if (window.innerWidth <= 1024) return;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;

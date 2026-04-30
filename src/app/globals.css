@@ -16,9 +16,12 @@
 }
 
 html {
-  /* Lenis handles smooth/inertial scroll — native smooth-behavior fights it */
   scroll-behavior: auto;
   scroll-padding-top: 80px;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
 }
 
 body {
@@ -27,16 +30,27 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   cursor: none;
   margin: 0;
-  overscroll-behavior-y: none;
-  /* Explicitly declare vertical pan support — Samsung Chrome checks the full
-     ancestor chain and needs this on body, not just on main. */
-  touch-action: pan-y;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
 }
 
-html {
-  margin: 0;
-  overscroll-behavior-y: none;
-  touch-action: pan-y;
+/* Every element explicitly allows vertical pan and pinch-zoom.
+   touch-action is not inherited, so without this each element defaults to
+   touch-action: auto which can be overridden by browser heuristics on
+   Samsung/Android. This declaration wins on every device. */
+* {
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Horizontal-scroll containers need pan-x restored. */
+.scrollbar-hide {
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+/* Utility to lock scroll when a modal or overlay is open. */
+.no-scroll {
+  overflow: hidden;
 }
 
 a,
@@ -223,47 +237,32 @@ button,
   }
 }
 
-/* ─── Mobile scroll fix (max-width: 768px) ──────────────────────────
-   Goal: 100% native browser scrolling — zero JS intervention.
-   Desktop layout and animations are completely untouched.
+/* ─── Mobile / tablet overrides (≤ 1024px or coarse pointer) ────────
+   Global touch/overflow rules above already handle scroll.
+   This block handles GPU/compositor optimisations only.
 ──────────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px), (hover: none) and (pointer: coarse) {
   html,
   body {
-    /* overflow-x: hidden on body is a known Chromium bug trigger that reassigns
-       the scroll root and breaks touch drag on some Android/Samsung devices.
-       Keep it only on html; body uses overflow-x: clip which doesn't affect
-       the scroll container. */
-    overflow-x: clip;
     will-change: scroll-position;
-    touch-action: pan-y;
-  }
-
-  html {
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
   }
 
   main {
     overflow: visible !important;
     overflow-x: hidden !important;
-    touch-action: pan-y;
     overscroll-behavior: contain;
   }
 
-  /* Header: remove backdrop-filter (triggers a GPU compositing layer on every scroll frame) */
   header {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background-color: rgba(12, 12, 12, 0.94) !important;
   }
 
-  /* Hide the GPU-heavy mix-blend + blur overlay divs in the gradient background */
   .mobile-hidden {
     display: none !important;
   }
 
-  /* Belt-and-suspenders: disable any remaining mix-blend-mode compositing */
   .mix-blend-screen {
     mix-blend-mode: normal !important;
   }
@@ -271,13 +270,11 @@ button,
     mix-blend-mode: normal !important;
   }
 
-  /* Remove GPU layer caused by filter:drop-shadow on the WhatsApp button */
   .whatsapp-fab {
     filter: none !important;
     animation: none !important;
   }
 
-  /* Section-reveal: show final state immediately — no fade/slide on mobile */
   .section-reveal {
     opacity: 1 !important;
     transform: none !important;

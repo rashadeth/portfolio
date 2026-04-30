@@ -29,6 +29,9 @@ function ScrollTriggerBridge() {
 
 function FluidParallax() {
   useGSAP(() => {
+    // Desktop only — touch devices use native scroll with no GSAP interference.
+    if (window.innerWidth <= 1024) return;
+
     const layers = gsap.utils.toArray<HTMLElement>(
       document.querySelectorAll("main [data-parallax-layer]"),
     );
@@ -83,7 +86,7 @@ function SmoothAnchors() {
       if (!href || !href.startsWith("#")) return;
 
       if (href === "#") {
-        event.preventDefault();
+        if (event.cancelable) event.preventDefault();
         lenis.scrollTo(0, { duration: 1.05 });
         return;
       }
@@ -92,7 +95,7 @@ function SmoothAnchors() {
       const el = document.getElementById(id);
       if (!el) return;
 
-      event.preventDefault();
+      if (event.cancelable) event.preventDefault();
       lenis.scrollTo(el, { offset: -NAV_OFFSET, duration: 1.1 });
     };
 
@@ -112,7 +115,7 @@ function NativeSmoothAnchors() {
       const href = anchor.getAttribute("href");
       if (!href || !href.startsWith("#")) return;
 
-      event.preventDefault();
+      if (event.cancelable) event.preventDefault();
 
       if (href === "#") {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -139,23 +142,16 @@ function NativeSmoothAnchors() {
 }
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
-  // Enable Lenis only on desktop-class devices with fine pointers.
-  // Touch devices (including large tablets) stay on native scroll to avoid friction.
+  // Lenis runs only on screens wider than 1024px — every touch device gets
+  // 100% native browser scroll with zero JS interference.
   const [useLenis, setUseLenis] = useState(false);
 
   useEffect(() => {
-    const sizeMq = window.matchMedia("(min-width: 1024px)");
-    const pointerMq = window.matchMedia("(hover: hover) and (pointer: fine)");
-
-    const sync = () => setUseLenis(sizeMq.matches && pointerMq.matches);
+    const mq = window.matchMedia("(min-width: 1025px)");
+    const sync = () => setUseLenis(mq.matches);
     sync();
-
-    sizeMq.addEventListener("change", sync);
-    pointerMq.addEventListener("change", sync);
-    return () => {
-      sizeMq.removeEventListener("change", sync);
-      pointerMq.removeEventListener("change", sync);
-    };
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
 
   if (!useLenis) {
