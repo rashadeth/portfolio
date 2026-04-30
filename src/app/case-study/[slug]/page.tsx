@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { getProject, getAllSlugs } from "@/lib/projects";
 import projects from "@/lib/projects";
+import OverflowReset from "@/components/OverflowReset";
 
 export const dynamicParams = false;
 
@@ -39,6 +40,7 @@ export default async function CaseStudyPage({
 
   return (
     <main className="cursor-restore relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]">
+      <OverflowReset />
       {/* grain overlay */}
       <div
         aria-hidden="true"
