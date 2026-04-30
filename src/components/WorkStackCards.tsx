@@ -76,7 +76,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
         <article
           key={project.slug}
           data-project-hover="true"
-          className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8"
+          className="group relative w-full overflow-hidden rounded-xl border border-white/[0.05] bg-[var(--bg)] p-4 sm:p-6 md:p-8 touch-pan-y"
         >
           {/* Soft neutral dot texture */}
           <div
@@ -98,7 +98,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
             <div className="w-full lg:w-3/5">
               <div
                 data-orientation={project.orientation}
-                className={`relative w-full rounded-[6px] border border-white/[0.03] ${
+                className={`relative w-full rounded-[6px] border border-white/[0.03] touch-pan-y ${
                   project.orientation === "portrait"
                     ? "h-[300px] overflow-hidden sm:flex sm:h-[520px] sm:items-center sm:justify-center sm:bg-[#f5f5f5] sm:p-5 lg:h-[600px] lg:p-6"
                     : "h-[300px] overflow-hidden sm:aspect-video sm:h-auto sm:max-h-[340px] md:max-h-[420px] lg:max-h-[500px]"

@@ -28,11 +28,15 @@ body {
   cursor: none;
   margin: 0;
   overscroll-behavior-y: none;
+  /* Explicitly declare vertical pan support — Samsung Chrome checks the full
+     ancestor chain and needs this on body, not just on main. */
+  touch-action: pan-y;
 }
 
 html {
   margin: 0;
   overscroll-behavior-y: none;
+  touch-action: pan-y;
 }
 
 a,
@@ -226,27 +230,25 @@ button,
 @media (max-width: 1024px), (hover: none) and (pointer: coarse) {
   html,
   body {
-    overflow-x: hidden;
-    /* overflow-y must remain auto/unset so native scroll flows freely */
-    /* will-change: scroll-position hints the compositor without creating a new
-       stacking context — safe to use here (will-change: transform would break
-       position:fixed descendants). */
+    /* overflow-x: hidden on body is a known Chromium bug trigger that reassigns
+       the scroll root and breaks touch drag on some Android/Samsung devices.
+       Keep it only on html; body uses overflow-x: clip which doesn't affect
+       the scroll container. */
+    overflow-x: clip;
     will-change: scroll-position;
+    touch-action: pan-y;
   }
 
-  /* Enable GPU-composited native scroll on the document layer */
   html {
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Let native scroll flow — do NOT add transform/translateZ here because
-     position:fixed children (gradient bg, cursors, WhatsApp btn) are inside
-     <main> and any transform on a parent makes it the new containing block,
-     breaking their fixed positioning. */
   main {
-    overflow: visible !important;   /* override overflow:clip inline style */
+    overflow: visible !important;
     overflow-x: hidden !important;
     touch-action: pan-y;
+    overscroll-behavior: contain;
   }
 
   /* Header: remove backdrop-filter (triggers a GPU compositing layer on every scroll frame) */
