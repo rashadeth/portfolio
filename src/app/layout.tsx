@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     siteName: "Ian O",
     images: [
       {
-        url: "/images/og-image.png",
-        width: 1024,
-        height: 554,
+        url: "https://yohanan.design/images/og-image.png",
+        width: 1200,
+        height: 630,
         alt: "Ian O — Design Engineer",
       },
     ],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ian O — Design Engineer",
     description: "Designing and building digital products from Abuja, Nigeria.",
-    images: ["/images/og-image.png"],
+    images: ["https://yohanan.design/images/og-image.png"],
   },
 };
 
