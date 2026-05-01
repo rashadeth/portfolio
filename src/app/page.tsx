@@ -94,11 +94,11 @@ export default function Home() {
           animation: "grainDrift 14s steps(6, end) infinite",
         }}
       />
-      <header className="fixed inset-x-0 top-0 z-50 cursor-default border-b border-t border-white/[0.05] bg-[rgba(12,12,12,0.64)] backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-t border-white/[0.05] bg-[rgba(12,12,12,0.64)] backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 md:px-10">
           <a
             href="#"
-            className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-colors hover:border-white"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-colors hover:border-white"
             aria-label="Home"
           >
             <Aperture size={22} strokeWidth={1.75} />
@@ -108,7 +108,7 @@ export default function Home() {
               <li>
                 <a
                   href="#work"
-                  className="relative cursor-pointer text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
+                  className="relative text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
                 >
                   Work
                 </a>
@@ -116,7 +116,7 @@ export default function Home() {
               <li>
                 <a
                   href="#about"
-                  className="relative cursor-pointer text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
+                  className="relative text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
                 >
                   About
                 </a>
@@ -124,7 +124,7 @@ export default function Home() {
               <li>
                 <a
                   href="#contact"
-                  className="relative cursor-pointer text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
+                  className="relative text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
                 >
                   Contact
                 </a>

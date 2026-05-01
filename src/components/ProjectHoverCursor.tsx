@@ -56,7 +56,7 @@ export default function ProjectHoverCursor() {
     <div
       ref={cursorRef}
       aria-hidden="true"
-      className={`pointer-events-none fixed left-0 top-0 z-[70] hidden md:flex h-[112px] w-[112px] items-center justify-center rounded-full border border-white/45 bg-white/10 text-center text-[11px] uppercase tracking-[0.14em] text-[#0f0f0f] backdrop-blur-xl shadow-[inset_0_1px_14px_rgba(255,255,255,0.22),0_10px_28px_rgba(0,0,0,0.38),0_0_30px_rgba(255,255,255,0.18)] transition-opacity duration-200 ${
+      className={`pointer-events-none fixed left-0 top-0 z-[99999] hidden md:flex h-[112px] w-[112px] items-center justify-center rounded-full border border-white/45 bg-white/10 text-center text-[11px] uppercase tracking-[0.14em] text-[#0f0f0f] backdrop-blur-xl shadow-[inset_0_1px_14px_rgba(255,255,255,0.22),0_10px_28px_rgba(0,0,0,0.38),0_0_30px_rgba(255,255,255,0.18)] transition-opacity duration-200 ${
         active ? "opacity-100" : "opacity-0"
       }`}
       style={{ animation: "liquidMorph 2.4s ease-in-out infinite alternate" }}

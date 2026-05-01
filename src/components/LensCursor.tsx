@@ -122,7 +122,7 @@ export default function LensCursor() {
           height: 0,
           overflow: 'visible',
           pointerEvents: 'none',
-          zIndex: 9998,
+          zIndex: 99997,
         }}
       >
         <defs>
@@ -149,7 +149,7 @@ export default function LensCursor() {
           maxWidth: '13ch',
           color: '#e8e4dc',
           pointerEvents: 'none',
-          zIndex: 9998,
+          zIndex: 99998,
           opacity: 0,
           transform: 'scale(1.6)',
           clipPath: 'url(#lens-clip)',
@@ -183,7 +183,7 @@ export default function LensCursor() {
           border: '1px solid rgba(255,255,255,0.2)',
           boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.1)',
           pointerEvents: 'none',
-          zIndex: 9999,
+          zIndex: 99999,
           opacity: 0,
           transition: 'opacity 0.3s ease',
         }}
