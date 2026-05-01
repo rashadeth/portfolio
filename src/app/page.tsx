@@ -235,7 +235,7 @@ export default function Home() {
                 <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-[#4ade80] shadow-[0_0_14px_rgba(74,222,128,0.95)]" />
                 <span>Available for projects</span>
               </div>
-              <span>Based in Abuja, NG</span>
+              <span>9.0722° N, 7.4891° E</span>
             </div>
           </div>
         </div>
@@ -335,9 +335,9 @@ export default function Home() {
 
       <footer className="relative z-20 mx-auto w-full max-w-[1440px] bg-black px-4 pb-0 sm:px-6 md:px-10">
         <div className="grid gap-3 border-t border-white/[0.05] pb-6 pt-6 text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] md:grid-cols-3">
-          <span>© {new Date().getFullYear()} Ian Rashad</span>
+          <span>© {new Date().getFullYear()} Ian O</span>
           <span className="md:text-center">Designed & built by Ian</span>
-          <span className="md:text-right">Abuja, Nigeria</span>
+          <span className="md:text-right">9.0722° N, 7.4891° E</span>
         </div>
       </footer>
     </main>
