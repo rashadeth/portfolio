@@ -5,50 +5,35 @@ import { useEffect, useRef, useState } from "react";
 export default function ProjectHoverCursor() {
   const [active, setActive] = useState(false);
   const cursorRef = useRef<HTMLDivElement | null>(null);
-  const targetRef = useRef({ x: 0, y: 0 });
-  const posRef = useRef({ x: 0, y: 0 });
-  const frameRef = useRef(0);
 
   useEffect(() => {
     const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!hasFinePointer) return;
 
-    const move = (event: MouseEvent) => {
-      targetRef.current.x = event.clientX;
-      targetRef.current.y = event.clientY;
+    const move = (e: MouseEvent) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+      }
     };
 
-    const onOver = (event: MouseEvent) => {
-      const target = event.target as Element | null;
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as Element | null;
       setActive(Boolean(target?.closest("[data-project-hover='true']")));
     };
 
-    const onOut = (event: MouseEvent) => {
-      const related = event.relatedTarget as Element | null;
+    const onOut = (e: MouseEvent) => {
+      const related = e.relatedTarget as Element | null;
       setActive(Boolean(related?.closest("[data-project-hover='true']")));
     };
 
-    const animate = () => {
-      posRef.current.x += (targetRef.current.x - posRef.current.x) * 0.16;
-      posRef.current.y += (targetRef.current.y - posRef.current.y) * 0.16;
-
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${posRef.current.x}px, ${posRef.current.y}px, 0) translate(-50%, -50%)`;
-      }
-
-      frameRef.current = window.requestAnimationFrame(animate);
-    };
-
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseover", onOver);
-    window.addEventListener("mouseout", onOut);
-    frameRef.current = window.requestAnimationFrame(animate);
+    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mouseover", onOver, { passive: true });
+    window.addEventListener("mouseout", onOut, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", onOver);
       window.removeEventListener("mouseout", onOut);
-      window.cancelAnimationFrame(frameRef.current);
     };
   }, []);
 

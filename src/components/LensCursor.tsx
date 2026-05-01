@@ -9,7 +9,7 @@ const WORDS = [
   { en: 'products.', zh: '产品。' },
 ]
 
-const LERP = 0.1
+const LERP = 1
 const RADIUS = 60
 
 export default function LensCursor() {
