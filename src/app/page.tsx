@@ -71,12 +71,7 @@ export default function Home() {
 
   const contactLinks = [
     { label: "Email", href: "mailto:yohananokpoko@gmail.com" },
-    {
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/ian-okpoko-9b35922b6?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
-    },
     { label: "Twitter", href: "https://x.com/yohanansoltd?s=21" },
-    { label: "TikTok", href: "https://www.tiktok.com/@yohanan.sol?_r=1&_t=ZS-95usZANzM2i." },
   ];
 
   return (

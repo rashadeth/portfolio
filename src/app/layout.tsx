@@ -79,11 +79,7 @@ export default function RootLayout({
               addressLocality: "9.0722° N, 7.4891° E",
               addressCountry: "NG",
             },
-            sameAs: [
-              "https://www.linkedin.com/in/ian-okpoko-9b35922b6",
-              "https://x.com/yohanansoltd",
-              "https://www.tiktok.com/@yohanan.sol",
-            ],
+            sameAs: ["https://x.com/yohanansoltd"],
           }),
         }}
       />
