@@ -217,6 +217,7 @@ const projects: Project[] = [
       { src: "/images/spacebook/list-new-space.png", label: "List a New Space", orientation: "desktop" },
       { src: "/images/spacebook/edit-space-details.png", label: "Edit Space Details", orientation: "desktop" },
     ],
+    liveUrl: "https://www.spacebook.live",
   },
   {
     slug: "steppa",

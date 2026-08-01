@@ -43,6 +43,7 @@ export default function Home() {
       orientation: "landscape",
       fitMode: "cover",
       mediaBg: "transparent",
+      liveUrl: "https://www.spacebook.live",
     },
     {
       name: "Steppa",
