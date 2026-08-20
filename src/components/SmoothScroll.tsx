@@ -5,22 +5,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis, useLenis } from "lenis/react";
 import { useEffect, useState, type ReactNode } from "react";
+import { isTouchCapable } from "@/lib/device";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NAV_OFFSET = 80;
-
-// `(hover: hover) and (pointer: fine)` is not a reliable "is this a touch
-// device" test on real Android hardware — some devices (Samsung S-Pen
-// models especially, and some budget digitizers) misreport it as true even
-// though the primary input is touch. Actual touch hardware capability is
-// not something a browser can misreport, so it's used as a hard veto: any
-// device that can receive touch input at all is treated as touch-only,
-// no matter what the hover/pointer media features claim.
-function isTouchCapable() {
-  if (typeof window === "undefined") return false;
-  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
-}
 
 function ScrollTriggerBridge() {
   const lenis = useLenis();

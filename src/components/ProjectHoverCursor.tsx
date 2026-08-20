@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { isTouchCapable } from "@/lib/device";
 
 export default function ProjectHoverCursor() {
   const [active, setActive] = useState(false);
@@ -8,7 +9,7 @@ export default function ProjectHoverCursor() {
 
   useEffect(() => {
     const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!hasFinePointer) return;
+    if (!hasFinePointer || isTouchCapable()) return;
 
     const move = (e: MouseEvent) => {
       if (cursorRef.current) {

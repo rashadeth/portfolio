@@ -1,11 +1,12 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import { isTouchCapable } from '@/lib/device'
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || isTouchCapable()) return
 
     const el = dotRef.current
     if (!el) return

@@ -3,6 +3,7 @@
 import { Component, useEffect, useRef, type ReactNode } from "react";
 import { useState } from "react";
 import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
+import { isTouchCapable } from "@/lib/device";
 
 const STATIC_GRADIENT_STYLE = {
   background:
@@ -26,15 +27,6 @@ class ShaderErrorBoundary extends Component<{ children: ReactNode }, { hasError:
     }
     return this.props.children;
   }
-}
-
-// `(hover: hover) and (pointer: fine)` is not a reliable "is this a touch
-// device" test on real Android hardware — some devices misreport it as true
-// even though the primary input is touch. Actual touch hardware capability
-// can't be misreported the same way, so it's used as a hard veto.
-function isTouchCapable() {
-  if (typeof window === "undefined") return false;
-  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
 }
 
 export default function FramerGradientBackground() {

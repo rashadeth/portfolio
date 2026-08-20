@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import { isTouchCapable } from '@/lib/device'
 
 const WORDS = [
   { en: 'Designing', zh: '设计' },
@@ -23,7 +24,12 @@ export default function LensCursor() {
   const raf = useRef<number>(0)
 
   useEffect(() => {
-    if (window.innerWidth < 768) return
+    // This effect runs an unconditional requestAnimationFrame loop for as
+    // long as it's mounted — it must never start on a touch device, no
+    // matter the viewport width (a wide/landscape Android phone or tablet
+    // would otherwise run it forever, competing with scroll for the main
+    // thread, for an effect that's never even visible on touch).
+    if (window.innerWidth < 768 || isTouchCapable()) return
 
     const measureTitle = () => {
       const el = document.getElementById('hero-title')
