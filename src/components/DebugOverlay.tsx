@@ -2,16 +2,26 @@
 
 // TEMPORARY diagnostic overlay for the Android scroll-freeze investigation.
 // Shows device/touch capability info, live scroll/touch event counters, and
-// any JS errors, directly on screen — no computer or cable needed. Remove
-// this file and its <DebugOverlay /> usage in layout.tsx once resolved.
+// any JS errors, directly on screen — no computer or cable needed. Only
+// renders when the page is loaded with ?debug=1, so normal visitors never
+// see it. Remove this file and its <DebugOverlay /> usage in layout.tsx
+// once resolved.
 
 import { useEffect, useState } from "react";
 
 export default function DebugOverlay() {
+  const [enabled, setEnabled] = useState(false);
   const [lines, setLines] = useState<string[]>(["booting…"]);
   const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
+    // Reading window.location on mount — not derivable during SSR/render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEnabled(new URLSearchParams(window.location.search).get("debug") === "1");
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
     const staticInfo = [
       `UA: ${navigator.userAgent}`,
       `maxTouchPoints: ${navigator.maxTouchPoints}`,
@@ -67,7 +77,9 @@ export default function DebugOverlay() {
       window.removeEventListener("unhandledrejection", onRejection);
       window.clearInterval(interval);
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <div
