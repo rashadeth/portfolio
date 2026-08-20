@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis, useLenis } from "lenis/react";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,12 +106,70 @@ function SmoothAnchors() {
   return null;
 }
 
+function NativeSmoothAnchors() {
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const anchor = (event.target as HTMLElement | null)?.closest("a");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+
+      if (event.cancelable) event.preventDefault();
+
+      if (href === "#") {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        return;
+      }
+
+      const id = href.slice(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const absoluteTop = window.scrollY + el.getBoundingClientRect().top - NAV_OFFSET;
+      window.scrollTo({
+        top: Math.max(absoluteTop, 0),
+        left: 0,
+        behavior: "smooth",
+      });
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  return null;
+}
+
 export default function SmoothScroll({ children }: { children: ReactNode }) {
-  // Lenis now runs on every device, including touch/Android. `syncTouch` stays
-  // false so touch input keeps the OS's native momentum scroll (the smoothest,
-  // cheapest path on Android) — Lenis just mirrors scroll position for
-  // ScrollTrigger sync and drives smooth anchor-link jumps. Only wheel/trackpad
-  // input gets Lenis's own eased scrolling (smoothWheel).
+  // Lenis's internal VirtualScroll always attaches non-passive touchstart/
+  // touchmove/touchend listeners on window — regardless of `syncTouch`. A
+  // non-passive touch listener forces Android Chrome to run that JS handler
+  // synchronously on the main thread before it can start the native
+  // fast-scroll path, on every touch move. That's what makes scrolling feel
+  // stuck on Android, not any Lenis *setting*. So Lenis only mounts for
+  // devices with a precise pointer (mouse/trackpad); touch devices get 100%
+  // native scroll with zero JS in the loop, and a native `scrollTo` fallback
+  // for in-page anchor links.
+  const [hasFinePointer, setHasFinePointer] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const sync = () => setHasFinePointer(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  if (!hasFinePointer) {
+    return (
+      <>
+        <NativeSmoothAnchors />
+        {children}
+      </>
+    );
+  }
+
   return (
     <ReactLenis
       root
