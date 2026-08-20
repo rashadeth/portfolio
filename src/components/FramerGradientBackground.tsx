@@ -59,6 +59,34 @@ export default function FramerGradientBackground() {
   }, []);
 
   useEffect(() => {
+    const container = wrapperRef.current;
+    if (!container) return;
+
+    // Belt-and-suspenders on top of the pointerEvents="none" prop passed to
+    // ShaderGradientCanvas: that prop styles the wrapper div the library
+    // creates, but react-three-fiber's <Canvas> builds its own inner
+    // <canvas> DOM element, which is what camera-controls actually attaches
+    // its (non-passive, preventDefault-calling) listeners to. If that inner
+    // canvas doesn't inherit pointer-events: none the way the library
+    // intends, the prop alone doesn't stop it from swallowing touch input.
+    // This reaches into the DOM directly and forces it, independent of
+    // whatever the library's internals actually do — a MutationObserver
+    // because the canvas element (and any WebGL context it recreates on
+    // resize/remount) can appear after this effect runs.
+    const disableCanvasPointerEvents = () => {
+      container.querySelectorAll("canvas").forEach((canvas) => {
+        canvas.style.pointerEvents = "none";
+      });
+    };
+    disableCanvasPointerEvents();
+
+    const observer = new MutationObserver(disableCanvasPointerEvents);
+    observer.observe(container, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!hasFinePointer || isTouchCapable()) return;
 
