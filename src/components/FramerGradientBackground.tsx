@@ -135,12 +135,23 @@ export default function FramerGradientBackground() {
             request to keep the animated background everywhere. Wrapped in
             an error boundary: if WebGL ever fails to initialize on some
             device, it fails into the static gradient instead of the shader
-            crash taking the whole page down. */}
+            crash taking the whole page down.
+
+            pointerEvents="none" is @shadergradient/react's own documented
+            "Touch Control" switch. Left unset, the canvas's underlying
+            camera-controls library attaches non-passive pointermove/wheel
+            listeners with preventDefault() for interactive camera drag —
+            confirmed via an Android diagnostic (touchmove events firing,
+            zero resulting scroll: the exact signature of a preventDefault'd
+            touch handler). This background is decorative only and was
+            never meant to capture input; disabling it here stops it from
+            competing with page scroll on touch devices. */}
         <ShaderErrorBoundary>
           <ShaderGradientCanvas
             style={{ position: "absolute", inset: 0 }}
             pixelDensity={pixelDensity}
             fov={42}
+            pointerEvents="none"
           >
             <ShaderGradient
               animate="on"
