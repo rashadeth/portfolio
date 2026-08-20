@@ -42,20 +42,6 @@ export default function FramerGradientBackground() {
     uStrength: 2.05,
   });
   const [pixelDensity, setPixelDensity] = useState(1.2);
-  // The shader is a real-time WebGL render loop (react-three-fiber, frameloop
-  // "always") that never stops — on touch/lower-power devices it competes
-  // with the browser's compositor for every scroll frame, which is a major
-  // source of scroll jank on Android. Those devices get a static CSS
-  // gradient instead: same look, zero per-frame cost.
-  //
-  // Defaulting this to `false` (rather than `true` + flipping off post-mount)
-  // is deliberate: mounting the canvas and tearing it straight back down
-  // creates a WebGL context while an HDR env-map texture load is still in
-  // flight, then destroys it. That create/destroy churn is known to hang or
-  // crash on Android's fragmented GPU/driver stack (freezing the whole page,
-  // scroll included) even though iOS Safari tolerates it fine. So WebGL only
-  // ever gets created once we've confirmed it's safe — never provisionally.
-  const [renderShader, setRenderShader] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef(0);
 
@@ -67,20 +53,8 @@ export default function FramerGradientBackground() {
     syncDensity();
     densityQuery.addEventListener("change", syncDensity);
 
-    // Requires a wide viewport, a fine pointer, AND no touch hardware at
-    // all — so a touch tablet, or an Android phone that misreports
-    // hover/pointer, never qualifies.
-    const canRenderShaderQuery = window.matchMedia(
-      "(min-width: 1025px) and (hover: hover) and (pointer: fine)",
-    );
-    const syncRenderShader = () =>
-      setRenderShader(canRenderShaderQuery.matches && !isTouchCapable());
-    syncRenderShader();
-    canRenderShaderQuery.addEventListener("change", syncRenderShader);
-
     return () => {
       densityQuery.removeEventListener("change", syncDensity);
-      canRenderShaderQuery.removeEventListener("change", syncRenderShader);
     };
   }, []);
 
@@ -157,42 +131,41 @@ export default function FramerGradientBackground() {
   return (
     <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-0 will-change-transform">
       <div className="absolute inset-0">
-        {renderShader ? (
-          <ShaderErrorBoundary>
-            <ShaderGradientCanvas
-              style={{ position: "absolute", inset: 0 }}
-              pixelDensity={pixelDensity}
-              fov={42}
-            >
-              <ShaderGradient
-                animate="on"
-                type="plane"
-                shader="defaults"
-                uSpeed={0.32}
-                uStrength={gradient.uStrength}
-                uDensity={1.2}
-                uFrequency={5.1}
-                positionX={gradient.positionX}
-                positionY={gradient.positionY}
-                color1="#fff6c8"
-                color2="#ff6a3b"
-                color3="#3d0a1e"
-                brightness={0.98}
-                grain="on"
-                grainBlending={0.24}
-                cDistance={3.45}
-                cPolarAngle={gradient.cPolarAngle}
-                cAzimuthAngle={gradient.cAzimuthAngle}
-                lightType="3d"
-                envPreset="dawn"
-              />
-            </ShaderGradientCanvas>
-          </ShaderErrorBoundary>
-        ) : (
-          // Static stand-in for the animated shader: same warm dawn palette,
-          // rendered once and left to the compositor — no per-frame WebGL cost.
-          <div aria-hidden="true" className="absolute inset-0" style={STATIC_GRADIENT_STYLE} />
-        )}
+        {/* Runs on every device, including touch/Android, per explicit
+            request to keep the animated background everywhere. Wrapped in
+            an error boundary: if WebGL ever fails to initialize on some
+            device, it fails into the static gradient instead of the shader
+            crash taking the whole page down. */}
+        <ShaderErrorBoundary>
+          <ShaderGradientCanvas
+            style={{ position: "absolute", inset: 0 }}
+            pixelDensity={pixelDensity}
+            fov={42}
+          >
+            <ShaderGradient
+              animate="on"
+              type="plane"
+              shader="defaults"
+              uSpeed={0.32}
+              uStrength={gradient.uStrength}
+              uDensity={1.2}
+              uFrequency={5.1}
+              positionX={gradient.positionX}
+              positionY={gradient.positionY}
+              color1="#fff6c8"
+              color2="#ff6a3b"
+              color3="#3d0a1e"
+              brightness={0.98}
+              grain="on"
+              grainBlending={0.24}
+              cDistance={3.45}
+              cPolarAngle={gradient.cPolarAngle}
+              cAzimuthAngle={gradient.cAzimuthAngle}
+              lightType="3d"
+              envPreset="dawn"
+            />
+          </ShaderGradientCanvas>
+        </ShaderErrorBoundary>
       </div>
 
       <div className="absolute inset-0 bg-[#0c0c0c]/42" />
