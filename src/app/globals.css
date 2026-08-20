@@ -212,11 +212,6 @@ body {
   50%       { transform: translateY(-10px); }
 }
 
-@keyframes whatsappFloat {
-  from { transform: translateY(-4px); }
-  to   { transform: translateY(4px); }
-}
-
 @keyframes cardGlowPulse {
   0% {
     opacity: 0.35;
@@ -254,11 +249,6 @@ body {
   }
   .mix-blend-overlay {
     mix-blend-mode: normal !important;
-  }
-
-  .whatsapp-fab {
-    filter: none !important;
-    animation: none !important;
   }
 
   .section-reveal {
