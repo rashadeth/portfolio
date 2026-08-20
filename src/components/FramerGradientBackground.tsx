@@ -22,7 +22,15 @@ export default function FramerGradientBackground() {
   // with the browser's compositor for every scroll frame, which is a major
   // source of scroll jank on Android. Those devices get a static CSS
   // gradient instead: same look, zero per-frame cost.
-  const [renderShader, setRenderShader] = useState(true);
+  //
+  // Defaulting this to `false` (rather than `true` + flipping off post-mount)
+  // is deliberate: mounting the canvas and tearing it straight back down
+  // creates a WebGL context while an HDR env-map texture load is still in
+  // flight, then destroys it. That create/destroy churn is known to hang or
+  // crash on Android's fragmented GPU/driver stack (freezing the whole page,
+  // scroll included) even though iOS Safari tolerates it fine. So WebGL only
+  // ever gets created once we've confirmed it's safe — never provisionally.
+  const [renderShader, setRenderShader] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef(0);
 
@@ -34,14 +42,18 @@ export default function FramerGradientBackground() {
     syncDensity();
     densityQuery.addEventListener("change", syncDensity);
 
-    const lowPowerQuery = window.matchMedia("(max-width: 1024px), (pointer: coarse)");
-    const syncRenderShader = () => setRenderShader(!lowPowerQuery.matches);
+    // Requires both a wide viewport AND a fine pointer, so a touch tablet
+    // that happens to be landscape/wide never qualifies.
+    const canRenderShaderQuery = window.matchMedia(
+      "(min-width: 1025px) and (hover: hover) and (pointer: fine)",
+    );
+    const syncRenderShader = () => setRenderShader(canRenderShaderQuery.matches);
     syncRenderShader();
-    lowPowerQuery.addEventListener("change", syncRenderShader);
+    canRenderShaderQuery.addEventListener("change", syncRenderShader);
 
     return () => {
       densityQuery.removeEventListener("change", syncDensity);
-      lowPowerQuery.removeEventListener("change", syncRenderShader);
+      canRenderShaderQuery.removeEventListener("change", syncRenderShader);
     };
   }, []);
 
