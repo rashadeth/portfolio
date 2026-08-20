@@ -17,16 +17,32 @@ export default function FramerGradientBackground() {
     uStrength: 2.05,
   });
   const [pixelDensity, setPixelDensity] = useState(1.2);
+  // The shader is a real-time WebGL render loop (react-three-fiber, frameloop
+  // "always") that never stops — on touch/lower-power devices it competes
+  // with the browser's compositor for every scroll frame, which is a major
+  // source of scroll jank on Android. Those devices get a static CSS
+  // gradient instead: same look, zero per-frame cost.
+  const [renderShader, setRenderShader] = useState(true);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef(0);
 
   useEffect(() => {
+    const densityQuery = window.matchMedia("(max-width: 1024px)");
     const syncDensity = () => {
-      setPixelDensity(window.matchMedia("(max-width: 1024px)").matches ? 1.1 : 1.35);
+      setPixelDensity(densityQuery.matches ? 1.1 : 1.35);
     };
     syncDensity();
-    window.addEventListener("resize", syncDensity);
-    return () => window.removeEventListener("resize", syncDensity);
+    densityQuery.addEventListener("change", syncDensity);
+
+    const lowPowerQuery = window.matchMedia("(max-width: 1024px), (pointer: coarse)");
+    const syncRenderShader = () => setRenderShader(!lowPowerQuery.matches);
+    syncRenderShader();
+    lowPowerQuery.addEventListener("change", syncRenderShader);
+
+    return () => {
+      densityQuery.removeEventListener("change", syncDensity);
+      lowPowerQuery.removeEventListener("change", syncRenderShader);
+    };
   }, []);
 
   useEffect(() => {
@@ -102,34 +118,47 @@ export default function FramerGradientBackground() {
   return (
     <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-0 will-change-transform">
       <div className="absolute inset-0">
-        <ShaderGradientCanvas
-          style={{ position: "absolute", inset: 0 }}
-          pixelDensity={pixelDensity}
-          fov={42}
-        >
-          <ShaderGradient
-            animate="on"
-            type="plane"
-            shader="defaults"
-            uSpeed={0.32}
-            uStrength={gradient.uStrength}
-            uDensity={1.2}
-            uFrequency={5.1}
-            positionX={gradient.positionX}
-            positionY={gradient.positionY}
-            color1="#fff6c8"
-            color2="#ff6a3b"
-            color3="#3d0a1e"
-            brightness={0.98}
-            grain="on"
-            grainBlending={0.24}
-            cDistance={3.45}
-            cPolarAngle={gradient.cPolarAngle}
-            cAzimuthAngle={gradient.cAzimuthAngle}
-            lightType="3d"
-            envPreset="dawn"
+        {renderShader ? (
+          <ShaderGradientCanvas
+            style={{ position: "absolute", inset: 0 }}
+            pixelDensity={pixelDensity}
+            fov={42}
+          >
+            <ShaderGradient
+              animate="on"
+              type="plane"
+              shader="defaults"
+              uSpeed={0.32}
+              uStrength={gradient.uStrength}
+              uDensity={1.2}
+              uFrequency={5.1}
+              positionX={gradient.positionX}
+              positionY={gradient.positionY}
+              color1="#fff6c8"
+              color2="#ff6a3b"
+              color3="#3d0a1e"
+              brightness={0.98}
+              grain="on"
+              grainBlending={0.24}
+              cDistance={3.45}
+              cPolarAngle={gradient.cPolarAngle}
+              cAzimuthAngle={gradient.cAzimuthAngle}
+              lightType="3d"
+              envPreset="dawn"
+            />
+          </ShaderGradientCanvas>
+        ) : (
+          // Static stand-in for the animated shader: same warm dawn palette,
+          // rendered once and left to the compositor — no per-frame WebGL cost.
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(120% 90% at 78% 8%, #fff6c8 0%, rgba(255,180,96,0.85) 22%, rgba(255,106,59,0.75) 46%, rgba(61,10,30,0.9) 72%, #0c0c0c 100%)",
+            }}
           />
-        </ShaderGradientCanvas>
+        )}
       </div>
 
       <div className="absolute inset-0 bg-[#0c0c0c]/42" />

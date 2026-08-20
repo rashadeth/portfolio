@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis, useLenis } from "lenis/react";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,63 +106,12 @@ function SmoothAnchors() {
   return null;
 }
 
-function NativeSmoothAnchors() {
-  useEffect(() => {
-    const onClick = (event: MouseEvent) => {
-      const anchor = (event.target as HTMLElement | null)?.closest("a");
-      if (!anchor) return;
-
-      const href = anchor.getAttribute("href");
-      if (!href || !href.startsWith("#")) return;
-
-      if (event.cancelable) event.preventDefault();
-
-      if (href === "#") {
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-        return;
-      }
-
-      const id = href.slice(1);
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const absoluteTop = window.scrollY + el.getBoundingClientRect().top - NAV_OFFSET;
-      window.scrollTo({
-        top: Math.max(absoluteTop, 0),
-        left: 0,
-        behavior: "smooth",
-      });
-    };
-
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
-  }, []);
-
-  return null;
-}
-
 export default function SmoothScroll({ children }: { children: ReactNode }) {
-  // Lenis runs only on screens wider than 1024px — every touch device gets
-  // 100% native browser scroll with zero JS interference.
-  const [useLenis, setUseLenis] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1025px)");
-    const sync = () => setUseLenis(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-
-  if (!useLenis) {
-    return (
-      <>
-        <NativeSmoothAnchors />
-        {children}
-      </>
-    );
-  }
-
+  // Lenis now runs on every device, including touch/Android. `syncTouch` stays
+  // false so touch input keeps the OS's native momentum scroll (the smoothest,
+  // cheapest path on Android) — Lenis just mirrors scroll position for
+  // ScrollTrigger sync and drives smooth anchor-link jumps. Only wheel/trackpad
+  // input gets Lenis's own eased scrolling (smoothWheel).
   return (
     <ReactLenis
       root

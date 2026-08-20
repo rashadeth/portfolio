@@ -235,11 +235,6 @@ body {
    This block handles GPU/compositor optimisations only.
 ──────────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px), (hover: none) and (pointer: coarse) {
-  html,
-  body {
-    will-change: scroll-position;
-  }
-
   main {
     overflow: visible !important;
     overflow-x: hidden !important;
