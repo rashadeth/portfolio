@@ -40,18 +40,16 @@ body {
   }
 }
 
-/* Every element explicitly allows vertical pan and pinch-zoom.
-   touch-action is not inherited, so without this each element defaults to
-   touch-action: auto which can be overridden by browser heuristics on
-   Samsung/Android. This declaration wins on every device. */
-* {
-  touch-action: pan-y pinch-zoom;
-}
-
-/* Horizontal-scroll containers need pan-x restored. */
-.scrollbar-hide {
-  touch-action: pan-x pan-y pinch-zoom;
-}
+/* Previously every element was forced to `touch-action: pan-y pinch-zoom`
+   via a universal `*` selector, meant to fix a Samsung Internet gesture
+   heuristic. That compound value (a directional keyword + pinch-zoom in one
+   declaration) is a newer addition to the touch-action spec and isn't
+   parsed consistently across the full spread of Android WebView/Chrome
+   versions in the wild — worst case, an engine that can't parse it drops
+   the whole element to touch-action: none instead of falling back to auto,
+   which blocks scrolling outright. Removed: every element now just uses
+   the platform default (`touch-action: auto`), which is what the vast
+   majority of scrollable sites rely on and is universally supported. */
 
 /* Utility to lock scroll when a modal or overlay is open. */
 .no-scroll {
