@@ -221,7 +221,7 @@ export default function Home() {
           <HeroTitle />
           <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <p className="max-w-xl text-sm font-light leading-relaxed text-white">
-              I craft visually distinct, high-performing interfaces and turn product ideas into polished,
+              I craft visually distinct, high-performing interfaces and turn product idea&apos;s into polished,
               scalable digital experiences from concept to launch.
             </p>
             <div className="flex flex-col items-start gap-2 text-xs font-light tracking-[0.16em] text-white md:items-end">
