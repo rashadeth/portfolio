@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
 import Script from "next/script";
 import CustomCursor from "@/components/CustomCursor";
+import DebugOverlay from "@/components/DebugOverlay";
 import ScrollToTopOnLoad from "@/components/ScrollToTopOnLoad";
 import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default function RootLayout({
       className={`${manrope.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <DebugOverlay />
         <CustomCursor />
         <SmoothScroll>
           <ScrollToTopOnLoad />
