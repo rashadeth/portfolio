@@ -224,7 +224,7 @@ export default function Home() {
               I craft visually distinct, high-performing interfaces and turn product ideas into polished,
               scalable digital experiences from concept to launch.
             </p>
-            <div className="flex flex-col items-start gap-2 text-xs font-light uppercase tracking-[0.16em] text-white md:items-end">
+            <div className="flex flex-col items-start gap-2 text-xs font-light tracking-[0.16em] text-white md:items-end">
               <div className="flex items-center gap-3 text-white">
                 <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-[#4ade80] shadow-[0_0_14px_rgba(74,222,128,0.95)]" />
                 <span>Available for projects</span>
