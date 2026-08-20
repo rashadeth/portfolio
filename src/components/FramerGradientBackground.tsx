@@ -1,8 +1,41 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Component, useEffect, useRef, type ReactNode } from "react";
 import { useState } from "react";
 import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
+
+const STATIC_GRADIENT_STYLE = {
+  background:
+    "radial-gradient(120% 90% at 78% 8%, #fff6c8 0%, rgba(255,180,96,0.85) 22%, rgba(255,106,59,0.75) 46%, rgba(61,10,30,0.9) 72%, #0c0c0c 100%)",
+} as const;
+
+// Belt-and-suspenders: if the shader ever throws during mount (an
+// unsupported WebGL context, a broken env-map fetch, a GPU driver quirk we
+// haven't seen), fail into the static gradient instead of taking the whole
+// page — and the scroll it needs — down with it.
+class ShaderErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div aria-hidden="true" className="absolute inset-0" style={STATIC_GRADIENT_STYLE} />;
+    }
+    return this.props.children;
+  }
+}
+
+// `(hover: hover) and (pointer: fine)` is not a reliable "is this a touch
+// device" test on real Android hardware — some devices misreport it as true
+// even though the primary input is touch. Actual touch hardware capability
+// can't be misreported the same way, so it's used as a hard veto.
+function isTouchCapable() {
+  if (typeof window === "undefined") return false;
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}
 
 export default function FramerGradientBackground() {
   const targetRef = useRef({ x: 0, y: 0 });
@@ -42,12 +75,14 @@ export default function FramerGradientBackground() {
     syncDensity();
     densityQuery.addEventListener("change", syncDensity);
 
-    // Requires both a wide viewport AND a fine pointer, so a touch tablet
-    // that happens to be landscape/wide never qualifies.
+    // Requires a wide viewport, a fine pointer, AND no touch hardware at
+    // all — so a touch tablet, or an Android phone that misreports
+    // hover/pointer, never qualifies.
     const canRenderShaderQuery = window.matchMedia(
       "(min-width: 1025px) and (hover: hover) and (pointer: fine)",
     );
-    const syncRenderShader = () => setRenderShader(canRenderShaderQuery.matches);
+    const syncRenderShader = () =>
+      setRenderShader(canRenderShaderQuery.matches && !isTouchCapable());
     syncRenderShader();
     canRenderShaderQuery.addEventListener("change", syncRenderShader);
 
@@ -59,7 +94,7 @@ export default function FramerGradientBackground() {
 
   useEffect(() => {
     const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!hasFinePointer) return;
+    if (!hasFinePointer || isTouchCapable()) return;
 
     const onMove = (event: MouseEvent) => {
       const nx = event.clientX / window.innerWidth - 0.5;
@@ -131,45 +166,40 @@ export default function FramerGradientBackground() {
     <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-0 will-change-transform">
       <div className="absolute inset-0">
         {renderShader ? (
-          <ShaderGradientCanvas
-            style={{ position: "absolute", inset: 0 }}
-            pixelDensity={pixelDensity}
-            fov={42}
-          >
-            <ShaderGradient
-              animate="on"
-              type="plane"
-              shader="defaults"
-              uSpeed={0.32}
-              uStrength={gradient.uStrength}
-              uDensity={1.2}
-              uFrequency={5.1}
-              positionX={gradient.positionX}
-              positionY={gradient.positionY}
-              color1="#fff6c8"
-              color2="#ff6a3b"
-              color3="#3d0a1e"
-              brightness={0.98}
-              grain="on"
-              grainBlending={0.24}
-              cDistance={3.45}
-              cPolarAngle={gradient.cPolarAngle}
-              cAzimuthAngle={gradient.cAzimuthAngle}
-              lightType="3d"
-              envPreset="dawn"
-            />
-          </ShaderGradientCanvas>
+          <ShaderErrorBoundary>
+            <ShaderGradientCanvas
+              style={{ position: "absolute", inset: 0 }}
+              pixelDensity={pixelDensity}
+              fov={42}
+            >
+              <ShaderGradient
+                animate="on"
+                type="plane"
+                shader="defaults"
+                uSpeed={0.32}
+                uStrength={gradient.uStrength}
+                uDensity={1.2}
+                uFrequency={5.1}
+                positionX={gradient.positionX}
+                positionY={gradient.positionY}
+                color1="#fff6c8"
+                color2="#ff6a3b"
+                color3="#3d0a1e"
+                brightness={0.98}
+                grain="on"
+                grainBlending={0.24}
+                cDistance={3.45}
+                cPolarAngle={gradient.cPolarAngle}
+                cAzimuthAngle={gradient.cAzimuthAngle}
+                lightType="3d"
+                envPreset="dawn"
+              />
+            </ShaderGradientCanvas>
+          </ShaderErrorBoundary>
         ) : (
           // Static stand-in for the animated shader: same warm dawn palette,
           // rendered once and left to the compositor — no per-frame WebGL cost.
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(120% 90% at 78% 8%, #fff6c8 0%, rgba(255,180,96,0.85) 22%, rgba(255,106,59,0.75) 46%, rgba(61,10,30,0.9) 72%, #0c0c0c 100%)",
-            }}
-          />
+          <div aria-hidden="true" className="absolute inset-0" style={STATIC_GRADIENT_STYLE} />
         )}
       </div>
 

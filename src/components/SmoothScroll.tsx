@@ -10,6 +10,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 const NAV_OFFSET = 80;
 
+// `(hover: hover) and (pointer: fine)` is not a reliable "is this a touch
+// device" test on real Android hardware — some devices (Samsung S-Pen
+// models especially, and some budget digitizers) misreport it as true even
+// though the primary input is touch. Actual touch hardware capability is
+// not something a browser can misreport, so it's used as a hard veto: any
+// device that can receive touch input at all is treated as touch-only,
+// no matter what the hover/pointer media features claim.
+function isTouchCapable() {
+  if (typeof window === "undefined") return false;
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}
+
 function ScrollTriggerBridge() {
   const lenis = useLenis();
 
@@ -155,7 +167,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const sync = () => setHasFinePointer(mq.matches);
+    const sync = () => setHasFinePointer(mq.matches && !isTouchCapable());
     sync();
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
