@@ -226,7 +226,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col items-start gap-2 text-xs font-light tracking-[0.16em] text-white md:items-end">
               <div className="flex items-center gap-3 text-white">
-                <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-[#4ade80] shadow-[0_0_14px_rgba(74,222,128,0.95)]" />
+                <span className="h-2 w-2 animate-pulse rounded-full bg-[#4ade80] shadow-[0_0_6px_rgba(74,222,128,0.55)]" />
                 <span>Available for projects</span>
               </div>
               <span>9.0722° N, 7.4891° E</span>
