@@ -21,20 +21,21 @@ function ProjectVideo({
   src,
   orientation,
   fitMode,
-  eager,
 }: {
   src: string;
   orientation: string;
   fitMode: string;
-  eager: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const node = videoRef.current;
     if (!node) return;
-    if (eager) node.load();
 
+    // rootMargin starts loading/playing a video 320px before it scrolls
+    // into view, which is proactive enough on its own — none of these
+    // files (several run 1-8MB+) should ever force-download on mount
+    // regardless of scroll position.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!videoRef.current) return;
@@ -49,7 +50,7 @@ function ProjectVideo({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [eager]);
+  }, []);
 
   return (
     <video
@@ -57,7 +58,7 @@ function ProjectVideo({
       muted
       loop
       playsInline
-      preload={eager ? "auto" : "metadata"}
+      preload="metadata"
       src={src}
       data-orientation={orientation}
       className={`pointer-events-none h-full w-full object-center md:pointer-events-auto ${
@@ -115,7 +116,6 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                     src={project.videoSrc}
                     orientation={project.orientation}
                     fitMode={project.fitMode}
-                    eager={index < 2}
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[#111] px-6 text-center">
