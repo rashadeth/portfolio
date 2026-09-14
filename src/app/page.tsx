@@ -9,18 +9,6 @@ import { Aperture } from "lucide-react";
 export default function Home() {
   const projects = [
     {
-      name: "Barbr App",
-      slug: "barbr-app",
-      description: "A booking and discovery app experience tailored for barbers and clients.",
-      tags: ["Mobile", "Product"],
-      videoSrc: "/videos/barbr.MP4",
-      hasVideo: true,
-      orientation: "portrait",
-      fitMode: "contain",
-      mediaBg: "#f5f5f5",
-      liveUrl: "https://apps.apple.com/ng/app/barbr-creators/id6760665839",
-    },
-    {
       name: "Foodcourt",
       slug: "foodcourt",
       description: "A food ordering and discovery concept focused on speed and clarity.",

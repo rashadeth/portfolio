@@ -48,66 +48,6 @@ export type Project = {
 
 const projects: Project[] = [
   {
-    slug: "barbr-app",
-    name: "Barbr App",
-    tagline: "A booking and discovery experience built for barbers and clients.",
-    description: "A booking and discovery app experience tailored for barbers and clients.",
-    tags: ["Mobile", "Product"],
-    year: "2024",
-    role: "Lead Product Designer",
-    platform: "iOS",
-    videoSrc: "/videos/barbr.MP4",
-    problem:
-      "Barbershop discovery in Nigeria is heavily word-of-mouth. Clients have no reliable way to browse barbers, view portfolios, or book without a phone call. Barbers lose revenue to no-shows and last-minute cancellations with no structured workflow.",
-    processSteps: [
-      {
-        step: "01",
-        title: "Discovery",
-        body: "Conducted contextual interviews with 12 barbers and 20+ clients across Abuja. Mapped the end-to-end journey from search to post-cut review. Identified three critical friction points: portfolio discovery, appointment confirmation, and no-show management.",
-      },
-      {
-        step: "02",
-        title: "Information Architecture",
-        body: "Restructured dual-sided navigation to clearly separate the client discovery flow from the barber creator dashboard. Prototyped and tested three IA variants before settling on a bottom-tab model that reduced task time by 38%.",
-      },
-      {
-        step: "03",
-        title: "Visual Design",
-        body: "Developed a high-contrast, warm-toned design language with a type scale rooted in Manrope. Prioritised portrait photography and video in cards to let portfolio quality sell the booking.",
-      },
-      {
-        step: "04",
-        title: "Handoff & Launch",
-        body: "Delivered annotated Figma specs, component tokens, and a motion guide. Worked directly with the iOS developer during build, resolving 14 implementation edge-cases before the App Store submission.",
-      },
-    ],
-    aiWorkflow: {
-      headline: "AI-assisted research synthesis and content strategy",
-      tools: [
-        { name: "Claude", role: "Interview synthesis, persona generation, and copy review" },
-        { name: "Midjourney", role: "Mood boarding and art-direction exploration" },
-        { name: "Framer AI", role: "Rapid landing-page variants for concept review" },
-      ],
-      summary:
-        "AI compressed a 3-week research analysis sprint into 4 days. Claude synthesised raw interview notes into actionable insight clusters; Midjourney generated 40+ visual directions in a single session, halving the mood-board phase.",
-    },
-    impactStats: [
-      { value: "4.8★", label: "App Store Rating" },
-      { value: "2,400+", label: "Downloads in Month 1" },
-      { value: "38%", label: "Reduction in Task Time" },
-      { value: "3×", label: "Barber Booking Rate" },
-    ],
-    mockups: [
-      { src: "/images/barbr/select-goals.png", label: "Select Goals" },
-      { src: "/images/barbr/select-struggles.png", label: "Select Struggles" },
-      { src: "/images/barbr/signup.png", label: "Sign Up" },
-      { src: "/images/barbr/select-profile-type.png", label: "Profile Type" },
-      { src: "/images/barbr/barbershop-name.png", label: "Barbershop Name" },
-      { src: "/images/barbr/welcome.png", label: "Welcome" },
-    ],
-    liveUrl: "https://apps.apple.com/ng/app/barbr-creators/id6760665839",
-  },
-  {
     slug: "foodcourt",
     name: "Foodcourt",
     tagline: "An internal logistics and operations dashboard for dispatch and ops teams.",
