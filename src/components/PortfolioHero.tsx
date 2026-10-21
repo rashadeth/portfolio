@@ -57,9 +57,10 @@ export default function PortfolioHero() {
         <a className="wordmark" href="#top" aria-label="Ian O home">
           <Image src="/images/brand/ian-o-white-transparent.png" alt="Ian O" width={88} height={88} priority className="brand-logo" />
         </a>
-        <nav aria-label="Main navigation">
-          <a href="#work">Work</a>
-          <a href="mailto:yohananokpoko@gmail.com">Let’s talk</a>
+        <nav className="desktop-navigation" aria-label="Main navigation">
+          <a href="#work">Films</a>
+          <a href="#design">Design</a>
+          <a href="mailto:yohananokpoko@gmail.com">Contact</a>
         </nav>
       </header>
       <div className="hero-content">

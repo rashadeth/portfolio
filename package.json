@@ -11,6 +11,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@lottiefiles/react-lottie-player": "^3.6.0",
+    "@mingcute/react": "^3.0.2",
     "@react-three/fiber": "^9.6.0",
     "@shadergradient/react": "^2.4.20",
     "@types/three": "^0.184.0",

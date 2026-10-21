@@ -15,8 +15,8 @@ body, .portfolio { background: var(--brand-cream); color: var(--brand-espresso);
 ::selection { background: var(--brand-mustard); color: var(--brand-espresso); }
 .portfolio a:hover { color: var(--brand-orange); }
 .portfolio :focus-visible { outline-color: var(--brand-orange); }
-.portfolio .work-section#work { background: var(--brand-cream); }
-.portfolio .work-section + .work-section { background: var(--brand-sage); }
+.portfolio #films-section { background: var(--brand-cream); }
+.portfolio #design-section { background: var(--brand-sage); }
 .portfolio .section-heading h2 { color: var(--brand-olive); }
 .portfolio .film-caption h3 { color: var(--brand-espresso); }
 .portfolio .film-caption .film-description,

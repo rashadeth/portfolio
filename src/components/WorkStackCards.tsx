@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import PortfolioIcon from "@/components/PortfolioIcon";
 
 type Project = {
   name: string;
@@ -160,11 +160,11 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                       className="inline-flex items-center gap-1 text-white transition-opacity hover:opacity-80"
                     >
                       <span className="sm:hidden" aria-hidden="true">
-                        <ExternalLink size={14} strokeWidth={1.75} />
+                        <PortfolioIcon name="external" size={14} />
                       </span>
                       <span className="hidden sm:inline">Live App</span>
                       <span className="hidden sm:inline" aria-hidden="true">
-                        <ExternalLink size={12} strokeWidth={1.75} />
+                        <PortfolioIcon name="external" size={12} />
                       </span>
                     </a>
                   ) : null}
@@ -173,7 +173,7 @@ export default function WorkStackCards({ projects }: { projects: Project[] }) {
                     className="inline-flex items-center gap-2 text-white transition-opacity hover:opacity-70"
                   >
                     View Case Study
-                    <ArrowRight size={12} strokeWidth={1.75} />
+                    <PortfolioIcon name="next" size={12} />
                   </Link>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import PortfolioIcon from "@/components/PortfolioIcon";
 import { getProject, getAllSlugs } from "@/lib/projects";
 import projects from "@/lib/projects";
 import OverflowReset from "@/components/OverflowReset";
@@ -59,7 +59,7 @@ export default async function CaseStudyPage({
             href="/"
             className="inline-flex items-center gap-2 text-[10px] font-light uppercase tracking-[0.14em] text-[#f8ebd8]/70 transition-colors hover:text-[#f8ebd8]"
           >
-            <ArrowLeft size={13} strokeWidth={1.75} />
+            <PortfolioIcon name="back" size={13} />
             Back
           </Link>
           {project.liveUrl && (
@@ -70,7 +70,7 @@ export default async function CaseStudyPage({
               className="inline-flex items-center gap-1.5 text-[10px] font-light uppercase tracking-[0.14em] text-[#f8ebd8]/70 transition-colors hover:text-[#f8ebd8]"
             >
               Live Project
-              <ExternalLink size={11} strokeWidth={1.75} />
+              <PortfolioIcon name="external" size={11} />
             </a>
           )}
         </div>
@@ -328,9 +328,8 @@ export default async function CaseStudyPage({
                   {nextProject.tagline}
                 </p>
               </div>
-              <ArrowRight
+              <PortfolioIcon name="next"
                 size={32}
-                strokeWidth={1.25}
                 className="shrink-0 text-[#f8ebd8]/30 transition-transform duration-300 group-hover:translate-x-2 group-hover:text-[#f8ebd8]/70"
               />
             </div>

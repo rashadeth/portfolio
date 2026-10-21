@@ -1,0 +1,7 @@
+.portfolio-icon { position: relative; display: inline-block; flex-shrink: 0; vertical-align: middle; }
+.portfolio-icon > svg { position: absolute; inset: 0; }
+.portfolio-icon .icon-filled { opacity: 0; }
+.portfolio-icon[data-active="true"] .icon-filled,
+a:is(:hover, :focus-visible, :active) .portfolio-icon:not([data-active="false"]) .icon-filled { opacity: 1; }
+.portfolio-icon[data-active="true"] .icon-regular,
+a:is(:hover, :focus-visible, :active) .portfolio-icon:not([data-active="false"]) .icon-regular { opacity: 0; }

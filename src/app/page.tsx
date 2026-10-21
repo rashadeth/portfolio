@@ -1,4 +1,5 @@
 import PortfolioHero from "@/components/PortfolioHero";
+import GlassNav from "@/components/GlassNav";
 import PortfolioScrollReveal from "@/components/PortfolioScrollReveal";
 
 const films = [
@@ -44,10 +45,12 @@ const designs = [
 export default function Home() {
   return (
     <main className="portfolio" id="top">
+      <GlassNav />
       <PortfolioScrollReveal />
       <PortfolioHero />
 
-      <section id="work" className="work-section" aria-labelledby="films-title">
+      <span id="work" className="section-anchor" aria-hidden="true" />
+      <section id="films-section" className="work-section" aria-labelledby="films-title">
         <div className="section-heading">
           <h2 id="films-title">AI films & ads</h2>
         </div>
@@ -71,7 +74,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="work-section" aria-labelledby="design-title">
+      <span id="design" className="section-anchor" aria-hidden="true" />
+      <section id="design-section" className="work-section" aria-labelledby="design-title">
         <div className="section-heading">
           <h2 id="design-title">Digital design</h2>
         </div>
