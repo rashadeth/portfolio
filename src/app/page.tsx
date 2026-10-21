@@ -76,9 +76,11 @@ export default function Home() {
         <div className="design-grid">
           {designs.map((project) => (
             <article className="design-card" key={project.slug}>
+              <div className="design-media">
               <video controls playsInline preload="none" poster={`/images/ads/${project.slug}.jpg`} aria-label={`${project.title} design showcase`}>
                 <source src={`/videos/${project.video}`} type="video/mp4" />
               </video>
+              </div>
               <div className="film-caption"><h3>{project.title}</h3><a href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>View project</a></div>
             </article>
           ))}

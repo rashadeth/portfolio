@@ -22,6 +22,23 @@ body, .portfolio { background: var(--brand-cream); color: var(--brand-espresso);
 .portfolio .film-caption .film-description,
 .portfolio .design-card .film-caption a { color: var(--brand-olive); }
 .portfolio .design-card .film-caption a:hover { color: var(--brand-orange); }
-.portfolio .film-media, .portfolio .design-card video { background: var(--brand-espresso); }
+.portfolio .film-media,
+.portfolio .design-media {
+  aspect-ratio: auto;
+  padding: 7%;
+  background: #95560d url("/images/backgrounds/amber-texture.png") center / cover no-repeat;
+  overflow: hidden;
+}
+.portfolio .film-media video,
+.portfolio .design-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--brand-espresso);
+  box-shadow: 0 16px 40px #24191540;
+}
+.portfolio .film-media video { aspect-ratio: 9 / 16; }
+.portfolio .film-eden-power .film-media video,
+.portfolio .film-chowdeck-zayith .film-media video { aspect-ratio: 16 / 9; }
 .portfolio .hero-contact { color: var(--brand-espresso); }
 .portfolio .hero-contact:hover { color: var(--brand-espresso); }
