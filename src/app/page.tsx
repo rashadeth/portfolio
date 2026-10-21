@@ -2,9 +2,15 @@ import PortfolioHero from "@/components/PortfolioHero";
 
 const films = [
   {
-    title: "Zayith × Chowdeck",
+    title: "Chowdeck × Zayith",
+    category: "AI brand ad",
+    description: "An AI ad bringing Zayith yoghurt and Chowdeck delivery together.",
+    slug: "chowdeck-zayith",
+  },
+  {
+    title: "Zayith",
     category: "AI product ad",
-    description: "A short animated ad bringing Zayith yoghurt and Chowdeck into one brand story.",
+    description: "An AI product ad for Zayith yoghurt.",
     slug: "zayith",
   },
   {
