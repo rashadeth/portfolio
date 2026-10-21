@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
 import Script from "next/script";
+import SmoothScroll from "@/components/SmoothScroll";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import "./brand-theme.css";
 
@@ -55,6 +57,7 @@ export default function RootLayout({
       className={`${manrope.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <SmoothScroll />
         {children}
       </body>
       <Script
