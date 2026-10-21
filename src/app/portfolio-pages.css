@@ -30,7 +30,7 @@
 .contact-form textarea { min-height: 160px; resize: vertical; }
 .contact-form input[type="email"] { min-height: 56px; }
 .contact-form :focus-visible { outline: 2px solid var(--brand-olive); outline-offset: 3px; }
-.contact-send { width: 100%; display: flex; align-items: center; justify-content: space-between; min-height: 58px; padding: 16px 20px; background: var(--brand-olive); color: var(--brand-cream); cursor: pointer; font-size: 15px; border: 0; }
+.contact-send { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 16px 20px; background: var(--brand-olive); color: var(--brand-cream); cursor: pointer; font-size: 15px; border: 0; }
 .contact-send:hover { background: #343a21; }
 .contact-send:disabled { opacity: .6; cursor: wait; }
 .contact-form button:disabled { cursor: wait; }
