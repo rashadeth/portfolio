@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, type CSSProperties, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import ContactSuccess from "./ContactSuccess";
 import PortfolioIcon from "./PortfolioIcon";
 import { contactAccessKey } from "@/lib/contact-config";
 
@@ -10,15 +11,6 @@ const templates = [
   { label: "Content strategy", icon: "home", message: "Hi Ian, I’m interested in building a content strategy for my brand. Can we talk about ideas and how we could work together?" },
   { label: "A collaboration", icon: "mail", message: "Hi Ian, I have a collaboration in mind and think we could make something great together. Are you open to a conversation?" },
 ] as const;
-
-function RibbonBurst() {
-  const colors = ["#f8ebd8", "#bbbd91", "#a4992e", "#c53d10"];
-  return <div className="ribbon-burst" aria-hidden="true">{Array.from({ length: 36 }, (_, i) => {
-    const angle = i * 2.399;
-    const radius = 130 + (i % 5) * 45;
-    return <i key={i} style={{ "--ribbon-x": `${Math.cos(angle) * radius}px`, "--ribbon-y": `${Math.sin(angle) * radius + 160}px`, "--ribbon-spin": `${(i % 2 ? 1 : -1) * (180 + i * 23)}deg`, "--ribbon-color": colors[i % 4] } as CSSProperties} />;
-  })}</div>;
-}
 
 export default function ContactComposer() {
   const [choice, setChoice] = useState(0);
@@ -63,12 +55,7 @@ export default function ContactComposer() {
     } finally { inFlight.current = false; }
   }
 
-  if (status === "sent") return <div className="contact-success" role="status" aria-live="polite">
-    <RibbonBurst />
-    <h2>Sent!</h2>
-    <p>Your idea is on its way to me. I’ll reply to the email you shared.</p>
-    <button type="button" onClick={() => { setStatus("idle"); setError(""); }}>Send another message</button>
-  </div>;
+  if (status === "sent") return <ContactSuccess onClose={() => { setStatus("idle"); setError(""); }} />;
 
   return <form className="contact-form" onSubmit={submit} aria-busy={status === "sending"}>
     <fieldset disabled={status === "sending"}>
