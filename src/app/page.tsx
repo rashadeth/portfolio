@@ -53,7 +53,7 @@ export default function Home() {
           {films.map((film) => (
             <article className={`film-card film-${film.slug}`} key={film.slug}>
               <div className="film-media">
-                <video controls playsInline preload="none" poster={`/images/ads/${film.slug}.jpg`} aria-label={`${film.title} — ${film.category}`}>
+                <video controls playsInline preload="none" poster={`/images/ads/${film.slug}-cover.jpg`} aria-label={`${film.title} — ${film.category}`}>
                   <source src={`/videos/ads/${film.slug}.mp4`} type="video/mp4" />
                   Your browser does not support video. <a href={`/videos/ads/${film.slug}.mp4`}>Download {film.title}</a>.
                 </video>
