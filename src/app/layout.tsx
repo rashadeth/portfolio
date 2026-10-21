@@ -24,6 +24,7 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   ...pageMetadata("/", siteTitle, siteDescription),
   metadataBase: new URL(siteUrl),
+  verification: { google: "VAY3Ua_SB2mo73DDKZ-L3ZL4DTMa3Uu34Y5Pzfya-i4" },
   authors: [{ name: "Ian Okpoko", url: siteUrl }],
   creator: "Ian Okpoko",
   publisher: "Ian Okpoko",

@@ -8,6 +8,7 @@
 .design-card .design-caption h3 a { font-size: inherit; color: inherit; }
 .design-card .design-caption .case-study-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: underline; text-underline-offset: 5px; }
 .design-caption { flex-wrap: wrap; }
+.design-actions { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .home-collection { min-height: 100svh; display: grid; align-content: center; margin-inline: calc(-1 * var(--page-gutter)); padding: 64px var(--page-gutter); background: var(--brand-cream); }
 .home-design { background: var(--brand-sage); }
 .collection-link { display: block; color: var(--brand-espresso); }

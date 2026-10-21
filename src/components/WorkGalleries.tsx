@@ -1,5 +1,6 @@
 import { films, designs } from "@/lib/portfolio-work";
 import Link from "next/link";
+import { getProject } from "@/lib/projects";
 
 export function FilmGallery() { return (<div className="film-grid">
           {films.map((film) => (
@@ -21,7 +22,9 @@ export function FilmGallery() { return (<div className="film-grid">
         </div>); }
 
 export function DesignGallery() { return (<div className="design-grid">
-          {designs.map((project) => (
+          {designs.map((project) => {
+            const liveUrl = getProject(project.slug)?.liveUrl;
+            return (
             <article className="design-card" key={project.slug}>
               <div className="design-media">
               <video controls playsInline preload="none" poster={`/images/ads/${project.slug}.jpg`} aria-label={`${project.title} design showcase`}>
@@ -30,8 +33,11 @@ export function DesignGallery() { return (<div className="design-grid">
               </div>
               <div className="film-caption design-caption">
                 <h3><Link href={`/case-study/${project.slug}`}>{project.title}</Link></h3>
-                <Link className="case-study-link" href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>View case study</Link>
+                <div className="design-actions">
+                  <Link className="case-study-link" href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>View case study</Link>
+                  {liveUrl && <a className="case-study-link" href={liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} live product (opens in a new tab)`}>View live product</a>}
+                </div>
               </div>
             </article>
-          ))}
+          ); })}
         </div>); }
