@@ -1,4 +1,5 @@
 import { films, designs } from "@/lib/portfolio-work";
+import Link from "next/link";
 
 export function FilmGallery() { return (<div className="film-grid">
           {films.map((film) => (
@@ -27,7 +28,10 @@ export function DesignGallery() { return (<div className="design-grid">
                 <source src={`/videos/${project.video}`} type="video/mp4" />
               </video>
               </div>
-              <div className="film-caption"><h3>{project.title}</h3><a href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>View project</a></div>
+              <div className="film-caption design-caption">
+                <h3><Link href={`/case-study/${project.slug}`}>{project.title}</Link></h3>
+                <Link className="case-study-link" href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>View case study</Link>
+              </div>
             </article>
           ))}
         </div>); }
