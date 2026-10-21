@@ -1,0 +1,22 @@
+/* Clip sideways overflow without creating an ancestor scroll container,
+   which would prevent viewport-based sticky positioning. */
+html.portfolio-stack-active,
+html.portfolio-stack-active body {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.section-stack {
+  isolation: isolate;
+  /* Override the older mobile overflow rule, which creates a scroll container. */
+  overflow: visible !important;
+}
+.section-stack > section {
+  position: sticky;
+  top: var(--stack-top, 0px);
+  z-index: var(--stack-order, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-stack > section { position: relative; top: auto; }
+}
