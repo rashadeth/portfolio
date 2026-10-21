@@ -69,3 +69,11 @@
   .success-ribbons { display: none; }
   .success-content { animation: none; }
 }
+
+.contact-celebration.is-intro { background: #3f422c; }
+.success-dither { width: min(82vw, 620px); aspect-ratio: 1; pointer-events: none; }
+.success-dither video { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.success-dither video::-webkit-media-controls,
+.success-dither video::-webkit-media-controls-start-playback-button { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .success-dither { display: none; } }
+.success-dither video { outline: none; mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); mask-composite: intersect; }
