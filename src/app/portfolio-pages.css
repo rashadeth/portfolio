@@ -38,6 +38,7 @@
 .contact-send:disabled { opacity: .6; cursor: wait; }
 .contact-form button:disabled { cursor: wait; }
 .contact-note { margin-top: 12px; color: var(--brand-olive); font-size: 12px; line-height: 1.6; }
+.contact-note a { text-decoration: underline; text-underline-offset: 3px; }
 .contact-error { margin: 0 0 20px; color: #9c2912; font-size: 14px; line-height: 1.6; }
 .contact-honey { display: none; }
 /* A full-screen, top-layer celebration after confirmed delivery. */
