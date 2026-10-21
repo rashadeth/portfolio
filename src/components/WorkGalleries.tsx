@@ -1,6 +1,7 @@
 import { films, designs } from "@/lib/portfolio-work";
 import Link from "next/link";
 import { getProject } from "@/lib/projects";
+import ArrowRightUp from "@mingcute/react/core-regular/arrow-right-up";
 
 export function FilmGallery() { return (<div className="film-grid">
           {films.map((film) => (
@@ -34,8 +35,8 @@ export function DesignGallery() { return (<div className="design-grid">
               <div className="film-caption design-caption">
                 <h3><Link href={`/case-study/${project.slug}`}>{project.title}</Link></h3>
                 <div className="design-actions">
-                  <Link className="case-study-link" href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>View case study</Link>
-                  {liveUrl && <a className="case-study-link" href={liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} live product (opens in a new tab)`}>View live product</a>}
+                  <Link className="case-study-link" href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>Case study</Link>
+                  {liveUrl && <a className="case-study-link" href={liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} live product (opens in a new tab)`}>View product <ArrowRightUp size={16} aria-hidden="true" /></a>}
                 </div>
               </div>
             </article>
