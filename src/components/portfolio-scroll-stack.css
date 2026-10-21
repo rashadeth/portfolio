@@ -19,15 +19,13 @@ html.portfolio-stack-active body {
   z-index: var(--stack-order, 1);
 }
 
-/* On touch screens, only the hero is held behind the following content.
-   Pinning each short preview makes swipes feel as though they stop between sections. */
+/* Mobile uses one native document scroller, without pinned sections. */
 @media (max-width: 700px), (hover: none) and (pointer: coarse) {
-  .section-stack > .home-collection {
-    position: relative;
-    top: auto;
-    min-height: auto;
-    align-content: start;
-  }
+  html, body { overflow-x: clip; overflow-y: visible; }
+  main.portfolio { overflow-x: clip !important; overflow-y: visible !important; overscroll-behavior: auto; }
+  main.portfolio > section { position: relative; top: auto; }
+  main.portfolio > .home-collection { min-height: auto; align-content: start; }
+  main.portfolio > .home-collection:last-child { padding-bottom: calc(140px + env(safe-area-inset-bottom)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

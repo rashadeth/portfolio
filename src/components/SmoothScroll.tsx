@@ -11,13 +11,14 @@ export default function SmoothScroll() {
 
   useEffect(() => {
     const pointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const compact = window.matchMedia("(max-width: 700px)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let lenis: Lenis | undefined;
 
     const sync = () => {
       lenis?.destroy();
       lenis = undefined;
-      if (!pointer.matches || isTouchCapable() || reducedMotion.matches) return;
+      if (compact.matches || !pointer.matches || isTouchCapable() || reducedMotion.matches) return;
 
       lenis = new Lenis({
         autoRaf: true,
@@ -32,10 +33,12 @@ export default function SmoothScroll() {
 
     sync();
     pointer.addEventListener("change", sync);
+    compact.addEventListener("change", sync);
     reducedMotion.addEventListener("change", sync);
     return () => {
       lenis?.destroy();
       pointer.removeEventListener("change", sync);
+      compact.removeEventListener("change", sync);
       reducedMotion.removeEventListener("change", sync);
     };
   }, [pathname]);
