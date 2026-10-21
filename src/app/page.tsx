@@ -1,327 +1,84 @@
-import FramerGradientBackground from "@/components/FramerGradientBackground";
-import ContactLinksAnimated from "@/components/ContactLinksAnimated";
-import HeroTitle from "@/components/HeroTitle";
-import LensCursor from "@/components/LensCursor";
-import ProjectHoverCursor from "@/components/ProjectHoverCursor";
-import WorkStackCards from "@/components/WorkStackCards";
-import { Aperture } from "lucide-react";
+import PortfolioHero from "@/components/PortfolioHero";
+
+const films = [
+  {
+    title: "Zayith × Chowdeck",
+    category: "AI product ad",
+    description: "A short animated ad bringing Zayith yoghurt and Chowdeck into one brand story.",
+    slug: "zayith",
+  },
+  {
+    title: "Lexycon",
+    category: "AI UGC ad",
+    description: "A creator-style video introducing Lexycon through a personal, conversational story.",
+    slug: "lexycon",
+  },
+  {
+    title: "Blok — Bole Festival",
+    category: "AI ad",
+    description: "An AI-powered ad bringing Blok into the world of Bole Festival.",
+    slug: "blok",
+  },
+  {
+    title: "Eden Power",
+    category: "AI brand film",
+    description: "An AI-crafted commercial combining product visuals and storytelling for Eden Power.",
+    slug: "eden-power",
+  },
+];
+
+const designs = [
+  { title: "Foodcourt", slug: "foodcourt", video: "foodcourt.MP4" },
+  { title: "Spacebook", slug: "spacebook", video: "spacebook.mp4" },
+  { title: "Steppa", slug: "steppa", video: "steppa.mp4" },
+  { title: "AFROSZN", slug: "afroszn", video: "afroszn.mp4" },
+];
 
 export default function Home() {
-  const projects = [
-    {
-      name: "Foodcourt",
-      slug: "foodcourt",
-      description: "A food ordering and discovery concept focused on speed and clarity.",
-      tags: ["Food", "Web"],
-      videoSrc: "/videos/foodcourt.MP4",
-      hasVideo: true,
-      orientation: "landscape",
-      fitMode: "contain",
-      mediaBg: "#f5f5f5",
-      liveUrl: "https://apps.apple.com/ng/app/foodcourt-food-delivery/id1579693328",
-    },
-    {
-      name: "Spacebook",
-      slug: "spacebook",
-      description: "A two-sided marketplace for creators to discover and book creative spaces.",
-      tags: ["Product", "Web"],
-      videoSrc: "/videos/spacebook.mp4",
-      hasVideo: true,
-      orientation: "landscape",
-      fitMode: "cover",
-      mediaBg: "transparent",
-      liveUrl: "https://www.spacebook.live",
-    },
-    {
-      name: "Steppa",
-      slug: "steppa",
-      description: "A modern mobility interface focused on intuitive booking and routing flows.",
-      tags: ["UX", "Platform"],
-      videoSrc: "/videos/steppa.mp4",
-      hasVideo: true,
-      orientation: "portrait",
-      fitMode: "contain",
-      mediaBg: "#f5f5f5",
-    },
-    {
-      name: "AFROSZN",
-      slug: "afroszn",
-      description: "A culture-first media experience blending editorial storytelling and commerce.",
-      tags: ["Brand", "Web"],
-      videoSrc: "/videos/afroszn.mp4",
-      hasVideo: true,
-      orientation: "landscape",
-      fitMode: "contain",
-      mediaBg: "#f5f5f5",
-      liveUrl: "https://afroszn.org/",
-    },
-  ];
-
-  const contactLinks = [
-    { label: "Email", href: "mailto:yohananokpoko@gmail.com" },
-    { label: "Twitter", href: "https://x.com/yohanansoltd?s=21" },
-  ];
-
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[#0c0c0c] text-[#e8e4dc]">
-      <FramerGradientBackground />
-      <ProjectHoverCursor />
+    <main className="portfolio" id="top">
+      <PortfolioHero />
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-50 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
-          animation: "grainDrift 14s steps(6, end) infinite",
-        }}
-      />
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-t border-white/[0.05] bg-[rgba(12,12,12,0.64)] backdrop-blur-xl">
-        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 md:px-10">
-          <a
-            href="#"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-colors hover:border-white"
-            aria-label="Home"
-          >
-            <Aperture size={22} strokeWidth={1.75} />
-          </a>
-          <nav className="font-sans text-[10px] font-light tracking-[0.08em] text-white sm:text-[11px] sm:tracking-[0.1em]">
-            <ul className="flex items-center gap-4 sm:gap-6 md:gap-10">
-              <li>
-                <a
-                  href="#work"
-                  className="relative text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
-                >
-                  Work
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#about"
-                  className="relative text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className="relative text-white/80 transition-colors duration-200 hover:text-white focus-visible:text-white after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-white/70 after:transition-all after:duration-200 hover:after:w-full"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
+      <section id="work" className="work-section" aria-labelledby="films-title">
+        <div className="section-heading">
+          <h2 id="films-title">AI films & ads</h2>
         </div>
-      </header>
-
-      <section
-        id="hero"
-        className="relative mx-auto w-full max-w-[1440px] px-4 pb-4 pt-24 sm:px-6 sm:pb-6 sm:pt-28 md:px-10 md:pb-8 md:pt-32"
-      >
-        <div className="relative min-h-[calc(100svh-5.5rem)] overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:min-h-[calc(100svh-6rem)] sm:rounded-3xl">
-          <LensCursor />
-          <div
-            aria-hidden="true"
-            data-parallax-layer
-            data-parallax-amount="28"
-            className="pointer-events-none absolute inset-0 z-0 will-change-transform"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' seed='3'/%3E%3CfeDisplacementMap scale='8'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23w)' opacity='0.18'/%3E%3C/svg%3E\")",
-              opacity: 0.2,
-            }}
-          />
-          <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-end px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-20 md:px-8 md:pb-16">
-          <div style={{ marginBottom: '24px' }}>
-            <svg
-              width="280"
-              height="160"
-              viewBox="0 0 280 160"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ overflow: 'visible' }}
-            >
-              <g style={{ animation: 'flyAcross 16s linear infinite', transform: 'scale(2)', transformOrigin: '0px 0px' }}>
-                {/* Paper plane body */}
-                <path
-                  d="M0 0 L-30 -15 L-22 0 L-30 15 Z"
-                  stroke="#e8e4dc"
-                  strokeWidth="1.2"
-                  fill="rgba(232,228,220,0.1)"
-                  strokeLinejoin="round"
-                />
-                {/* Wing fold */}
-                <path d="M0 0 L-22 0" stroke="#e8e4dc" strokeWidth="0.8" opacity="0.4"/>
-
-                {/* Ribbon string from tail */}
-                <path
-                  d="M-30 0 Q-45 8 -55 4 Q-70 0 -80 6 Q-90 12 -100 8"
-                  stroke="#d4c9a8"
-                  strokeWidth="0.8"
-                  fill="none"
-                  opacity="0.7"
-                />
-
-                {/* Ribbon banner */}
-                <rect
-                  x="-145" y="-10" width="60" height="20" rx="2"
-                  fill="rgba(212,201,168,0.12)"
-                  stroke="#d4c9a8"
-                  strokeWidth="0.8"
-                />
-                {/* Ribbon tails */}
-                <path
-                  d="M-145 -10 L-152 0 L-145 10"
-                  fill="rgba(212,201,168,0.12)"
-                  stroke="#d4c9a8"
-                  strokeWidth="0.8"
-                />
-
-                {/* Text on ribbon */}
-                <text
-                  x="-115" y="5"
-                  textAnchor="middle"
-                  fontFamily="monospace"
-                  fontSize="7"
-                  fill="#d4c9a8"
-                  letterSpacing="1"
-                  opacity="0.9"
-                >
-                  let&apos;s work
-                </text>
-              </g>
-
-              <style>{`
-                @keyframes flyAcross {
-                  0%   { transform: scale(2) translate(-300px, 100px) rotate(-3deg); }
-                  100% { transform: scale(2) translate(1800px,  75px) rotate(-4deg); }
-                }
-                @keyframes drawString {
-                  0%, 100% { opacity: 0.7; }
-                  50%      { opacity: 0.4; }
-                }
-              `}</style>
-            </svg>
-          </div>
-          <p className="text-[11px] font-light uppercase tracking-[0.2em] text-white">Design Engineer</p>
-          <HeroTitle />
-          <div className="mt-10 flex flex-col gap-8 border-t border-white/[0.05] pt-8 md:mt-12 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-sm font-light leading-relaxed text-white">
-              I craft visually distinct, high-performing interfaces and turn product idea&apos;s into polished,
-              scalable digital experiences from concept to launch.
-            </p>
-            <div className="flex flex-col items-start gap-2 text-xs font-light tracking-[0.16em] text-white md:items-end">
-              <div className="flex items-center gap-3 text-white">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-[#4ade80] shadow-[0_0_6px_rgba(74,222,128,0.55)]" />
-                <span>Available for projects</span>
+        <div className="film-grid">
+          {films.map((film) => (
+            <article className={`film-card film-${film.slug}`} key={film.slug}>
+              <div className="film-media">
+                <video controls playsInline preload="none" poster={`/images/ads/${film.slug}.jpg`} aria-label={`${film.title} — ${film.category}`}>
+                  <source src={`/videos/ads/${film.slug}.mp4`} type="video/mp4" />
+                  Your browser does not support video. <a href={`/videos/ads/${film.slug}.mp4`}>Download {film.title}</a>.
+                </video>
               </div>
-              <span>9.0722° N, 7.4891° E</span>
-            </div>
-          </div>
-        </div>
-        </div>
-      </section>
-
-      <section
-        id="work"
-        className="relative z-10 mx-auto w-full max-w-[1440px] px-4 pb-4 pt-2 sm:px-6 sm:pb-6 sm:pt-3 md:px-10 md:pb-8 md:pt-4"
-      >
-        <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl md:pb-10">
-          <div
-            aria-hidden="true"
-            data-parallax-layer
-            data-parallax-amount="20"
-            className="pointer-events-none absolute inset-0 z-0 will-change-transform"
-            style={{
-              backgroundImage: "radial-gradient(rgba(232,228,220,0.06) 1.5px, transparent 1.5px)",
-              backgroundSize: "28px 28px",
-              maskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
-            }}
-          />
-          <div className="relative z-10 px-3 pt-10 pb-6 sm:px-5 sm:pb-10 sm:pt-12 md:px-6 md:pb-16 lg:pb-24">
-            <WorkStackCards projects={projects} />
-          </div>
+              <div className="film-caption">
+                <div>
+                  <h3>{film.title}</h3>
+                  <p className="film-description">{film.description}</p>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section
-        id="about"
-        className="relative z-20 mx-auto w-full max-w-[1440px] px-4 pb-4 pt-8 sm:px-6 sm:pb-6 sm:pt-12 md:px-10 md:pb-8 md:pt-14"
-      >
-        <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
-          <div
-            aria-hidden="true"
-            data-parallax-layer
-            data-parallax-amount="26"
-            className="pointer-events-none absolute -bottom-52 -left-44 z-0 h-[700px] w-[700px] rounded-full will-change-transform"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(0,200,150,0.08) 0%, rgba(0,200,150,0.025) 48%, rgba(0,200,150,0) 76%)",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            data-parallax-layer
-            data-parallax-amount="14"
-            className="pointer-events-none absolute inset-0 z-0 opacity-40 will-change-transform"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(45deg, rgba(232,228,220,0.04) 0 1px, transparent 1px 18px)",
-            }}
-          />
-          <div className="relative z-10 grid gap-12 px-4 py-14 sm:px-7 sm:py-16 md:grid-cols-2 md:gap-20 md:px-10 md:py-20">
-          <p className="max-w-[20ch] font-sans text-[clamp(36px,8vw,60px)] font-light leading-[1.02] tracking-tight">
-            I am a designer and developer focused on making digital products feel clear, useful, and
-            deeply human.
-          </p>
-          <div className="divide-y divide-[rgba(232,228,220,0.08)]">
-            <div className="grid gap-2 py-5 sm:grid-cols-[120px_1fr] sm:gap-6">
-              <span className="text-xs font-light uppercase tracking-[0.16em] text-white">
-                Currently
-              </span>
-              <p className="text-sm font-light leading-relaxed">Freelancing on product and frontend work.</p>
-            </div>
-            <div className="grid gap-2 py-5 sm:grid-cols-[120px_1fr] sm:gap-6">
-              <span className="text-xs font-light uppercase tracking-[0.16em] text-white">
-                Previously
-              </span>
-              <p className="text-sm font-light leading-relaxed">
-                Designed and shipped products across startup teams.
-              </p>
-            </div>
-            <div className="grid gap-2 py-5 sm:grid-cols-[120px_1fr] sm:gap-6">
-              <span className="text-xs font-light uppercase tracking-[0.16em] text-white">
-                Stack
-              </span>
-              <p className="text-sm font-light leading-relaxed">
-                Figma, Next.js, React, TypeScript, Tailwind, GSAP.
-              </p>
-            </div>
-          </div>
+      <section className="work-section" aria-labelledby="design-title">
+        <div className="section-heading">
+          <h2 id="design-title">Digital design</h2>
         </div>
+        <div className="design-grid">
+          {designs.map((project) => (
+            <article className="design-card" key={project.slug}>
+              <video controls playsInline preload="none" poster={`/images/ads/${project.slug}.jpg`} aria-label={`${project.title} design showcase`}>
+                <source src={`/videos/${project.video}`} type="video/mp4" />
+              </video>
+              <div className="film-caption"><h3>{project.title}</h3><a href={`/case-study/${project.slug}`} aria-label={`View ${project.title} case study`}>View project</a></div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section
-        id="contact"
-        className="relative mx-auto w-full max-w-[1440px] bg-[#000000] px-4 py-16 text-white sm:px-6 sm:py-20 md:px-10 md:py-24"
-      >
-        <h2 className="max-w-[12ch] font-sans text-[clamp(40px,9vw,84px)] font-light leading-[0.96] tracking-tight text-white">
-          Let&apos;s make something great.
-        </h2>
-        <ContactLinksAnimated links={contactLinks} />
-      </section>
-
-      <footer className="relative z-20 mx-auto w-full max-w-[1440px] bg-black px-4 pb-0 sm:px-6 md:px-10">
-        <div className="grid gap-3 border-t border-white/[0.05] pb-6 pt-6 text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] md:grid-cols-3">
-          <span>© {new Date().getFullYear()} Ian O</span>
-          <span className="md:text-center">Designed & built by Ian</span>
-          <span className="md:text-right">9.0722° N, 7.4891° E</span>
-        </div>
-      </footer>
     </main>
   );
 }

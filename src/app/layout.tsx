@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
 import Script from "next/script";
-import CustomCursor from "@/components/CustomCursor";
-import DebugOverlay from "@/components/DebugOverlay";
-import ScrollToTopOnLoad from "@/components/ScrollToTopOnLoad";
-import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -21,12 +17,12 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Ian O — Design Engineer",
-  description: "Designing and building digital products from 9.0722° N, 7.4891° E.",
+  title: "Ian O — Designer & AI Content Strategist",
+  description: "Digital design, AI films and brand stories by Ian Okpoko, designer and AI content strategist.",
   metadataBase: new URL("https://yohanan.design"),
   openGraph: {
-    title: "Ian O — Design Engineer",
-    description: "Designing and building digital products from 9.0722° N, 7.4891° E.",
+    title: "Ian O — Designer & AI Content Strategist",
+    description: "Digital design, AI films and brand stories by Ian Okpoko, designer and AI content strategist.",
     url: "https://yohanan.design",
     siteName: "Ian O",
     images: [
@@ -34,16 +30,16 @@ export const metadata: Metadata = {
         url: "https://yohanan.design/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Ian O — Design Engineer",
+        alt: "Ian O — Designer & AI Content Strategist",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ian O — Design Engineer",
-    description: "Designing and building digital products from 9.0722° N, 7.4891° E.",
-    images: [{ url: "https://yohanan.design/images/og-image.png", alt: "Ian O — Design Engineer" }],
+    title: "Ian O — Designer & AI Content Strategist",
+    description: "Digital design, AI films and brand stories by Ian Okpoko, designer and AI content strategist.",
+    images: [{ url: "https://yohanan.design/images/og-image.png", alt: "Ian O — Designer & AI Content Strategist" }],
   },
 };
 
@@ -58,12 +54,7 @@ export default function RootLayout({
       className={`${manrope.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <DebugOverlay />
-        <CustomCursor />
-        <SmoothScroll>
-          <ScrollToTopOnLoad />
-          {children}
-        </SmoothScroll>
+        {children}
       </body>
       <Script
         id="person-jsonld"
@@ -75,7 +66,7 @@ export default function RootLayout({
             name: "Ian Okpoko",
             alternateName: "Ian O",
             url: "https://yohanan.design",
-            jobTitle: "Design Engineer",
+            jobTitle: "Designer & AI Content Strategist",
             address: {
               "@type": "PostalAddress",
               addressLocality: "9.0722° N, 7.4891° E",
