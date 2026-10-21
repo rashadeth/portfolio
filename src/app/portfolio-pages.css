@@ -38,21 +38,21 @@
 .contact-error { margin: 0 0 20px; color: #9c2912; font-size: 14px; line-height: 1.6; }
 .contact-honey { display: none; }
 /* A full-screen, top-layer celebration after confirmed delivery. */
-.contact-celebration { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; height: 100dvh; max-height: none; margin: 0; padding: 32px; border: 0; color: var(--brand-cream); background: radial-gradient(ellipse at 50% 25%, #53572d 0%, #343a21 48%, #241f15 100%); overflow: auto; }
+.contact-celebration { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; height: 100dvh; max-height: none; margin: 0; padding: 32px; border: 0; color: var(--brand-cream); background: #343a21; overflow: auto; }
 .contact-celebration[open] { display: grid; place-items: center; }
 .contact-celebration::backdrop { background: #241915; }
-.success-ribbons { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.success-content { position: relative; text-align: center; max-width: 800px; padding: 40px 0; animation: success-arrive .8s cubic-bezier(.2,.7,.2,1) both; }
-.success-logo { margin: 0 auto 38px; object-fit: contain; }
-.success-content h2 { font-size: clamp(48px, 8vw, 112px); font-weight: 400; line-height: 1.05; letter-spacing: -.06em; }
+.success-content { background: #343a21; position: relative; text-align: center; max-width: 800px; padding: 40px 0; animation: success-arrive .8s cubic-bezier(.2,.7,.2,1) both; }
+.success-trophy { mix-blend-mode: lighten; display: block; width: 160px; height: 160px; margin: 0 auto 24px; object-fit: contain; pointer-events: none; }
+.success-trophy::-webkit-media-controls, .success-trophy::-webkit-media-controls-start-playback-button { display: none !important; }
+.success-content h2 { outline: none; font-size: clamp(48px, 8vw, 112px); font-weight: 400; line-height: 1.05; letter-spacing: -.06em; }
 .success-content p { font-size: clamp(16px, 2vw, 20px); line-height: 1.65; margin: 24px auto 38px; color: var(--brand-cream); }
-.success-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.success-actions a, .success-actions button { font: inherit; font-size: 14px; padding: 17px 24px; border-radius: 0; border: 1px solid var(--brand-sage); cursor: pointer; }
-.success-actions a { background: var(--brand-cream); color: var(--brand-espresso); border-color: var(--brand-cream); }
-.success-actions button { background: #343a21; color: var(--brand-cream); }
+.success-actions { display: flex; flex-direction: column; gap: 12px; width: min(100%, 320px); margin: 0 auto; }
+.success-actions a, .success-actions button { font: inherit; font-size: 14px; padding: 17px 24px; border-radius: 0; border: 0; cursor: pointer; }
+.success-actions a { background: var(--brand-cream); color: var(--brand-espresso);  }
+.success-actions button { background: transparent; color: var(--brand-cream); }
 .success-actions :focus-visible { outline: 2px solid var(--brand-cream); outline-offset: 5px; }
-.success-actions a:hover { background: var(--brand-sage); }
-.success-actions button:hover { background: #53572d; }
+.contact-celebration .success-actions a:hover { background: var(--brand-cream); color: var(--brand-espresso); }
+.contact-celebration .success-actions button:hover { background: transparent; color: var(--brand-cream); }
 @keyframes success-arrive { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 700px) {
   .site-header .desktop-navigation { display: none; }
@@ -65,11 +65,11 @@
   .contact-layout { grid-template-columns: 1fr; gap: 28px; padding: 20px 0 140px; }
   .contact-intro { padding-top: 0; }
   .contact-celebration { padding: 24px; }
-  .success-logo { margin-bottom: 30px; }
+
 }
 @media (prefers-reduced-motion: reduce) {
   .collection-cover img { transition: none; }
-  .success-ribbons { display: none; }
+
   .success-content { animation: none; }
 }
 
