@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
 import Script from "next/script";
+import GlassNav from "@/components/GlassNav";
 import SmoothScroll from "@/components/SmoothScroll";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import "./brand-theme.css";
+import "./portfolio-pages.css";
 
 const manrope = Manrope({
   variable: "--font-sans",
@@ -59,6 +61,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <SmoothScroll />
         {children}
+        <GlassNav />
       </body>
       <Script
         id="person-jsonld"

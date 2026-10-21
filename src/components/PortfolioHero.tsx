@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import PortfolioHeader from "./PortfolioHeader";
 import "./portfolio-hero.css";
 import { useEffect, useRef } from "react";
 
@@ -53,16 +55,7 @@ export default function PortfolioHero() {
         </video>
 
       </div>
-      <header className="site-header hero-header">
-        <a className="wordmark" href="#top" aria-label="Ian O home">
-          <Image src="/images/brand/ian-o-white-transparent.png" alt="Ian O" width={88} height={88} priority className="brand-logo" />
-        </a>
-        <nav className="desktop-navigation" aria-label="Main navigation">
-          <a href="#work">Films</a>
-          <a href="#design">Design</a>
-          <a href="mailto:yohananokpoko@gmail.com">Contact</a>
-        </nav>
-      </header>
+      <PortfolioHeader light />
       <div className="hero-content">
         <h1 id="intro-title">
           <span className="hero-line"><span>Designer &</span></span>
@@ -71,7 +64,7 @@ export default function PortfolioHero() {
         </h1>
         <div className="hero-introduction">
           <p>I design digital experiences and create AI-powered ads and brand stories.</p>
-          <a className="hero-contact" href="mailto:yohananokpoko@gmail.com">Let’s talk</a>
+          <Link className="hero-contact" href="/contact">Let’s talk</Link>
         </div>
       </div>
 

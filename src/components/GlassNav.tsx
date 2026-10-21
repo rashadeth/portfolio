@@ -1,18 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import PortfolioIcon from "./PortfolioIcon";
 import "./glass-nav.css";
 
 const links = [
-  { label: "Home", href: "#top", icon: "home" },
-  { label: "Films", href: "#work", icon: "film" },
-  { label: "Design", href: "#design", icon: "design" },
-  { label: "Contact", href: "mailto:yohananokpoko@gmail.com", icon: "mail" },
+  { label: "Home", href: "/", icon: "home" },
+  { label: "Films", href: "/films", icon: "film" },
+  { label: "Design", href: "/design", icon: "design" },
+  { label: "Contact", href: "/contact", icon: "mail" },
 ] as const;
 
 export default function GlassNav() {
-  const [active, setActive] = useState(0);
+  const pathname = usePathname();
+  const active = pathname.startsWith("/films") ? 1 : pathname.startsWith("/design") || pathname.startsWith("/case-study") ? 2 : pathname.startsWith("/contact") ? 3 : 0;
   const [preview, setPreview] = useState<number | null>(null);
   const lens = useRef<HTMLSpanElement>(null);
   const animation = useRef<Animation | null>(null);
@@ -51,42 +54,22 @@ export default function GlassNav() {
     return () => window.removeEventListener("resize", resize);
   }, [selected]);
 
-  useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const threshold = window.innerHeight * 0.4;
-      const design = document.getElementById("design-section");
-      const work = document.getElementById("films-section");
-      setActive(design && design.getBoundingClientRect().top <= threshold ? 2
-        : work && work.getBoundingClientRect().top <= threshold ? 1 : 0);
-    };
-    const queue = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
-    window.addEventListener("scroll", queue, { passive: true });
-    window.addEventListener("resize", queue);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", queue);
-      window.removeEventListener("resize", queue);
-    };
-  }, []);
 
   return (
     <nav className="glass-nav" aria-label="Main navigation"
       onMouseLeave={() => setPreview(null)}>
       <span ref={lens} className="glass-nav-lens" aria-hidden="true" />
       {links.map(({ label, href, icon }, index) => (
-        <a key={label} href={href}
-          aria-current={index === active ? "location" : undefined}
+        <Link key={label} href={href}
+          aria-current={index === active ? "page" : undefined}
           data-lit={(preview ?? active) === index}
           onMouseEnter={() => setPreview(index)}
           onFocus={() => setPreview(index)}
           onBlur={() => setPreview(null)}
-          onClick={() => { if (index < 3) setActive(index); setPreview(null); }}>
+          onClick={() => setPreview(null)}>
           <PortfolioIcon name={icon} size={22} active={(preview ?? active) === index} />
           <span>{label}</span>
-        </a>
+        </Link>
       ))}
     </nav>
   );

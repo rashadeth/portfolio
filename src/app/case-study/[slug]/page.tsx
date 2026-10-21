@@ -56,7 +56,7 @@ export default async function CaseStudyPage({
       <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-[rgba(36,25,21,0.92)] backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 md:px-10">
           <Link
-            href="/"
+            href="/design"
             className="inline-flex items-center gap-2 text-[10px] font-light uppercase tracking-[0.14em] text-[#f8ebd8]/70 transition-colors hover:text-[#f8ebd8]"
           >
             <PortfolioIcon name="back" size={13} />
