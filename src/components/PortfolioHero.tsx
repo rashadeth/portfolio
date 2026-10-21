@@ -15,7 +15,12 @@ export default function PortfolioHero() {
     const section = hero.current;
     if (!media || !section) return;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    media.muted = true;
+    media.defaultMuted = true;
+    media.controls = false;
     let visible = true;
+    const playing = () => { section.dataset.playing = "true"; };
+    const paused = () => { section.dataset.playing = "false"; };
     const sync = () => {
       if (preference.matches || !visible || document.hidden) media.pause();
       else void media.play().catch(() => {});
@@ -28,12 +33,20 @@ export default function PortfolioHero() {
     preference.addEventListener("change", sync);
     document.addEventListener("visibilitychange", sync);
     media.addEventListener("canplay", sync);
+    media.addEventListener("playing", playing);
+    media.addEventListener("pause", paused);
+    document.addEventListener("pointerdown", sync, { passive: true });
+    document.addEventListener("touchend", sync, { passive: true });
     sync();
     return () => {
       observer.disconnect();
       preference.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", sync);
       media.removeEventListener("canplay", sync);
+      media.removeEventListener("playing", playing);
+      media.removeEventListener("pause", paused);
+      document.removeEventListener("pointerdown", sync);
+      document.removeEventListener("touchend", sync);
       media.pause();
     };
   }, []);
@@ -50,7 +63,7 @@ export default function PortfolioHero() {
       </div>
       <div className="hero-art" aria-hidden="true">
         <Image src="/images/hero/olive-waves-poster.jpg" alt="" fill priority sizes="100vw" className="hero-image hero-poster" />
-        <video ref={video} className="hero-image hero-video" autoPlay muted loop playsInline preload="auto" poster="/images/hero/olive-waves-poster.jpg" tabIndex={-1}>
+        <video ref={video} className="hero-image hero-video" autoPlay muted loop playsInline controls={false} disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen noremoteplayback" preload="auto" poster="/images/hero/olive-waves-poster.jpg" tabIndex={-1}>
           <source src="/videos/hero/olive-waves.mp4" type="video/mp4" />
         </video>
 
