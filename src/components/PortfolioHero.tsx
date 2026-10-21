@@ -43,13 +43,13 @@ export default function PortfolioHero() {
           {[0, 1, 2, 3, 4].map((panel) => <div className="hero-entry-panel" key={panel} />)}
         </div>
         <div className="hero-entry-brand">
-          <Image src="/images/brand/ian-o-logo.png" alt="" width={64} height={64} priority />
+          <Image src="/images/brand/ian-o-white-transparent.png" alt="" width={64} height={64} priority />
         </div>
       </div>
       <div className="hero-art" aria-hidden="true">
-        <Image src="/images/hero/sculpted-orange-poster.jpg" alt="" fill priority sizes="100vw" className="hero-image hero-poster" />
-        <video ref={video} className="hero-image hero-video" autoPlay muted loop playsInline preload="auto" poster="/images/hero/sculpted-orange-poster.jpg" tabIndex={-1}>
-          <source src="/videos/hero/sculpted-orange-waves.mp4" type="video/mp4" />
+        <Image src="/images/hero/brand-waves-poster.jpg" alt="" fill priority sizes="100vw" className="hero-image hero-poster" />
+        <video ref={video} className="hero-image hero-video" autoPlay muted loop playsInline preload="auto" poster="/images/hero/brand-waves-poster.jpg" tabIndex={-1}>
+          <source src="/videos/hero/brand-waves.mp4" type="video/mp4" />
         </video>
 
       </div>

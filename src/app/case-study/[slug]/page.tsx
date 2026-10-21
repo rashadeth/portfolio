@@ -39,7 +39,7 @@ export default async function CaseStudyPage({
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <main className="cursor-restore relative min-h-screen bg-[#0c0c0c] text-[#e8e4dc]">
+    <main className="cursor-restore relative min-h-screen bg-[var(--brand-espresso)] text-[var(--brand-cream)]">
       <OverflowReset />
       {/* grain overlay */}
       <div
@@ -53,11 +53,11 @@ export default async function CaseStudyPage({
       />
 
       {/* nav */}
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-[rgba(12,12,12,0.72)] backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-[rgba(36,25,21,0.92)] backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 md:px-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[10px] font-light uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
+            className="inline-flex items-center gap-2 text-[10px] font-light uppercase tracking-[0.14em] text-[#f8ebd8]/70 transition-colors hover:text-[#f8ebd8]"
           >
             <ArrowLeft size={13} strokeWidth={1.75} />
             Back
@@ -67,7 +67,7 @@ export default async function CaseStudyPage({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[10px] font-light uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
+              className="inline-flex items-center gap-1.5 text-[10px] font-light uppercase tracking-[0.14em] text-[#f8ebd8]/70 transition-colors hover:text-[#f8ebd8]"
             >
               Live Project
               <ExternalLink size={11} strokeWidth={1.75} />
@@ -98,7 +98,7 @@ export default async function CaseStudyPage({
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/[0.08] px-3 py-1 text-[10px] font-light uppercase tracking-[0.16em] text-white/60"
+                    className="rounded-full border border-white/[0.08] px-3 py-1 text-[10px] font-light uppercase tracking-[0.16em] text-[#f8ebd8]/60"
                   >
                     {tag}
                   </span>
@@ -109,7 +109,7 @@ export default async function CaseStudyPage({
               <h1 className="max-w-[16ch] font-sans text-[clamp(42px,9vw,96px)] font-light leading-[0.94] tracking-tight">
                 {project.name}
               </h1>
-              <p className="mt-5 max-w-[52ch] text-base font-light leading-relaxed text-white/60 sm:text-lg">
+              <p className="mt-5 max-w-[52ch] text-base font-light leading-relaxed text-[#f8ebd8]/60 sm:text-lg">
                 {project.tagline}
               </p>
 
@@ -121,7 +121,7 @@ export default async function CaseStudyPage({
                   { term: "Platform", detail: project.platform },
                 ].map(({ term, detail }) => (
                   <div key={term} className="bg-white/[0.02] px-5 py-5 sm:px-6">
-                    <dt className="mb-1.5 text-[10px] font-light uppercase tracking-[0.18em] text-white/40">
+                    <dt className="mb-1.5 text-[10px] font-light uppercase tracking-[0.18em] text-[#f8ebd8]/40">
                       {term}
                     </dt>
                     <dd className="text-sm font-light leading-snug text-[#e8e4dc]">{detail}</dd>
@@ -136,7 +136,7 @@ export default async function CaseStudyPage({
         <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
           <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
             <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
-              <p className="mb-6 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+              <p className="mb-6 text-[10px] font-light uppercase tracking-[0.2em] text-[#f8ebd8]/40">
                 The Problem
               </p>
               <p className="max-w-[62ch] font-sans text-[clamp(20px,3.2vw,30px)] font-light leading-[1.35] tracking-tight text-[#e8e4dc]">
@@ -150,7 +150,7 @@ export default async function CaseStudyPage({
         <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
           <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
             <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
-              <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+              <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-[#f8ebd8]/40">
                 Process
               </p>
               <div className="grid gap-px border border-white/[0.05] sm:grid-cols-2">
@@ -159,13 +159,13 @@ export default async function CaseStudyPage({
                     key={step.step}
                     className="group bg-[#0c0c0c] px-6 py-8 transition-colors hover:bg-white/[0.025] sm:px-8 sm:py-10"
                   >
-                    <span className="mb-4 block text-[10px] font-light uppercase tracking-[0.2em] text-white/30">
+                    <span className="mb-4 block text-[10px] font-light uppercase tracking-[0.2em] text-[#f8ebd8]/30">
                       {step.step}
                     </span>
                     <h3 className="mb-3 font-sans text-xl font-light leading-snug tracking-tight text-[#e8e4dc]">
                       {step.title}
                     </h3>
-                    <p className="text-sm font-light leading-relaxed text-white/55">{step.body}</p>
+                    <p className="text-sm font-light leading-relaxed text-[#f8ebd8]/55">{step.body}</p>
                   </div>
                 ))}
               </div>
@@ -180,7 +180,7 @@ export default async function CaseStudyPage({
             <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
               <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
                 <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
-                  <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                  <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-[#f8ebd8]/40">
                     Screens
                   </p>
 
@@ -197,7 +197,7 @@ export default async function CaseStudyPage({
                               loading="lazy"
                             />
                           </div>
-                          <span className="text-[10px] font-light uppercase tracking-[0.16em] text-white/35">
+                          <span className="text-[10px] font-light uppercase tracking-[0.16em] text-[#f8ebd8]/35">
                             {mockup.label}
                           </span>
                         </div>
@@ -227,7 +227,7 @@ export default async function CaseStudyPage({
                                 loading="lazy"
                               />
                             </div>
-                            <span className="text-[10px] font-light uppercase tracking-[0.16em] text-white/35">
+                            <span className="text-[10px] font-light uppercase tracking-[0.16em] text-[#f8ebd8]/35">
                               {mockup.label}
                             </span>
                           </div>
@@ -259,7 +259,7 @@ export default async function CaseStudyPage({
               }}
             />
             <div className="relative z-10 px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
-              <p className="mb-3 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+              <p className="mb-3 text-[10px] font-light uppercase tracking-[0.2em] text-[#f8ebd8]/40">
                 AI Workflow
               </p>
               <h2 className="mb-10 max-w-[40ch] font-sans text-[clamp(18px,2.8vw,26px)] font-light leading-[1.3] tracking-tight">
@@ -272,15 +272,15 @@ export default async function CaseStudyPage({
                     key={tool.name}
                     className="flex flex-col gap-1 rounded-xl border border-white/[0.07] bg-white/[0.02] px-5 py-4 sm:w-[calc(33.333%-8px)]"
                   >
-                    <span className="text-xs font-light uppercase tracking-[0.14em] text-white">
+                    <span className="text-xs font-light uppercase tracking-[0.14em] text-[#f8ebd8]">
                       {tool.name}
                     </span>
-                    <span className="text-sm font-light leading-relaxed text-white/50">{tool.role}</span>
+                    <span className="text-sm font-light leading-relaxed text-[#f8ebd8]/50">{tool.role}</span>
                   </div>
                 ))}
               </div>
 
-              <p className="max-w-[58ch] text-sm font-light leading-relaxed text-white/55">
+              <p className="max-w-[58ch] text-sm font-light leading-relaxed text-[#f8ebd8]/55">
                 {project.aiWorkflow.summary}
               </p>
             </div>
@@ -291,7 +291,7 @@ export default async function CaseStudyPage({
         <section className="relative pb-4 pt-2 sm:pb-6 sm:pt-3 md:pb-8 md:pt-4">
           <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:rounded-3xl">
             <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
-              <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+              <p className="mb-10 text-[10px] font-light uppercase tracking-[0.2em] text-[#f8ebd8]/40">
                 Business Impact
               </p>
               <div className="grid grid-cols-2 gap-px border border-white/[0.05] sm:grid-cols-4">
@@ -300,7 +300,7 @@ export default async function CaseStudyPage({
                     <p className="mb-2 font-sans text-[clamp(28px,5vw,44px)] font-light leading-none tracking-tight text-[#e8e4dc]">
                       {stat.value}
                     </p>
-                    <p className="text-[11px] font-light uppercase tracking-[0.14em] text-white/40">
+                    <p className="text-[11px] font-light uppercase tracking-[0.14em] text-[#f8ebd8]/40">
                       {stat.label}
                     </p>
                   </div>
@@ -318,20 +318,20 @@ export default async function CaseStudyPage({
           >
             <div className="flex items-center justify-between px-5 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14">
               <div>
-                <p className="mb-2 text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                <p className="mb-2 text-[10px] font-light uppercase tracking-[0.2em] text-[#f8ebd8]/40">
                   Next Project
                 </p>
                 <h2 className="font-sans text-[clamp(28px,6vw,56px)] font-light leading-[0.95] tracking-tight text-[#e8e4dc]">
                   {nextProject.name}
                 </h2>
-                <p className="mt-3 max-w-[40ch] text-sm font-light text-white/50">
+                <p className="mt-3 max-w-[40ch] text-sm font-light text-[#f8ebd8]/50">
                   {nextProject.tagline}
                 </p>
               </div>
               <ArrowRight
                 size={32}
                 strokeWidth={1.25}
-                className="shrink-0 text-white/30 transition-transform duration-300 group-hover:translate-x-2 group-hover:text-white/70"
+                className="shrink-0 text-[#f8ebd8]/30 transition-transform duration-300 group-hover:translate-x-2 group-hover:text-[#f8ebd8]/70"
               />
             </div>
           </Link>
@@ -339,7 +339,7 @@ export default async function CaseStudyPage({
       </div>
 
       <footer className="mx-auto w-full max-w-[1440px] bg-black px-4 sm:px-6 md:px-10">
-        <div className="grid gap-3 border-t border-white/[0.05] pb-6 pt-6 text-[10px] font-light uppercase tracking-[0.18em] text-white sm:text-[11px] md:grid-cols-3">
+        <div className="grid gap-3 border-t border-white/[0.05] pb-6 pt-6 text-[10px] font-light uppercase tracking-[0.18em] text-[#f8ebd8] sm:text-[11px] md:grid-cols-3">
           <span>© {new Date().getFullYear()} Ian O</span>
           <span className="md:text-center">Designed & built by Ian</span>
           <span className="md:text-right">9.0722° N, 7.4891° E</span>

@@ -1,0 +1,27 @@
+/* Colors sampled from the supplied identity reference. */
+:root {
+  --brand-orange: #c53d10;
+  --brand-cream: #f8ebd8;
+  --brand-olive: #53441c;
+  --brand-espresso: #241915;
+  --brand-sage: #bbbd91;
+  --brand-mustard: #a4992e;
+  --bg: var(--brand-espresso);
+  --fg: var(--brand-cream);
+  --background: var(--brand-cream);
+  --foreground: var(--brand-espresso);
+}
+body, .portfolio { background: var(--brand-cream); color: var(--brand-espresso); }
+::selection { background: var(--brand-mustard); color: var(--brand-espresso); }
+.portfolio a:hover { color: var(--brand-orange); }
+.portfolio :focus-visible { outline-color: var(--brand-orange); }
+.portfolio .work-section#work { background: var(--brand-cream); }
+.portfolio .work-section + .work-section { background: var(--brand-sage); }
+.portfolio .section-heading h2 { color: var(--brand-olive); }
+.portfolio .film-caption h3 { color: var(--brand-espresso); }
+.portfolio .film-caption .film-description,
+.portfolio .design-card .film-caption a { color: var(--brand-olive); }
+.portfolio .design-card .film-caption a:hover { color: var(--brand-orange); }
+.portfolio .film-media, .portfolio .design-card video { background: var(--brand-espresso); }
+.portfolio .hero-contact { color: var(--brand-espresso); }
+.portfolio .hero-contact:hover { color: var(--brand-espresso); }
