@@ -2,6 +2,7 @@
 
 import { useRef, useState, type CSSProperties, type FormEvent } from "react";
 import PortfolioIcon from "./PortfolioIcon";
+import { contactAccessKey } from "@/lib/contact-config";
 
 const templates = [
   { label: "An AI film or ad", icon: "film", message: "Hi Ian, I’d love to create an AI film or ad for my brand. Could you share your availability and how we can get started?" },
@@ -31,25 +32,34 @@ export default function ContactComposer() {
     event.preventDefault();
     if (inFlight.current) return;
     setError("");
-    if (!message.trim()) { setError("Choose a message or write a little about your idea."); return; }
     const data = new FormData(event.currentTarget);
+    const replyEmail = String(data.get("email") ?? "").trim();
+    const submittedMessage = String(data.get("message") ?? "").trim();
+    if (!submittedMessage) { setError("Choose a message or write a little about your idea."); return; }
+    if (!replyEmail) { setError("Enter your email so I can reply."); return; }
+    if (!contactAccessKey) { setError("Message delivery is being set up. Please use the email link below for now."); return; }
     if (data.get("website")) { setError("Please try again."); return; }
     inFlight.current = true;
     setStatus("sending");
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email: email.trim(), message: message.trim(), enquiry: templates[choice].label, website: "" }),
-        signal: AbortSignal.timeout(60000),
+        body: JSON.stringify({ access_key: contactAccessKey, email: replyEmail, message: submittedMessage, enquiry: templates[choice].label, subject: `Portfolio enquiry — ${templates[choice].label}`, from_name: "Ian O Portfolio", botcheck: false }),
+        signal: AbortSignal.timeout(20000),
       });
       const result = await response.json();
-      const accepted = result.success === true || result.success === "true";
-      if (!response.ok || !accepted || /activat|confirm.*email/i.test(String(result.message ?? ""))) throw new Error("delivery");
+      if (!response.ok || result.success !== true) {
+        setStatus("idle");
+        setError(response.status === 429
+          ? "Too many attempts. Please wait a moment before trying again."
+          : "The delivery service couldn’t send your message. Your details are still here; try again or use the email link below.");
+        return;
+      }
       setStatus("sent");
     } catch {
       setStatus("idle");
-      setError("Your message couldn’t be confirmed. Please try again, or email me at yohananokpoko@gmail.com.");
+      setError("The delivery service isn’t responding. Your message is still here. Please try again shortly, or use the email link below.");
     } finally { inFlight.current = false; }
   }
 
