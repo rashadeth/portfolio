@@ -8,6 +8,8 @@ html.portfolio-stack-active body {
 
 .section-stack {
   isolation: isolate;
+  overflow-anchor: none;
+  overscroll-behavior: auto;
   /* Override the older mobile overflow rule, which creates a scroll container. */
   overflow: visible !important;
 }

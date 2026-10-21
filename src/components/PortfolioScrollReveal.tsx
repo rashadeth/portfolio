@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import "./portfolio-scroll-stack.css";
 
 /** Sections stay behind the following section as it scrolls over them. */
 export default function PortfolioScrollReveal() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>("main.portfolio");
     if (!root) return;
     const sections = Array.from(root.querySelectorAll<HTMLElement>(":scope > section"));
