@@ -48,10 +48,10 @@
 .success-content p { font-size: clamp(16px, 2vw, 20px); line-height: 1.65; margin: 24px auto 38px; color: var(--brand-cream); }
 .success-actions { display: flex; flex-direction: column; gap: 12px; width: min(100%, 320px); margin: 0 auto; }
 .success-actions a, .success-actions button { font: inherit; font-size: 14px; padding: 17px 24px; border-radius: 0; border: 0; cursor: pointer; }
-.success-actions a { background: var(--brand-cream); color: var(--brand-espresso);  }
+.success-actions a { background: var(--brand-orange); color: var(--brand-cream); }
 .success-actions button { background: transparent; color: var(--brand-cream); }
 .success-actions :focus-visible { outline: 2px solid var(--brand-cream); outline-offset: 5px; }
-.contact-celebration .success-actions a:hover { background: var(--brand-cream); color: var(--brand-espresso); }
+.contact-celebration .success-actions a:hover { background: var(--brand-orange); color: var(--brand-cream); }
 .contact-celebration .success-actions button:hover { background: transparent; color: var(--brand-cream); }
 @keyframes success-arrive { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 700px) {
@@ -74,9 +74,16 @@
 }
 
 .contact-celebration.is-intro { background: #3f422c; }
-.success-dither { width: min(82vw, 620px); aspect-ratio: 1; pointer-events: none; }
-.success-dither video { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.success-dither { width: min(82vw, 620px); pointer-events: none; }
+.success-dither video { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; pointer-events: none; }
 .success-dither video::-webkit-media-controls,
 .success-dither video::-webkit-media-controls-start-playback-button { display: none !important; }
 @media (prefers-reduced-motion: reduce) { .success-dither { display: none; } }
 .success-dither video { outline: none; mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); mask-composite: intersect; }
+
+.contact-celebration #success-title:focus,
+.contact-celebration #success-title:focus-visible { outline: none; box-shadow: none; }
+.success-delivering { margin: 16px 0 0; text-align: center; color: var(--brand-cream); font-size: 16px; line-height: 1.5; }
+
+.success-ribbons { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .success-ribbons { display: none; } }
