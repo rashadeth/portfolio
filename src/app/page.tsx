@@ -1,4 +1,5 @@
 import PortfolioHero from "@/components/PortfolioHero";
+import PortfolioScrollReveal from "@/components/PortfolioScrollReveal";
 
 const films = [
   {
@@ -43,6 +44,7 @@ const designs = [
 export default function Home() {
   return (
     <main className="portfolio" id="top">
+      <PortfolioScrollReveal />
       <PortfolioHero />
 
       <section id="work" className="work-section" aria-labelledby="films-title">
