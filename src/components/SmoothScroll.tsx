@@ -26,7 +26,7 @@ export default function SmoothScroll() {
         smoothWheel: true,
         syncTouch: false,
         anchors: { offset: -80 },
-        prevent: (node) => node.tagName === "VIDEO" || node.getAttribute("role") === "dialog",
+        prevent: (node) => node.getAttribute("role") === "dialog",
       });
     };
 
