@@ -1,9 +1,9 @@
 """Build a reusable LUT for the portfolio's sculpted hero video."""
 from pathlib import Path
 # Reference palette: espresso, olive, burnt orange, mustard, cream.
-stops = [(0.0, (36,25,21)), (.18,(63,40,21)), (.32,(83,68,28)),
-         (.48,(157,48,17)), (.60,(197,61,16)), (.74,(207,111,45)),
-         (.88,(214,163,89)), (1.0,(248,235,216))]
+stops = [(0.0, (20,16,13)), (.18,(36,25,21)), (.32,(59,48,23)),
+         (.48,(83,44,23)), (.60,(126,43,16)), (.74,(159,52,17)),
+         (.88,(155,76,28)), (1.0,(149,97,37))]
 def color(t):
     for (a, ca), (b, cb) in zip(stops, stops[1:]):
         if t <= b:

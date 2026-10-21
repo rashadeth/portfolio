@@ -47,9 +47,9 @@ export default function PortfolioHero() {
         </div>
       </div>
       <div className="hero-art" aria-hidden="true">
-        <Image src="/images/hero/brand-waves-poster.jpg" alt="" fill priority sizes="100vw" className="hero-image hero-poster" />
-        <video ref={video} className="hero-image hero-video" autoPlay muted loop playsInline preload="auto" poster="/images/hero/brand-waves-poster.jpg" tabIndex={-1}>
-          <source src="/videos/hero/brand-waves.mp4" type="video/mp4" />
+        <Image src="/images/hero/brand-depth-poster.jpg" alt="" fill priority sizes="100vw" className="hero-image hero-poster" />
+        <video ref={video} className="hero-image hero-video" autoPlay muted loop playsInline preload="auto" poster="/images/hero/brand-depth-poster.jpg" tabIndex={-1}>
+          <source src="/videos/hero/brand-depth-waves.mp4" type="video/mp4" />
         </video>
 
       </div>
