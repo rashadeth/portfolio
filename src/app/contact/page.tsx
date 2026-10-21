@@ -7,7 +7,7 @@ export default function Contact() {
   return <main className="portfolio contact-page">
     <PortfolioHeader />
     <div className="contact-layout">
-      <div className="contact-intro"><h1>Start with<br />an idea.</h1><p>Pick a message. Add your own touch if you like. Let’s see what we can make.</p></div>
+      <div className="contact-intro"><h1>Let’s talk.</h1></div>
       <ContactComposer />
     </div>
   </main>;

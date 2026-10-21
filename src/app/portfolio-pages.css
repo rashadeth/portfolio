@@ -1,7 +1,7 @@
 .page-header .brand-logo { filter: brightness(0); }
 .page-header { padding-block: 22px; }
 .collection-intro { padding: 70px 0 56px; }
-.collection-intro h1, .contact-intro h1 { font-size: clamp(48px, 7vw, 100px); line-height: 1.05; font-weight: 400; letter-spacing: -.06em; margin: 0 0 24px; }
+.collection-intro h1 { font-size: clamp(48px, 7vw, 100px); line-height: 1.05; font-weight: 400; letter-spacing: -.06em; margin: 0 0 24px; }
 .collection-intro p, .contact-intro p { color: var(--brand-olive); font-size: 16px; line-height: 1.7; max-width: 36ch; }
 .collection-page { min-height: 100svh; padding-bottom: 60px; }
 .design-page { background: var(--brand-sage); }
@@ -17,6 +17,8 @@
 .contact-page { min-height: 100svh; }
 .contact-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 8vw, 120px); padding: 70px 0 140px; }
 .contact-intro { padding-top: 12px; }
+.contact-intro h1 { margin: 0; font-size: clamp(32px, 4vw, 56px); line-height: 1.1; font-weight: 400; letter-spacing: -.045em; }
+.contact-page .brand-logo { width: 56px; height: 56px; }
 .contact-form { width: 100%; max-width: 660px; }
 .contact-form fieldset { border: 0; padding: 0; margin: 0 0 28px; }
 .contact-form legend, .contact-form label { display: block; font-size: 13px; margin-bottom: 12px; }
@@ -60,7 +62,8 @@
   .home-collection:last-child { padding-bottom: 130px; }
   .collection-label { align-items: baseline; gap: 12px; }
   .collection-label span { font-size: 11px; }
-  .contact-layout { grid-template-columns: 1fr; gap: 35px; padding: 30px 0 140px; }
+  .contact-layout { grid-template-columns: 1fr; gap: 28px; padding: 20px 0 140px; }
+  .contact-intro { padding-top: 0; }
   .contact-celebration { padding: 24px; }
   .success-logo { margin-bottom: 30px; }
 }
