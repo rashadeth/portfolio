@@ -2,36 +2,16 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import PortfolioIcon from "@/components/PortfolioIcon";
-import { getProject, getAllSlugs } from "@/lib/projects";
+import { getProject } from "@/lib/projects";
 import projects from "@/lib/projects";
 import OverflowReset from "@/components/OverflowReset";
 
-export const dynamicParams = false;
-
-export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
+export function getCaseStudyMetadata(slug: string): Metadata {
   const project = getProject(slug);
-  if (!project) return {};
-  return {
-    title: `${project.name} — Case Study`,
-    description: project.tagline,
-  };
+  return project ? { title: `${project.name} — Case Study`, description: project.tagline } : {};
 }
 
-export default async function CaseStudyPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
+export default function CaseStudyPage({ slug }: { slug: string }) {
   const project = getProject(slug);
   if (!project) notFound();
 
