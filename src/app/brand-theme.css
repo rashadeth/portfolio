@@ -27,7 +27,7 @@ body, .portfolio { background: var(--brand-cream); color: var(--brand-espresso);
 .portfolio .film-chowdeck-zayith .film-media {
   aspect-ratio: auto;
   padding: 7%;
-  background: #95560d url("/images/backgrounds/amber-texture.png") center / cover no-repeat;
+  background: #53441c url("/images/backgrounds/olive-wave-pattern.jpg") center / cover no-repeat;
   overflow: hidden;
 }
 .portfolio .film-eden-power .film-media video,
