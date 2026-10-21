@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import PortfolioHeader from "@/components/PortfolioHeader";
 import { DesignGallery } from "@/components/WorkGalleries";
 
-export const metadata: Metadata = { title: "Design — Ian O", description: "Digital experiences and product design by Ian Okpoko." };
+export const metadata = pageMetadata("/design", "Digital Design & Case Studies — Ian Okpoko", "Explore digital design projects and product design case studies by Ian Okpoko.");
 export default function Design() {
   return <main className="portfolio collection-page design-page">
     <PortfolioHeader />

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import PortfolioHeader from "@/components/PortfolioHeader";
 import { FilmGallery } from "@/components/WorkGalleries";
 
-export const metadata: Metadata = { title: "Films — Ian O", description: "AI films, brand ads and creator-style stories by Ian Okpoko." };
+export const metadata = pageMetadata("/films", "AI Films & Ads — Ian Okpoko", "AI films, brand ads and creator-style stories by Ian Okpoko, designer and AI content strategist.");
 export default function Films() {
   return <main className="portfolio collection-page">
     <PortfolioHeader />

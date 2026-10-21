@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import PortfolioHeader from "@/components/PortfolioHeader";
 import ContactComposer from "@/components/ContactComposer";
 
-export const metadata: Metadata = { title: "Contact — Ian O", description: "Start a conversation about a film, design project or creative collaboration." };
+export const metadata = pageMetadata("/contact", "Contact Ian Okpoko", "Contact Ian Okpoko about digital design, an AI film, content strategy or a creative collaboration.");
 export default function Contact() {
   return <main className="portfolio contact-page">
     <PortfolioHeader />

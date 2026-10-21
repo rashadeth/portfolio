@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
-import Script from "next/script";
+import { pageMetadata, siteUrl, siteTitle, siteDescription } from "@/lib/seo";
 import GlassNav from "@/components/GlassNav";
 import SmoothScroll from "@/components/SmoothScroll";
 import "lenis/dist/lenis.css";
@@ -22,30 +22,13 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Ian O — Designer & AI Content Strategist",
-  description: "Digital design, AI films and brand stories by Ian Okpoko, designer and AI content strategist.",
-  metadataBase: new URL("https://yohanan.design"),
-  openGraph: {
-    title: "Ian O — Designer & AI Content Strategist",
-    description: "Digital design, AI films and brand stories by Ian Okpoko, designer and AI content strategist.",
-    url: "https://yohanan.design",
-    siteName: "Ian O",
-    images: [
-      {
-        url: "https://yohanan.design/images/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Ian O — Designer & AI Content Strategist",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Ian O — Designer & AI Content Strategist",
-    description: "Digital design, AI films and brand stories by Ian Okpoko, designer and AI content strategist.",
-    images: [{ url: "https://yohanan.design/images/og-image.png", alt: "Ian O — Designer & AI Content Strategist" }],
-  },
+  ...pageMetadata("/", siteTitle, siteDescription),
+  metadataBase: new URL(siteUrl),
+  authors: [{ name: "Ian Okpoko", url: siteUrl }],
+  creator: "Ian Okpoko",
+  publisher: "Ian Okpoko",
+  keywords: ["Ian Okpoko", "Ian O", "designer", "AI content strategist", "digital design", "AI films"],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
 };
 
 export default function RootLayout({
@@ -62,27 +45,39 @@ export default function RootLayout({
         <SmoothScroll />
         {children}
         <GlassNav />
-      </body>
-      <Script
+      <script
         id="person-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Ian Okpoko",
-            alternateName: "Ian O",
-            url: "https://yohanan.design",
-            jobTitle: "Designer & AI Content Strategist",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "9.0722° N, 7.4891° E",
-              addressCountry: "NG",
-            },
-            sameAs: ["https://x.com/yohanansoltd"],
+            "@graph": [
+              {
+                "@type": "Person",
+                "@id": `${siteUrl}/#ian-okpoko`,
+                name: "Ian Okpoko",
+                alternateName: "Ian O",
+                url: siteUrl,
+                jobTitle: "Designer & AI Content Strategist",
+                description: siteDescription,
+                knowsAbout: ["Digital design", "Product design", "AI filmmaking", "Content strategy"],
+                sameAs: ["https://x.com/yohanansoltd"],
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${siteUrl}/#website`,
+                name: "Ian Okpoko",
+                alternateName: "Ian O Portfolio",
+                url: siteUrl,
+                description: siteDescription,
+                inLanguage: "en",
+                author: { "@id": `${siteUrl}/#ian-okpoko` },
+              },
+            ],
           }),
         }}
       />
+      </body>
     </html>
   );
 }

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import PortfolioIcon from "@/components/PortfolioIcon";
 import { getProject } from "@/lib/projects";
 import projects from "@/lib/projects";
@@ -8,7 +9,7 @@ import OverflowReset from "@/components/OverflowReset";
 
 export function getCaseStudyMetadata(slug: string): Metadata {
   const project = getProject(slug);
-  return project ? { title: `${project.name} — Case Study`, description: project.tagline } : {};
+  return project ? pageMetadata(`/case-study/${slug}`, `${project.name} Case Study — Ian Okpoko`, `${project.tagline} A digital design case study by Ian Okpoko.`) : {};
 }
 
 export default function CaseStudyPage({ slug }: { slug: string }) {
