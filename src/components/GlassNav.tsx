@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import PortfolioIcon from "./PortfolioIcon";
@@ -16,12 +16,12 @@ const links = [
 export default function GlassNav() {
   const pathname = usePathname();
   const active = pathname.startsWith("/films") ? 1 : pathname.startsWith("/design") || pathname.startsWith("/case-study") ? 2 : pathname.startsWith("/contact") ? 3 : 0;
-  const [preview, setPreview] = useState<number | null>(null);
+  const [preview, setPreview] = useState<{ index: number; pathname: string } | null>(null);
   const lens = useRef<HTMLSpanElement>(null);
   const animation = useRef<Animation | null>(null);
-  const selected = preview ?? active;
+  const selected = preview?.pathname === pathname ? preview.index : active;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = lens.current;
     if (!node) return;
     const width = node.offsetWidth;
@@ -29,6 +29,7 @@ export default function GlassNav() {
     const current = node.getBoundingClientRect();
     const from = current.left + current.width / 2 - parent.left - 8 - width / 2;
     const to = selected * width;
+    const currentTransform = getComputedStyle(node).transform;
     animation.current?.cancel();
     node.style.transform = `translateX(${to}px)`;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -36,11 +37,11 @@ export default function GlassNav() {
     if (Math.abs(distance) < 1) return;
     const stretch = 1 + Math.min(Math.abs(distance) / width * 0.38, 0.85);
     animation.current = node.animate([
-      { transform: `translateX(${from}px) scale(1, 1)`, offset: 0 },
-      { transform: `translateX(${from + distance * 0.55}px) scale(${stretch}, .88)`, offset: 0.38 },
-      { transform: `translateX(${to + Math.sign(distance) * 3}px) scale(.96, 1.04)`, offset: 0.76 },
+      { transform: currentTransform === "none" ? `translateX(${from}px)` : currentTransform, offset: 0 },
+      { transform: `translateX(${from + distance * 0.55}px) scale(${stretch}, .88)`, offset: 0.5 },
+      { transform: `translateX(${to + Math.sign(distance) * 3}px) scale(.96, 1.04)`, offset: 0.84 },
       { transform: `translateX(${to}px) scale(1, 1)`, offset: 1 },
-    ], { duration: 620, easing: "cubic-bezier(.22,.7,.24,1)" });
+    ], { duration: 820, easing: "cubic-bezier(.3,.6,.25,1)" });
   }, [selected]);
 
   useEffect(() => () => animation.current?.cancel(), []);
@@ -62,12 +63,15 @@ export default function GlassNav() {
       {links.map(({ label, href, icon }, index) => (
         <Link key={label} href={href}
           aria-current={index === active ? "page" : undefined}
-          data-lit={(preview ?? active) === index}
-          onMouseEnter={() => setPreview(index)}
-          onFocus={() => setPreview(index)}
+          data-lit={selected === index}
+          onPointerEnter={(event) => { if (event.pointerType === "mouse") setPreview({ index, pathname }); }}
+          onFocus={() => setPreview({ index, pathname })}
           onBlur={() => setPreview(null)}
-          onClick={() => setPreview(null)}>
-          <PortfolioIcon name={icon} size={22} active={(preview ?? active) === index} />
+          onClick={() => setPreview({ index, pathname })}>
+          <span className="glass-nav-icon" aria-hidden="true">
+            <span className="glass-nav-icon-rest"><PortfolioIcon name={icon} size={22} /></span>
+            <span className="glass-nav-icon-active"><PortfolioIcon name={icon} size={22} active /></span>
+          </span>
           <span>{label}</span>
         </Link>
       ))}
