@@ -1,5 +1,5 @@
 /* Reference-inspired, full-bleed hero. */
-.portfolio-hero { position: relative; isolation: isolate; min-height: 700px; min-height: max(650px, 100svh); margin-inline: calc(-1 * var(--page-gutter)); padding: 0 var(--page-gutter); overflow: hidden; color: var(--brand-cream); background: var(--brand-orange); }
+.portfolio-hero { position: relative; isolation: isolate; min-height: 700px; min-height: max(650px, 100svh); margin-inline: calc(-1 * var(--page-gutter)); padding: 0 var(--page-gutter); overflow: hidden; color: var(--brand-cream); background: #253019; }
 .hero-art { position: absolute; inset: 0; z-index: -3; }
 .hero-image { object-fit: cover; object-position: center; filter: none; }
 .hero-header { position: relative; padding-block: 22px; }

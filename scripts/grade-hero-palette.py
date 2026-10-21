@@ -1,9 +1,9 @@
 """Build a reusable LUT for the portfolio's sculpted hero video."""
 from pathlib import Path
-# Reference palette: espresso, olive, burnt orange, mustard, cream.
-stops = [(0.0, (20,16,13)), (.18,(36,25,21)), (.32,(59,48,23)),
-         (.48,(83,44,23)), (.60,(126,43,16)), (.74,(159,52,17)),
-         (.88,(155,76,28)), (1.0,(149,97,37))]
+# A single olive hue family: deep creases through soft olive highlights.
+stops = [(0.0, (17,23,13)), (.18,(27,35,19)), (.32,(37,47,25)),
+         (.48,(48,60,32)), (.60,(59,72,39)), (.74,(75,88,48)),
+         (.88,(96,108,62)), (1.0,(136,146,100))]
 def color(t):
     for (a, ca), (b, cb) in zip(stops, stops[1:]):
         if t <= b:
@@ -11,7 +11,7 @@ def color(t):
             return [(u+(v-u)*k)/255 for u,v in zip(ca,cb)]
     return [v/255 for v in stops[-1][1]]
 size=33
-out=['TITLE "Ian O warm sculpted brand palette"',f'LUT_3D_SIZE {size}','DOMAIN_MIN 0 0 0','DOMAIN_MAX 1 1 1']
+out=['TITLE "Ian O tonal olive sculpted palette"',f'LUT_3D_SIZE {size}','DOMAIN_MIN 0 0 0','DOMAIN_MAX 1 1 1']
 for b in range(size):
  for g in range(size):
   for r in range(size):
