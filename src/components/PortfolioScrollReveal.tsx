@@ -13,8 +13,9 @@ export default function PortfolioScrollReveal() {
 
     const measure = () => {
       sections.forEach((section, index) => {
-        // Long sections scroll fully before their bottom rests in the viewport.
-        section.style.setProperty("--stack-top", `${Math.min(0, window.innerHeight - section.offsetHeight)}px`);
+        // Use the stable viewport so mobile browser toolbar changes do not move the sticky stop.
+        // Long sections still scroll fully before their bottom rests in the viewport.
+        section.style.setProperty("--stack-top", `min(0px, calc(100svh - ${section.offsetHeight}px))`);
         section.style.setProperty("--stack-order", String(index + 1));
       });
     };

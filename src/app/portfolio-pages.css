@@ -5,7 +5,7 @@
 .collection-intro p, .contact-intro p { color: var(--brand-olive); font-size: 16px; line-height: 1.7; max-width: 36ch; }
 .collection-page { min-height: 100svh; padding-bottom: 60px; }
 .design-page { background: var(--brand-sage); }
-.home-collection { margin-inline: calc(-1 * var(--page-gutter)); padding: 64px var(--page-gutter); background: var(--brand-cream); }
+.home-collection { min-height: 100svh; display: grid; align-content: center; margin-inline: calc(-1 * var(--page-gutter)); padding: 64px var(--page-gutter); background: var(--brand-cream); }
 .home-design { background: var(--brand-sage); }
 .collection-link { display: block; color: var(--brand-espresso); }
 .collection-cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--brand-olive); }
