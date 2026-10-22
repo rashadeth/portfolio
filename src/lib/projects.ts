@@ -162,6 +162,7 @@ const projects: Project[] = [
   {
     slug: "steppa",
     name: "Steppa",
+    liveUrl: "https://steppa.yohananokpoko.workers.dev",
     tagline: "A modern mobility interface for intuitive booking and routing.",
     description: "A modern mobility interface focused on intuitive booking and routing flows.",
     tags: ["UX", "Platform"],
