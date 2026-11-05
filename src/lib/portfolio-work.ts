@@ -31,7 +31,8 @@ export const films = [
   },
 ];
 
-export const designs = [
+export const designs: { title: string; slug: string; video?: string; image?: string; liveUrl?: string }[] = [
+  { title: "Lexycon", slug: "lexycon", image: "/images/lexycon-design.png", liveUrl: "https://lexycon.site/" },
   { title: "Foodcourt", slug: "foodcourt", video: "foodcourt.MP4" },
   { title: "Spacebook", slug: "spacebook", video: "spacebook.mp4" },
   { title: "Steppa", slug: "steppa", video: "steppa.mp4" },
