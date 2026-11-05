@@ -31,6 +31,7 @@ export default function ContactComposer() {
     const submittedMessage = String(data.get("message") ?? "").trim();
     if (!submittedMessage) { setError("Choose a message or write a little about your idea."); return; }
     if (!replyEmail) { setError("Enter your email so I can reply."); return; }
+    if (!whatsappNumber) { setError("Enter your WhatsApp number, including your country code."); return; }
     if (!contactAccessKey) { setError("Message delivery is being set up. Please use the email link below for now."); return; }
     if (data.get("website")) { setError("Please try again."); return; }
     inFlight.current = true;
@@ -70,8 +71,8 @@ export default function ContactComposer() {
     <textarea id="contact-message" name="message" value={message} onChange={(event) => setMessage(event.target.value)} required maxLength={5000} disabled={status === "sending"} />
     <label htmlFor="contact-email">Where can I reply?</label>
     <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="you@example.com" value={email} onChange={(event) => setEmail(event.target.value)} required maxLength={254} disabled={status === "sending"} />
-    <label htmlFor="contact-whatsapp">WhatsApp number (optional, include country code)</label>
-    <input id="contact-whatsapp" name="whatsapp" type="tel" autoComplete="tel" placeholder="+234 801 234 5678" value={whatsapp} onChange={(event) => setWhatsapp(event.target.value)} maxLength={30} disabled={status === "sending"} />
+    <label htmlFor="contact-whatsapp">WhatsApp number (include country code)</label>
+    <input id="contact-whatsapp" name="whatsapp" type="tel" autoComplete="tel" placeholder="+234 801 234 5678" value={whatsapp} onChange={(event) => setWhatsapp(event.target.value)} required maxLength={30} disabled={status === "sending"} />
     <div className="contact-honey" aria-hidden="true"><label htmlFor="contact-website">Leave this empty</label><input id="contact-website" name="website" tabIndex={-1} autoComplete="off" /></div>
     {error && <p className="contact-error" role="alert">{error}</p>}
     <button type="submit" className="contact-send" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send message"}<PortfolioIcon name="mail" active size={22} /></button>

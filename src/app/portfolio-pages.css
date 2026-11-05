@@ -39,7 +39,8 @@
 .contact-send:disabled { opacity: .6; cursor: wait; }
 .contact-form button:disabled { cursor: wait; }
 .contact-note { margin-top: 12px; color: var(--brand-olive); font-size: 12px; line-height: 1.6; }
-.contact-note a { text-decoration: underline; text-underline-offset: 3px; }
+.contact-note a { color: var(--brand-orange); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.contact-note a:hover, .contact-note a:focus-visible { color: #a8320d; text-decoration-thickness: 2px; }
 .contact-error { margin: 0 0 20px; color: #9c2912; font-size: 14px; line-height: 1.6; }
 .contact-honey { display: none; }
 /* A full-screen, top-layer celebration after confirmed delivery. */
