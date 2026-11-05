@@ -16,6 +16,7 @@ export default function ContactComposer() {
   const [choice, setChoice] = useState(0);
   const [message, setMessage] = useState<string>(templates[0].message);
   const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState("");
   const inFlight = useRef(false);
@@ -26,6 +27,7 @@ export default function ContactComposer() {
     setError("");
     const data = new FormData(event.currentTarget);
     const replyEmail = String(data.get("email") ?? "").trim();
+    const whatsappNumber = String(data.get("whatsapp") ?? "").trim();
     const submittedMessage = String(data.get("message") ?? "").trim();
     if (!submittedMessage) { setError("Choose a message or write a little about your idea."); return; }
     if (!replyEmail) { setError("Enter your email so I can reply."); return; }
@@ -37,7 +39,7 @@ export default function ContactComposer() {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ access_key: contactAccessKey, email: replyEmail, message: submittedMessage, enquiry: templates[choice].label, subject: `Portfolio enquiry — ${templates[choice].label}`, from_name: "Ian O Portfolio", botcheck: false }),
+        body: JSON.stringify({ access_key: contactAccessKey, email: replyEmail, whatsapp: whatsappNumber, message: submittedMessage, enquiry: templates[choice].label, subject: `Portfolio enquiry — ${templates[choice].label}`, from_name: "Ian O Portfolio", botcheck: false }),
         signal: AbortSignal.timeout(20000),
       });
       const result = await response.json();
@@ -68,6 +70,8 @@ export default function ContactComposer() {
     <textarea id="contact-message" name="message" value={message} onChange={(event) => setMessage(event.target.value)} required maxLength={5000} disabled={status === "sending"} />
     <label htmlFor="contact-email">Where can I reply?</label>
     <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="you@example.com" value={email} onChange={(event) => setEmail(event.target.value)} required maxLength={254} disabled={status === "sending"} />
+    <label htmlFor="contact-whatsapp">WhatsApp number (optional, include country code)</label>
+    <input id="contact-whatsapp" name="whatsapp" type="tel" autoComplete="tel" placeholder="+234 801 234 5678" value={whatsapp} onChange={(event) => setWhatsapp(event.target.value)} maxLength={30} disabled={status === "sending"} />
     <div className="contact-honey" aria-hidden="true"><label htmlFor="contact-website">Leave this empty</label><input id="contact-website" name="website" tabIndex={-1} autoComplete="off" /></div>
     {error && <p className="contact-error" role="alert">{error}</p>}
     <button type="submit" className="contact-send" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send message"}<PortfolioIcon name="mail" active size={22} /></button>

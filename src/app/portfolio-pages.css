@@ -30,9 +30,9 @@
 .message-choice { display: flex; align-items: center; gap: 10px; text-align: left; padding: 17px 14px; border: 1px solid #53441c40; color: var(--brand-olive); background: transparent; font-size: 13px; cursor: pointer; }
 .message-choice:hover { background: #bbbd9133; }
 .message-choice[aria-pressed="true"] { background: var(--brand-olive); color: var(--brand-cream); border-color: var(--brand-olive); }
-.contact-form textarea, .contact-form input[type="email"] { width: 100%; font: inherit; font-size: 15px; line-height: 1.7; padding: 18px; border: 1px solid #53441c40; border-radius: 0; background: #fff8ec; color: var(--brand-espresso); margin-bottom: 24px; }
+.contact-form textarea, .contact-form input[type="email"], .contact-form input[type="tel"] { width: 100%; font: inherit; font-size: 15px; line-height: 1.7; padding: 18px; border: 1px solid #53441c40; border-radius: 0; background: #fff8ec; color: var(--brand-espresso); margin-bottom: 24px; }
 .contact-form textarea { min-height: 160px; resize: vertical; }
-.contact-form input[type="email"] { min-height: 56px; }
+.contact-form input[type="email"], .contact-form input[type="tel"] { min-height: 56px; }
 .contact-form :focus-visible { outline: 2px solid var(--brand-olive); outline-offset: 3px; }
 .contact-send { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 16px 20px; background: var(--brand-orange); color: var(--brand-cream); cursor: pointer; font-size: 15px; border: 0; }
 .contact-send:hover { background: #a8320d; }
